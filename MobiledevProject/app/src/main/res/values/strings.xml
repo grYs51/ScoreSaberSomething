@@ -10,7 +10,12 @@
     <string name="about">About</string>
     <string name="search">Search</string>
     <string name="scoresaber">ScoreSaber</string>
-    <string name="username">GrYs</string>
+    <string name="username">User</string>
     <string name="pp">pp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="scoresabersignin">Sign in</string>
+    <string name="sing_in">Sign in</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
