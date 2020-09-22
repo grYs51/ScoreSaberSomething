@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:title="@string/scoresaber">
+        <menu>
+            <item android:id="@+id/menuLeaderboard"
+                android:icon="@drawable/leaderbord"
+                android:title="@string/leaderboard" />
+
+            <item android:id="@+id/menuMaps"
+                android:icon="@drawable/songs"
+                android:title="@string/maps" />
+
+            <item android:id="@+id/menuRankedMaps"
+                android:icon="@drawable/scoresaber_logo"
+                android:title="@string/rankedmaps" />
+
+            <item android:id="@+id/menuProfile"
+                android:icon="@drawable/profile"
+                android:title="@string/profile" />
+
+            <item android:id="@+id/menuSearch"
+                android:icon="@drawable/search"
+                android:title="@string/search" />
+        </menu>
+    </item>
+
+
+
+    <item android:title="@string/others">
+
+        <menu>
+
+            <item android:id="@+id/menuSettings"
+                android:title="@string/settings"
+                android:icon="@drawable/settings" />
+
+            <item android:id="@+id/menuAbout"
+                android:title="@string/about"
+                android:icon="@drawable/about" />
+
+        </menu>
+    </item>
+
+</menu>

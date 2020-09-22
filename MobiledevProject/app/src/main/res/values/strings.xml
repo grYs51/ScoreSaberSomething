@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="app_name">MobiledevProject</string>
+    <string name="profile">Profile</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="maps">Maps</string>
+    <string name="rankedmaps">Ranked Maps</string>
+    <string name="others">Others</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    <string name="search">Search</string>
+    <string name="scoresaber">ScoreSaber</string>
+    <string name="username">GrYs</string>
+    <string name="pp">pp</string>
+
+</resources>
