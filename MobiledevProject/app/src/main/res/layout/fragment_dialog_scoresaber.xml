@@ -8,22 +8,24 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:background="#FFFFBB33"
         android:contentDescription="@string/app_name"
         android:scaleType="center"
-        android:src="@drawable/grys" />
+        android:src="@drawable/grys"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/scoresaberId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="255dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="15sp"
         android:hint="@string/scoresaber"
         android:inputType="textEmailAddress"
-        android:layout_marginTop="20sp"
-
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
@@ -33,9 +35,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
-        android:layout_marginRight="10sp"
-        android:layout_marginTop="20sp"
-        android:textSize="16sp"
+        android:layout_margin="10sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoresaberId" />
@@ -44,11 +45,8 @@
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="14dp"
-        android:layout_marginTop="20sp"
-
-        android:textSize="16sp"
+        android:layout_margin="10sp"
+        android:textSize="20sp"
         android:text="Cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/OkButton"

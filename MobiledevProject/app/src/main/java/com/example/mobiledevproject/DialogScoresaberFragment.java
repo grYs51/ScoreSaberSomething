@@ -15,6 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class DialogScoresaberFragment extends DialogFragment {
@@ -29,6 +33,8 @@ public class DialogScoresaberFragment extends DialogFragment {
     private EditText mInput;
     private TextView mActionOk, mActionCancel;
 
+
+    Pattern scoresaberPattern = Pattern.compile("(?:http(?:s)?:/)?(?:new\\.)?(?:scoresaber\\.com/u/)?(\\d{16,})(?:/.*)?");
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -38,24 +44,46 @@ public class DialogScoresaberFragment extends DialogFragment {
         mActionCancel = view.findViewById(R.id.cancelButton);
         mInput = view.findViewById(R.id.scoresaberId);
 
+
+
         mActionCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: closing dialog");
+                Log.d(TAG, "ScoresaberIdInput: closing dialog");
                 getDialog().dismiss();
             }
         });
         mActionOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: capturing input");
 
+                Log.d(TAG, "ScoresaberIdInput: capturing input -> " + mInput.getText().toString());
+                boolean flag = true;
                 String input = mInput.getText().toString();
-                if(!input.equals("")){
+                Matcher scoresaber = scoresaberPattern.matcher(input);
 
-                    mOnInputSelected.sendInput(input);
+                if(!input.equals("")){
+                    while( scoresaber.find()){
+                        if(scoresaber.group(1) != null){
+
+                            Log.d(TAG, "ScoresaberIdInput: Regex match");
+                            Toast.makeText(getActivity(),"Regex Matched!",Toast.LENGTH_SHORT).show();
+                            mOnInputSelected.sendInput(scoresaber.group(1));
+                            getDialog().dismiss();
+                            flag = false;
+                        }
+                    }
+                    if(flag){
+
+                        Log.d(TAG, "ScoresaberIdInput: Regex no match");
+                        Toast.makeText(getActivity(),"Regex doesn't match",Toast.LENGTH_SHORT).show();
+                    }
+
+                } else {
+
+                    Log.d(TAG, "ScoresaberIdInput: No Input");
+                    Toast.makeText(getActivity(),"No input found!",Toast.LENGTH_SHORT).show();
                 }
-                getDialog().dismiss();
             }
         });
 

@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="@id/imageProfile" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/header_User"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -39,12 +39,12 @@
         app:layout_constraintStart_toEndOf="@id/imageProfile" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/header_rank"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:text="@string/pp"
+        android:text="@string/rank"
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/imageProfile"
