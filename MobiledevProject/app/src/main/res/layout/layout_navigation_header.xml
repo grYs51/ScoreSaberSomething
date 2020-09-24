@@ -32,7 +32,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
         android:text="@string/username"
-        android:textColor="@color/colorPrimaryText"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
