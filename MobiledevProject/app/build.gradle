@@ -42,9 +42,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
     //data and json
-    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.5.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0'
 
     //recycler
@@ -55,4 +55,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
 
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

@@ -10,12 +10,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobiledevproject.model.PlayerProfile.Player;
 import com.example.mobiledevproject.model.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.model.PlayerProfile.PlayerScoreStats;
 import com.example.mobiledevproject.model.PlayerProfile.ScoresSaberApi;
+import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,28 +33,39 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
 
     private  Player player_response;
 
-    private TextView profileUserName;
-    private TextView profile_Rank_Global;
-    private TextView profile_Rank_Local;
-    private TextView profile_pp;
-    private TextView profile_Average_Rank_Acc;
+    private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc;
+    private ImageView profile_User_Image, profile_User_Country_Flag;
 
-
+    private Retrofit retrofit;
+    private  ScoresSaberApi scoresSaberApi;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        profileUserName = view.findViewById(R.id.profileUserName);
-        profile_Rank_Global = view.findViewById(R.id.profileRankGlobal);
-        profile_Rank_Local = view.findViewById(R.id.profileRankLocal);
-        profile_pp = view.findViewById(R.id.profilePP);
-        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
 
-        Log.d(TAG, "onClick: Opening Dialog");
-                DialogScoresaberFragment dialog = new DialogScoresaberFragment();
-                dialog.setTargetFragment(ProfileFragment.this, 1);
-                dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+//        profile_Username = view.findViewById(R.id.profileUserName);
+//        profile_Rank_Global = view.findViewById(R.id.profileRankGlobal);
+//        profile_Rank_Local = view.findViewById(R.id.profileRankLocal);
+//        profile_pp = view.findViewById(R.id.profilePP);
+//        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
+//
+//        profile_User_Image = view.findViewById(R.id.imageProfile);
+//        profile_User_Country_Flag = view.findViewById(R.id.profileFlagLocal);
+
+        retrofit = new Retrofit.Builder()
+                .baseUrl("https://new.scoresaber.com/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        scoresSaberApi = retrofit.create(ScoresSaberApi.class);
+
+//        getUserData("76561198075540765");
+
+//        Log.d(TAG, "onClick: Opening Dialog");
+//                DialogScoresaberFragment dialog = new DialogScoresaberFragment();
+//                dialog.setTargetFragment(ProfileFragment.this, 1);
+//                dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
 
 
 
@@ -62,15 +75,17 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     @Override
     public void sendInput(String input) {
          Log.d(TAG, "sendInput: found incoming input: " + input);
-//         mInputDisplay.setText(input);
 
-         Retrofit retrofit = new Retrofit.Builder()
-                 .baseUrl("https://new.scoresaber.com/api/")
-                 .addConverterFactory(GsonConverterFactory.create())
-                 .build();
+         getUserData(input);
 
-        final ScoresSaberApi scoresSaberApi = retrofit.create(ScoresSaberApi.class);
 
+
+
+
+
+    }
+
+    public  void  getUserData(String input){
         scoresSaberApi.getUserInfo(input).enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
@@ -80,15 +95,29 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                     Log.d(TAG, "onResponse1: isSuccessful: "+response.code());
                     return;
                 }
+
                 player_response = response.body();
                 PlayerScoreStats playerScoreStats = player_response.getScore_stats();
                 PlayerPlayerInfo playerPlayerInfo = player_response.getPlayer_info();
 
-                profileUserName.setText(playerPlayerInfo.getPlayer_Name());
-                profile_Rank_Global.setText(Integer.toString( playerPlayerInfo.getRank()));
-                profile_Rank_Local.setText(Integer.toString(playerPlayerInfo.getCountry_Rank()));
-                profile_pp.setText(Double.toString( playerPlayerInfo.getPp()));
-                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+
+//                profile_Username.setText(playerPlayerInfo.getPlayer_Name());
+//                profile_Rank_Global.setText(Integer.toString( playerPlayerInfo.getRank()));
+//                profile_Rank_Local.setText(Integer.toString(playerPlayerInfo.getCountry_Rank()));
+//                profile_pp.setText(Double.toString( playerPlayerInfo.getPp()));
+//                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+
+                Picasso.get()
+                        .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar() )
+                        .placeholder(R.drawable.profile)
+                        .error(R.drawable.leaderbord)
+                        .into(profile_User_Image);
+
+                Picasso.get()
+                        .load("https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry() + ".png")
+                        .placeholder(R.drawable.profile)
+                        .error(R.drawable.leaderbord)
+                        .into(profile_User_Country_Flag);
 
             }
 
@@ -97,7 +126,6 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                 Log.d(TAG, "onFailure: "+t.getMessage());
             }
         });
-
     }
 
 }
