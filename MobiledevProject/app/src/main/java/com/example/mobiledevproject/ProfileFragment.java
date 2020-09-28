@@ -19,6 +19,9 @@ import com.example.mobiledevproject.model.PlayerProfile.PlayerScoreStats;
 import com.example.mobiledevproject.model.PlayerProfile.ScoresSaberApi;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Array;
+import java.util.stream.Stream;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -44,14 +47,14 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
 
-//        profile_Username = view.findViewById(R.id.profileUserName);
-//        profile_Rank_Global = view.findViewById(R.id.profileRankGlobal);
-//        profile_Rank_Local = view.findViewById(R.id.profileRankLocal);
-//        profile_pp = view.findViewById(R.id.profilePP);
+       profile_Username = view.findViewById(R.id.profile_Username);
+        profile_Rank_Global = view.findViewById(R.id.profile_User_Rank_Global);
+        profile_Rank_Local = view.findViewById(R.id.profile_User_Rank_Local);
+        profile_pp = view.findViewById(R.id.profile_user_PP);
 //        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
 //
-//        profile_User_Image = view.findViewById(R.id.imageProfile);
-//        profile_User_Country_Flag = view.findViewById(R.id.profileFlagLocal);
+        profile_User_Image = view.findViewById(R.id.imageProfile);
+        profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
 
         retrofit = new Retrofit.Builder()
                 .baseUrl("https://new.scoresaber.com/api/")
@@ -60,7 +63,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
 
         scoresSaberApi = retrofit.create(ScoresSaberApi.class);
 
-//        getUserData("76561198075540765");
+        getUserData("76561198075540765");
 
 //        Log.d(TAG, "onClick: Opening Dialog");
 //                DialogScoresaberFragment dialog = new DialogScoresaberFragment();
@@ -74,25 +77,21 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
 
     @Override
     public void sendInput(String input) {
+
          Log.d(TAG, "sendInput: found incoming input: " + input);
-
          getUserData(input);
-
-
-
-
-
 
     }
 
     public  void  getUserData(String input){
+
+
         scoresSaberApi.getUserInfo(input).enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
-                Log.d(TAG, "onResponse1: "+response.isSuccessful());
 
                 if ( !response.isSuccessful()){
-                    Log.d(TAG, "onResponse1: isSuccessful: "+response.code());
+                    Log.d(TAG, "onResponse: isSuccessful: "+response.code());
                     return;
                 }
 
@@ -100,11 +99,10 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                 PlayerScoreStats playerScoreStats = player_response.getScore_stats();
                 PlayerPlayerInfo playerPlayerInfo = player_response.getPlayer_info();
 
-
-//                profile_Username.setText(playerPlayerInfo.getPlayer_Name());
-//                profile_Rank_Global.setText(Integer.toString( playerPlayerInfo.getRank()));
-//                profile_Rank_Local.setText(Integer.toString(playerPlayerInfo.getCountry_Rank()));
-//                profile_pp.setText(Double.toString( playerPlayerInfo.getPp()));
+               profile_Username.setText(playerPlayerInfo.getPlayer_Name());
+                profile_Rank_Global.setText("#"+ playerPlayerInfo.getRank()+ " - ");
+                profile_Rank_Local.setText("#"+ playerPlayerInfo.getCountry_Rank());
+                profile_pp.setText(Double.toString( playerPlayerInfo.getPp())+"pp");
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
 
                 Picasso.get()
@@ -119,6 +117,12 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                         .error(R.drawable.leaderbord)
                         .into(profile_User_Country_Flag);
 
+                String historyString = playerPlayerInfo.getHistory();
+                String [] stringTokens = historyString.split(",");
+
+                
+
+                Log.d(TAG, "onResponse: Done");
             }
 
             @Override
