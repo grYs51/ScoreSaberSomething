@@ -20,4 +20,6 @@
     <color name="circleColor">#ff5521</color>
     <color name="yellow">#ffdf74</color>
     <color name="background">#f5f5f5</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
 </resources>
