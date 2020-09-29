@@ -1,6 +1,4 @@
-package com.example.mobiledevproject.model.PlayerProfile;
-
-import com.example.mobiledevproject.model.PlayerProfile.Player;
+package com.example.mobiledevproject.profile.PlayerProfile;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

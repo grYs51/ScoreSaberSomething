@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile"
+    app:startDestination="@id/navProfile">
+
+    <fragment
+        android:id="@+id/navProfileRecentScore"
+        android:name="com.example.mobiledevproject.profile.profile_Recent_songs"
+        android:label="profile__recent_songs"
+        tools:layout="@layout/fragment_profile__recent_songs" />
+    <fragment
+        android:id="@+id/navProfileTopScore"
+        android:name="com.example.mobiledevproject.profile.profile_Top_Songs"
+        android:label="profile__top__songs"
+        tools:layout="@layout/fragment_profile__top__songs" />
+    <fragment
+        android:id="@+id/navProfile"
+        android:name="com.example.mobiledevproject.profile.profile_User_Profile"
+        android:label="profile__user__profile"
+        tools:layout="@layout/fragment_profile__user__profile" />
+</navigation>

@@ -51,5 +51,5 @@ public class MainActivity extends AppCompatActivity {
                 textTitle.setText(destination.getLabel());
             }
         });
-    }
+        }
 }
