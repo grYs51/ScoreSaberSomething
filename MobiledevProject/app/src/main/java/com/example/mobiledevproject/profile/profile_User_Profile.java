@@ -100,17 +100,20 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
 
                 Picasso.get()
-                        .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar() )
+                        .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar().toLowerCase() )
                         .placeholder(R.drawable.profile)
                         .error(R.drawable.leaderbord)
                         .into(profile_User_Image);
 
+
+
                 Picasso.get()
-                        .load("https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry() + ".png")
+                        .load("https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry().toLowerCase() + ".png")
                         .placeholder(R.drawable.profile)
                         .error(R.drawable.leaderbord)
                         .into(profile_User_Country_Flag);
 
+                Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry().toLowerCase() + ".png");
                 String historyString = playerPlayerInfo.getHistory();
                 String [] stringTokens = historyString.split(",");
                 int size = stringTokens.length;
@@ -125,11 +128,11 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
                 int historyDiff = arr[size-6]-playerPlayerInfo.getRank();
                 profile_Diff.setText(historyDiff+ "");
 
-
+//
 //                if (historyDiff < 0){
 //                    profile_Diff.setTextColor(Integer.parseInt("#FF0000"));
 //                } else if(historyDiff > 0){
-//                    profile_Diff.setTextColor(Integer.parseInt("#FF0000"));
+//                    profile_Diff.setTextColor(Integer.parseInt("#00FF00"));
 //
 //                } else {
 //                    profile_Diff.setTextColor(Integer.parseInt(String.valueOf(R.color.greyText)));
