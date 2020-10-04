@@ -18,7 +18,7 @@ import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.profile.PlayerProfile.Player;
 import com.example.mobiledevproject.profile.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.profile.PlayerProfile.PlayerScoreStats;
-import com.example.mobiledevproject.profile.PlayerProfile.ScoresSaberApi;
+import com.example.mobiledevproject.ApiCall.ScoresSaberApi;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
