@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.profile;
+package com.example.mobiledevproject.profile.Fragments;
 
 import android.os.Bundle;
 

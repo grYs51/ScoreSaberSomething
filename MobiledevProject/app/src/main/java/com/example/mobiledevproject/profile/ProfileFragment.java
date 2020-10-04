@@ -1,6 +1,5 @@
 package com.example.mobiledevproject.profile;
 
-import android.app.Activity;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
+import com.example.mobiledevproject.profile.Fragments.profile_Recent_songs;
+import com.example.mobiledevproject.profile.Fragments.profile_Top_Songs;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

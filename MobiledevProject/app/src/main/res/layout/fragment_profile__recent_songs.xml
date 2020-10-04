@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".profile.profile_Recent_songs"
+    tools:context=".profile.Fragments.profile_Recent_songs"
     android:background="#ffffff">
 
 

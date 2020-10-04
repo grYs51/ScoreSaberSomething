@@ -21,7 +21,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/profileFragment"
-            android:name="com.example.mobiledevproject.profile.profile_User_Profile"
+            android:name="com.example.mobiledevproject.profile.Fragments.profile_User_Profile"
             app:navGraph="@navigation/profile"/>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
