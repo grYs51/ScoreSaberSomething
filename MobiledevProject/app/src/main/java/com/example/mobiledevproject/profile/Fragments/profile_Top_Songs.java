@@ -29,12 +29,6 @@ public class profile_Top_Songs extends Fragment {
     private RecyclerView topsongRecyclerView;
     ScoresaberMapAdapter scoresaberMapAdapter;
 
-
-    public profile_Top_Songs() {
-        // Required empty public constructor
-    }
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,21 +44,18 @@ public class profile_Top_Songs extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile__top__songs, container, false);
 
         topsongRecyclerView = view.findViewById(R.id.recycler_view_profile_topscore);
-
         topsongRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         topsongRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         topsongRecyclerView.setAdapter(scoresaberMapAdapter); // empty
 
-
         getTopSongs("76561198075540765", "1");
-
         return view;
     }
 
 
 
     public void getTopSongs(String userId, String page){
-        Log.d(TAG, "getTopSongs: gethere");
+        Log.d(TAG, "getTopSongs: "+ userId + " - " + page);
 
         Call<Scores> mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId,page);
         
