@@ -22,4 +22,11 @@
     <color name="background">#f5f5f5</color>
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
+
+<!--    difficulty colors-->
+    <color name="easy">#4caf50</color>
+    <color name="mediums">#00bcd4</color>
+    <color name="hard">#ff8f00</color>
+    <color name="expert">#c62828</color>
+    <color name="expertPlus">#ab47bc</color>
 </resources>

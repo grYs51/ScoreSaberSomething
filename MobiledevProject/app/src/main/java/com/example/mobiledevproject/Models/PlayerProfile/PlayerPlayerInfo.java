@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.profile.PlayerProfile;
+package com.example.mobiledevproject.Models.PlayerProfile;
 
 import com.google.gson.annotations.SerializedName;
 

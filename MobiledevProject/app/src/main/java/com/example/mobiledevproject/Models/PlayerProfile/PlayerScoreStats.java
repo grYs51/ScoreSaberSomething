@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.profile.PlayerProfile;
+package com.example.mobiledevproject.Models.PlayerProfile;
 
 import com.google.gson.annotations.SerializedName;
 
@@ -18,6 +18,7 @@ public class PlayerScoreStats {
 
     @SerializedName("rankedPlayCount")
     private Integer ranked_Play_Count;
+
 
     public Integer getTotal_Score() {
         return total_Score;

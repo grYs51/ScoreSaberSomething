@@ -13,19 +13,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.DialogScoresaberFragment;
 import com.example.mobiledevproject.R;
-import com.example.mobiledevproject.profile.PlayerProfile.Player;
-import com.example.mobiledevproject.profile.PlayerProfile.PlayerPlayerInfo;
-import com.example.mobiledevproject.profile.PlayerProfile.PlayerScoreStats;
-import com.example.mobiledevproject.ApiCall.ScoresSaberApi;
+import com.example.mobiledevproject.Models.PlayerProfile.Player;
+import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
+import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class profile_User_Profile extends Fragment implements DialogScoresaberFragment.OnInputSelected{
@@ -35,13 +33,12 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag ;
 
-    private Retrofit retrofit;
-    private ScoresSaberApi scoresSaberApi;
     private static final String TAG = "Profile_User_Profile";
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile__user__profile, container, false);
+
 
         profile_Username = view.findViewById(R.id.profile_Username);
         profile_Rank_Global = view.findViewById(R.id.profile_User_Rank_Global);
@@ -49,15 +46,9 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
         profile_pp = view.findViewById(R.id.profile_user_PP);
         profile_Diff = view.findViewById(R.id.profile_history_amount);
 //        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
-
         profile_User_Image = view.findViewById(R.id.imageProfile);
         profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
-        retrofit = new Retrofit.Builder()
-                .baseUrl("https://new.scoresaber.com/api/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        scoresSaberApi = retrofit.create(ScoresSaberApi.class);
 
         getUserData("76561198075540765");
 
@@ -65,7 +56,6 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
 //                DialogScoresaberFragment dialog = new DialogScoresaberFragment();
 //                dialog.setTargetFragment(ProfileFragment.this, 1);
 //                dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
-
         return view;
     }
 
@@ -77,10 +67,11 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
     }
 
 
-    public  void  getUserData(String input){
+     public  void  getUserData(String input){
 
+        Call<Player> playerCall = ApiClient.getPlayerService().getUserInfo(input);
 
-        scoresSaberApi.getUserInfo(input).enqueue(new Callback<Player>() {
+        playerCall.enqueue(new Callback<Player>() {
             @Override
             public void onResponse(Call<Player> call, Response<Player> response) {
 
