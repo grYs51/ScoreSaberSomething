@@ -21,6 +21,7 @@ import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
 import com.squareup.picasso.Picasso;
 
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -89,6 +90,7 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
                 profile_Rank_Local.setText("#"+ playerPlayerInfo.getCountry_Rank());
                 profile_pp.setText(Double.toString( playerPlayerInfo.getPp())+"pp");
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+
 
                 Picasso.get()
                         .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar().toLowerCase() )

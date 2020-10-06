@@ -58,4 +58,8 @@ dependencies {
     //images
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+
+    //animation
+    implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
+
 }

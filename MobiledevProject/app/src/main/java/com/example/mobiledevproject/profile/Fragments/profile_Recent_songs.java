@@ -16,12 +16,11 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.mobiledevproject.Adapters.Scoresaber.ScoresaberMapAdapter;
+import com.example.mobiledevproject.Adapters.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.R;
 
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -37,12 +36,11 @@ public class profile_Recent_songs extends Fragment {
     Call<Scores> mapList;
 
     private int page_number = 1;
-    private int item_count = 8;
 
     //vars
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
-    private int view_treshold = 8;
+    private int view_threshold = 8;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,10 +54,17 @@ public class profile_Recent_songs extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_profile__recent_songs, container, false);
 
-        RecyclerView(view);
+        recyclerView(view);
 
         getRecentSongs("76561198075540765", page_number);
 
+        addScrollListener();
+
+        return view;
+    }
+
+
+    private void addScrollListener() {
         recentsongRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -75,15 +80,13 @@ public class profile_Recent_songs extends Fragment {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_treshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
                         performPagination();
                         isLoading = true;
                     }
                 }
             }
         });
-
-        return view;
     }
 
     private void performPagination(){
@@ -130,9 +133,7 @@ public class profile_Recent_songs extends Fragment {
 
     }
 
-
-
-    private void RecyclerView(View view) {
+    private void recyclerView(View view) {
         recentsongRecyclerView = view.findViewById(R.id.recycler_view_profile_recentScore);
         recentsongRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recentsongRecyclerView.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));

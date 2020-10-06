@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.mobiledevproject.Adapters.Scoresaber.ScoresaberMapAdapter;
+import com.example.mobiledevproject.Adapters.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.R;
@@ -34,12 +34,11 @@ public class profile_Top_Songs extends Fragment {
     Call<Scores> mapList;
 
     private int page_number = 1;
-    private int item_count = 8;
 
     //vars
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
-    private int view_treshold = 8;
+    private int view_threshold = 8;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,6 +56,12 @@ public class profile_Top_Songs extends Fragment {
 
         getTopSongs("76561198075540765", page_number);
 
+        addScrolllistener();
+
+        return view;
+    }
+
+    private void addScrolllistener() {
         topsongRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
@@ -72,15 +77,13 @@ public class profile_Top_Songs extends Fragment {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_treshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
                         performPagination();
                         isLoading = true;
                     }
                 }
             }
         });
-
-        return view;
     }
 
     private void performPagination(){
@@ -88,12 +91,10 @@ public class profile_Top_Songs extends Fragment {
         getTopSongs("76561198075540765", page_number);
     }
 
-
-
     public void getTopSongs(String userId, int page){
         Log.d(TAG, "getTopSongs: "+ userId + " - " + page);
 
-        Call<Scores> mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString( page));
+        mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString( page));
         
         mapList.enqueue(new Callback<Scores>() {
             @Override
