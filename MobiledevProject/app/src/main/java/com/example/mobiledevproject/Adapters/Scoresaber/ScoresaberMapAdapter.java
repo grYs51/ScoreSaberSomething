@@ -26,11 +26,15 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     private Context context;
 
     public ScoresaberMapAdapter(){
-
     }
+
     public void setData(Scores scores){
         this.scores = scores;
         notifyDataSetChanged();
+    }
+
+    public void addData (Scores scores){
+        this.scores.getScores().addAll(scores.getScores());
     }
 
     @NonNull
@@ -78,18 +82,8 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView mapImage;
-        ImageView songdiff;
-
-        TextView songName;
-        TextView songAuthor;
-        TextView levelAuthor;
-
-        TextView rank;
-        TextView pp;
-        TextView ppWeight;
-        TextView acc;
-
+        ImageView mapImage, songdiff;
+        TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -105,9 +99,8 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             pp = itemView.findViewById(R.id.item_pp);
             ppWeight = itemView.findViewById(R.id.item_ppWeight);
             acc = itemView.findViewById(R.id.item_Acc);
-
-
-
         }
     }
+
+
 }
