@@ -1,5 +1,6 @@
 package com.example.mobiledevproject.Adapters;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +16,24 @@ import com.example.mobiledevproject.Shared.PpWeight;
 import com.example.mobiledevproject.Shared.ScoresaberAcc;
 import com.squareup.picasso.Picasso;
 
+import org.ocpsoft.prettytime.PrettyTime;
+
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
+import java.util.TimeZone;
+
+import static android.content.ContentValues.TAG;
 
 public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdapter.ViewHolder> {
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     private Scores scores;
     private Context context;
+    PrettyTime p;
+    Instant i;
 
     public ScoresaberMapAdapter(){
     }
@@ -38,7 +51,8 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        return new ScoresaberMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map,parent, false));
+        p = new PrettyTime();
+        return new ScoresaberMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_scoresaber,parent, false));
     }
 
     @Override
@@ -48,9 +62,19 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         ScoresaberAcc scoresaberAcc = new ScoresaberAcc(scoresaberMap.getScore(),scoresaberMap.getMaxScore());
         DiffColor diffColor = new DiffColor(scoresaberMap.getDifficulty());
 
+        String dt = scoresaberMap.getTimeSet();
+        try {
+            i = Instant.parse(dt);
+            Log.d(TAG, "onBindViewHolder: "+ dt);
+            holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName() + " - "+ p.format(Date.from(i)));
+        } catch (DateTimeParseException dtpe) {
+            Log.d(TAG, "catch: "+ dtpe);
+            holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName());
+        }
+
+
         holder.songName.setText( scoresaberMap.getSongName());
         holder.songAuthor.setText(scoresaberMap.getSongAuthorName());
-        holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName());
         holder.rank.setText(""+scoresaberMap.getRank());
         holder.pp.setText(""+scoresaberMap.getPp()+"pp ");
         holder.ppWeight.setText("("+df2.format(ppWeight.getPpWeight()) + "pp)");
@@ -99,5 +123,12 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         }
     }
 
-
+    public static String convertToNewFormat(String dateStr) throws ParseException {
+        TimeZone utc = TimeZone.getTimeZone("UTC");
+        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        sourceFormat.setTimeZone(utc);
+        Date convertedDate = sourceFormat.parse(dateStr);
+        return destFormat.format(convertedDate);
+    }
 }
