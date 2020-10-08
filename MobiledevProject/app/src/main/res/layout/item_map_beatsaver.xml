@@ -111,6 +111,7 @@
                     android:orientation="horizontal">
 
                     <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/colorDiffEasy"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.2"
@@ -120,6 +121,7 @@
                         app:riv_corner_radius="5dp" />
 
                     <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/colorDiffNormal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.2"
@@ -129,6 +131,7 @@
                         android:paddingEnd="10dp"
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/colorDiffHard"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.2"
@@ -138,6 +141,7 @@
                         android:paddingEnd="10dp"
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/colorDiffExpert"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.2"
@@ -147,6 +151,7 @@
                         android:paddingEnd="10dp"
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
+                        android:id="@+id/colorDiffExpertPlus"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.2"

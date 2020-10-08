@@ -65,7 +65,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         String dt = scoresaberMap.getTimeSet();
         try {
             i = Instant.parse(dt);
-            Log.d(TAG, "onBindViewHolder: "+ dt);
+//            Log.d(TAG, "onBindViewHolder: "+ dt);
             holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName() + " - "+ p.format(Date.from(i)));
         } catch (DateTimeParseException dtpe) {
             Log.d(TAG, "catch: "+ dtpe);
