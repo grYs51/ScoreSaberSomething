@@ -35,15 +35,14 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     PrettyTime p;
     Instant i;
 
-    public ScoresaberMapAdapter(){
+    public ScoresaberMapAdapter() {
     }
 
-    public void setData(Scores scores){
+    public void setData(Scores scores) {
         this.scores = scores;
-        notifyDataSetChanged();
     }
 
-    public void addData (Scores scores){
+    public void addData(Scores scores) {
         this.scores.getScores().addAll(scores.getScores());
     }
 
@@ -52,38 +51,38 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
         p = new PrettyTime();
-        return new ScoresaberMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_scoresaber,parent, false));
+        return new ScoresaberMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_scoresaber, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScoresaberMap scoresaberMap = scores.getScores().get(position);
-        PpWeight ppWeight = new PpWeight(scoresaberMap.getPp(),scoresaberMap.getWeight());
-        ScoresaberAcc scoresaberAcc = new ScoresaberAcc(scoresaberMap.getScore(),scoresaberMap.getMaxScore());
+        PpWeight ppWeight = new PpWeight(scoresaberMap.getPp(), scoresaberMap.getWeight());
+        ScoresaberAcc scoresaberAcc = new ScoresaberAcc(scoresaberMap.getScore(), scoresaberMap.getMaxScore());
         DiffColor diffColor = new DiffColor(scoresaberMap.getDifficulty());
 
         String dt = scoresaberMap.getTimeSet();
         try {
             i = Instant.parse(dt);
 //            Log.d(TAG, "onBindViewHolder: "+ dt);
-            holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName() + " - "+ p.format(Date.from(i)));
+            holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName() + " - " + p.format(Date.from(i)));
         } catch (DateTimeParseException dtpe) {
-            Log.d(TAG, "catch: "+ dtpe);
+            Log.d(TAG, "catch: " + dtpe);
             holder.levelAuthor.setText(scoresaberMap.getLevelAuthorName());
         }
 
 
-        holder.songName.setText( scoresaberMap.getSongName());
+        holder.songName.setText(scoresaberMap.getSongName());
         holder.songAuthor.setText(scoresaberMap.getSongAuthorName());
-        holder.rank.setText(""+scoresaberMap.getRank());
-        holder.pp.setText(""+scoresaberMap.getPp()+"pp ");
-        holder.ppWeight.setText("("+df2.format(ppWeight.getPpWeight()) + "pp)");
-        holder.acc.setText(""+ df2.format(scoresaberAcc.getAcc())+"%");
+        holder.rank.setText("" + scoresaberMap.getRank());
+        holder.pp.setText("" + scoresaberMap.getPp() + "pp ");
+        holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + "pp)");
+        holder.acc.setText("" + df2.format(scoresaberAcc.getAcc()) + "%");
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 
         Picasso.get()
-                .load("https://scoresaber.com/imports/images/songs/"+ scoresaberMap.getSongHash()+".png" )
+                .load("https://scoresaber.com/imports/images/songs/" + scoresaberMap.getSongHash() + ".png")
                 .placeholder(R.drawable.profile) //has to change
                 .error(R.drawable.leaderbord)  // has to change
                 .into(holder.mapImage);
@@ -92,7 +91,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     @Override
     public int getItemCount() {
 
-        if (scores == null){
+        if (scores == null) {
             return 0;
         } else {
             return scores.getScores().size();
@@ -122,13 +121,5 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             acc = itemView.findViewById(R.id.item_Acc);
         }
     }
-
-    public static String convertToNewFormat(String dateStr) throws ParseException {
-        TimeZone utc = TimeZone.getTimeZone("UTC");
-        SimpleDateFormat sourceFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-        SimpleDateFormat destFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        sourceFormat.setTimeZone(utc);
-        Date convertedDate = sourceFormat.parse(dateStr);
-        return destFormat.format(convertedDate);
-    }
 }
+

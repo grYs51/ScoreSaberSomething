@@ -113,11 +113,11 @@ public class profile_Recent_songs extends Fragment {
                 Scores scoresabermaps = response.body();
                 if (scoresaberMapAdapter.getItemCount() == 0){
                     scoresaberMapAdapter.setData(scoresabermaps);
-                    Toast.makeText(getActivity(), "First page is loaded", Toast.LENGTH_LONG);
+//                    Toast.makeText(getActivity(), "First page is loaded", Toast.LENGTH_LONG);
                     Log.d(TAG, "onResponse: First page is loaded");
                 } else{
                     scoresaberMapAdapter.addData(scoresabermaps);
-                    Toast.makeText(getContext(), "page "+ page + " loaded", Toast.LENGTH_LONG);
+//                    Toast.makeText(getContext(), "page "+ page + " loaded", Toast.LENGTH_LONG);
                     Log.d(TAG, "onResponse: page: "+page+ " loaded");
                 }
 

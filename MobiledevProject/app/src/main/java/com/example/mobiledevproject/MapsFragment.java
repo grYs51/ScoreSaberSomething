@@ -1,64 +1,94 @@
 package com.example.mobiledevproject;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MapsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
+import com.example.mobiledevproject.ApiCall.ApiClient;
+import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import com.example.mobiledevproject.Models.ScoresaberMap;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
+
+
 public class MapsFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private RecyclerView mapsbeatsaverRV;
+    private BeatsaverMapAdapter beatsaverMapAdapter;
+    Call<MapsBeatsaver> mapList;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private int page_number = 0;
 
-    public MapsFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MapsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MapsFragment newInstance(String param1, String param2) {
-        MapsFragment fragment = new MapsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    //vars
+    private boolean isLoading = true;
+    private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
+    private int view_threshold = 10;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        beatsaverMapAdapter = new BeatsaverMapAdapter();
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_maps, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+
+        recyclerView(view);
+
+        getMaps("hot", page_number);
+
+
+        return view;
+    }
+
+    private void getMaps(final String sorting, final int page) {
+        Log.d(TAG, "getMaps: page: "+page);
+        mapList = ApiClient.getallmapsSongs().getMaps(sorting, Integer.toString(page));
+        mapList.enqueue(new Callback<MapsBeatsaver>() {
+            @Override
+            public void onResponse(Call<MapsBeatsaver> call, Response<MapsBeatsaver> response) {
+                if(!response.isSuccessful()){
+                    Log.d(TAG, "isSucces: " + response.code());
+                    return;
+                }
+                MapsBeatsaver mapsExtra = response.body();
+                if(beatsaverMapAdapter.getItemCount() == 0){
+                    beatsaverMapAdapter.setData(mapsExtra);
+                } else {
+                    beatsaverMapAdapter.addData(mapsExtra);
+                    Log.d(TAG, "onResponse: page: "+ page+ " | sorting: "+ sorting);
+                }
+                beatsaverMapAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void recyclerView(View view) {
+        mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
+        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
+        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
     }
 }

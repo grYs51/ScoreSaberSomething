@@ -1,5 +1,6 @@
 package com.example.mobiledevproject.ApiCall;
 
+import com.example.mobiledevproject.ApiCall.Interfaces.AllmapsBeatsaverApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.PlayerFullApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.RecentSongApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.TopSongApi;
@@ -11,15 +12,20 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    private static Retrofit getRetrofit(){
+    String scoresaber = "https://new.scoresaber.com/";
+    String beatsaver = "https://beatsaver.com/";
+
+    private static Retrofit getRetrofit(String baseUrl){
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
+
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
 
+
         return new Retrofit.Builder()
-                .baseUrl("https://new.scoresaber.com/")
+                .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
@@ -27,17 +33,19 @@ public class ApiClient {
 
     public static PlayerFullApi getPlayerService(){
 
-        return getRetrofit().create(PlayerFullApi.class);
+        return getRetrofit( "https://new.scoresaber.com/").create(PlayerFullApi.class);
     }
 
     public static TopSongApi getPlayerTopSongs(){
 
-        return getRetrofit().create(TopSongApi.class);
+        return getRetrofit( "https://new.scoresaber.com/").create(TopSongApi.class);
     }
 
     public static RecentSongApi getPlayerRecentSongs(){
 
-
-        return getRetrofit().create(RecentSongApi.class);
+        return getRetrofit( "https://new.scoresaber.com/").create(RecentSongApi.class);
+    }
+    public static AllmapsBeatsaverApi getallmapsSongs(){
+        return getRetrofit("https://beatsaver.com/").create(AllmapsBeatsaverApi.class);
     }
 }
