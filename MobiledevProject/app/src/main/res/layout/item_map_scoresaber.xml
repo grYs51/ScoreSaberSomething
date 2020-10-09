@@ -5,14 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    >
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="10dp">
+    android:layout_margin="8dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -39,7 +32,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:riv_oval="true"></com.makeramen.roundedimageview.RoundedImageView>
 
-
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/item_mapDiffColor"
                 android:layout_width="30dp"
@@ -55,19 +47,6 @@
                 app:layout_constraintVertical_bias="1.0"
                 app:riv_oval="true" />
 
-<!--            <TextView-->
-<!--                android:id="@+id/item_mapRating"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                app:layout_constraintTop_toTopOf="@id/item_mapRatingColor"-->
-<!--                app:layout_constraintLeft_toLeftOf="@id/item_mapRatingColor"-->
-<!--                app:layout_constraintBottom_toBottomOf="@id/item_mapRatingColor"-->
-<!--                app:layout_constraintRight_toRightOf="@id/item_mapRatingColor"-->
-<!--                android:textColor="@color/white"-->
-<!--                android:textSize="12sp"-->
-<!--                android:text="77876"-->
-<!--                android:gravity="center"/>-->
-
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -82,7 +61,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Map Title"
-                                android:textSize="20sp"
+                                android:textSize="18sp"
                                 android:textStyle="bold"
 
                                 android:textColor="@color/black"/>
@@ -92,7 +71,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="songAuthorName"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 app:layout_constraintStart_toEndOf="@+id/static_dash"
                                 app:layout_constraintTop_toTopOf="parent"
                                 android:textColor="@color/black"/>
@@ -133,12 +112,14 @@
 
 
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="0.5"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -147,143 +128,49 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
+
                             <TextView
                                 android:id="@+id/item_pp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="--- "/>
+
                             <TextView
                                 android:id="@+id/item_ppWeight"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" (---)"/>
+
                         </LinearLayout>
+
                     </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_weight="0.3"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:gravity="center_horizontal">
+
                         <TextView
+                            android:id="@+id/item_acctext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Acc"
                             android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/item_Acc"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="---"/>
+
                     </LinearLayout>
+
                 </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="163dp"-->
-<!--                    android:layout_height="57dp"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="horizontal"-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/item_Map_image">-->
-
-
-<!--                    <com.makeramen.roundedimageview.RoundedImageView-->
-<!--                        android:id="@+id/mapColorEasy"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="25dp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:padding="2dp"-->
-<!--                        android:src="@color/greyText3"-->
-<!--                        app:riv_corner_radius="5dp" />-->
-
-<!--                    <com.makeramen.roundedimageview.RoundedImageView-->
-<!--                        android:id="@+id/mapColorMedium"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="25dp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:padding="2dp"-->
-<!--                        android:src="@color/greyText3"-->
-<!--                        app:riv_corner_radius="5dp" />-->
-
-<!--                    <com.makeramen.roundedimageview.RoundedImageView-->
-<!--                        android:id="@+id/mapColorHard"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="25dp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:padding="2dp"-->
-<!--                        android:src="@color/greyText3"-->
-<!--                        app:riv_corner_radius="5dp" />-->
-
-<!--                    <com.makeramen.roundedimageview.RoundedImageView-->
-<!--                        android:id="@+id/mapColorExpert"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="25dp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:padding="2dp"-->
-<!--                        android:src="@color/greyText3"-->
-<!--                        app:riv_corner_radius="5dp" />-->
-
-<!--                    <com.makeramen.roundedimageview.RoundedImageView-->
-<!--                        android:id="@+id/mapColorExpertPlus"-->
-<!--                        android:layout_width="0dp"-->
-<!--                        android:layout_height="25dp"-->
-<!--                        android:layout_weight="0.2"-->
-<!--                        android:padding="2dp"-->
-<!--                        android:src="@color/greyText3"-->
-<!--                        app:riv_corner_radius="5dp" />-->
-<!--                </LinearLayout>-->
 
             </LinearLayout>
 
-
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/static_dash"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text=" - "-->
-<!--                android:textSize="20sp"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/item_songName"-->
-<!--                app:layout_constraintTop_toTopOf="parent"-->
-<!--                android:textColor="@color/black"/>-->
-
-
-
-<!--            <TextView-->
-<!--                android:id="@+id/item_levelAuthorName"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="levelAuthorName"-->
-<!--                android:textSize="17sp"-->
-<!--                app:layout_constraintLeft_toRightOf="@id/item_Map_image"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/item_songName" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/item_timeUploaded"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="Date"-->
-<!--                android:textSize="14sp"-->
-<!--                app:layout_constraintBottom_toBottomOf="@+id/item_levelAuthorName"-->
-<!--                app:layout_constraintStart_toEndOf="@+id/item_levelAuthorName"-->
-<!--                app:layout_constraintTop_toTopOf="@+id/item_levelAuthorName" />-->
-
-
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </androidx.cardview.widget.CardView>
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

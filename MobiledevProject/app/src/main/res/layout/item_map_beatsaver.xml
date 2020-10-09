@@ -8,11 +8,7 @@
     android:layout_margin="8dp"
     >
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:cardCornerRadius="10dp">
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -106,59 +102,52 @@
                     app:layout_constraintTop_toBottomOf="@id/item_songName" />
 
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:orientation="horizontal"
+                    android:layout_marginEnd="150dp"
+                    android:gravity="bottom"
+                    >
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/colorDiffEasy"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
-                        android:src="@color/black"
+                        android:src="@color/greyText"
                         app:riv_corner_radius="5dp" />
 
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/colorDiffNormal"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:src="@color/black"
+                        android:src="@color/greyText"
                         app:riv_corner_radius="5dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/colorDiffHard"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:src="@color/black"
+                        android:src="@color/greyText"
                         app:riv_corner_radius="5dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/colorDiffExpert"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:src="@color/black"
+                        android:src="@color/greyText"
                         app:riv_corner_radius="5dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+
                         />
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:id="@+id/colorDiffExpertPlus"
-                        android:layout_width="0dp"
+                        android:layout_width="20dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2"
-                        android:src="@color/black"
+                        android:src="@color/greyText"
                         app:riv_corner_radius="5dp"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+
                         />
 
                 </LinearLayout>
@@ -167,7 +156,5 @@
             </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
