@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.DialogScoresaberFragment;
 import com.example.mobiledevproject.R;
@@ -90,19 +91,18 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
 
 
-                Picasso.get()
-                        .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar().toLowerCase() )
-                        .placeholder(R.drawable.profile)
-                        .error(R.drawable.leaderbord)
+                Glide.with(getContext())
+                        .load("https://new.scoresaber.com"+ playerPlayerInfo.getAvatar().toLowerCase())
+                        .centerCrop()
+                        .placeholder(R.drawable.leaderbord)
                         .into(profile_User_Image);
 
-
-
-                Picasso.get()
+                Glide.with(getContext())
                         .load("https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry().toLowerCase() + ".png")
                         .placeholder(R.drawable.profile)
                         .error(R.drawable.leaderbord)
                         .into(profile_User_Country_Flag);
+
 
                 Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/"+ playerPlayerInfo.getCountry().toLowerCase() + ".png");
                 String historyString = playerPlayerInfo.getHistory();

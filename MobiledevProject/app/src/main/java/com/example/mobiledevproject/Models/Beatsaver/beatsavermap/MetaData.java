@@ -7,6 +7,11 @@ public class MetaData {
     private Difficulties difficulties;
     private int duration;
     private boolean automapper;
+    private String levelAuthorName;
+    private String songAuthorName;
+    private String songName;
+    private String songSubName;
+    private Double bpm;
 
     private List<Characteristics> characteristics;
 
@@ -46,9 +51,5 @@ public class MetaData {
         return bpm;
     }
 
-    private String levelAuthorName;
-    private String songAuthorName;
-    private String songName;
-    private String songSubName;
-    private Double bpm;
+
 }

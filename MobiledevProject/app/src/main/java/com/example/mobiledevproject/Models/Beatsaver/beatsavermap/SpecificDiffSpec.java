@@ -2,7 +2,7 @@ package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
 public class SpecificDiffSpec {
 
-    private double duration;
+
 
     public double getDuration() {
         return duration;
@@ -24,18 +24,19 @@ public class SpecificDiffSpec {
         return obstacles;
     }
 
-    public int getNjs() {
+    public double getNjs() {
         return njs;
     }
 
-    public int getNjsOffset() {
+    public double getNjsOffset() {
         return njsOffset;
     }
 
+    private double duration;
     private int length;
     private int bombs;
     private int notes;
     private int obstacles;
-    private int njs;
-    private int njsOffset;
+    private double njs;
+    private double njsOffset;
 }

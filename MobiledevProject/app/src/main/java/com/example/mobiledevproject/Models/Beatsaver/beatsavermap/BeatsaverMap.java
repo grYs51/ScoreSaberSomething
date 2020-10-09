@@ -7,7 +7,7 @@ import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Uploader;
 public class BeatsaverMap {
 
     public MetaData getMetaData() {
-        return metaData;
+        return metadata;
     }
 
     public Stats getStats() {
@@ -58,7 +58,7 @@ public class BeatsaverMap {
         return coverURL;
     }
 
-    private MetaData metaData;
+    private MetaData metadata;
     private Stats stats;
     private String description;
     private String deletedAt;
