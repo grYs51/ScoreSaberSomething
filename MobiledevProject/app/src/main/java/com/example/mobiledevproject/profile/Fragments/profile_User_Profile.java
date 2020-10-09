@@ -20,7 +20,6 @@ import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
-import com.squareup.picasso.Picasso;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

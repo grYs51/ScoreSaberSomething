@@ -16,7 +16,6 @@ import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Shared.DiffColor;
 import com.example.mobiledevproject.Shared.PpWeight;
 import com.example.mobiledevproject.Shared.ScoresaberAcc;
-import com.squareup.picasso.Picasso;
 
 import org.ocpsoft.prettytime.PrettyTime;
 

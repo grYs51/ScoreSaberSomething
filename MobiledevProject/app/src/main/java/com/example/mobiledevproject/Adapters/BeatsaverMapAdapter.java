@@ -8,32 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.solver.state.State;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
-import com.example.mobiledevproject.Shared.DiffColor;
-import com.squareup.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
-
 import org.ocpsoft.prettytime.PrettyTime;
-
-import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
-import java.util.zip.DataFormatException;
-
-import okhttp3.Interceptor;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 import static android.content.ContentValues.TAG;
 
@@ -44,7 +29,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private Context context;
     PrettyTime p;
     Instant i;
-    Picasso picasso;
 
     public void setData(MapsBeatsaver mapsBeatsaver){
         this.mapsBeatsaver = mapsBeatsaver;
