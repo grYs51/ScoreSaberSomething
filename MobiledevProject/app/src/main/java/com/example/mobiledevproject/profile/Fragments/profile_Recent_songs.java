@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.mobiledevproject.Adapters.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
@@ -52,7 +51,7 @@ public class profile_Recent_songs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile__recent_songs, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_recent_songs, container, false);
 
         recyclerView(view);
 

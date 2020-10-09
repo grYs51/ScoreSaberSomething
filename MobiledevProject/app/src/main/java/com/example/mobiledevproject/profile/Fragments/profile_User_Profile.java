@@ -36,7 +36,7 @@ public class profile_User_Profile extends Fragment implements DialogScoresaberFr
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile__user__profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_user_profile, container, false);
 
 
         profile_Username = view.findViewById(R.id.profile_Username);

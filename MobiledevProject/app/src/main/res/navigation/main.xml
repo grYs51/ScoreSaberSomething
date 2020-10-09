@@ -9,7 +9,7 @@
         android:id="@+id/menuProfile"
         android:name="com.example.mobiledevproject.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile_adapter" />
 
     <fragment
         android:id="@+id/menuSettings"
@@ -28,9 +28,9 @@
         tools:layout="@layout/fragment_leaderboard" />
     <fragment
         android:id="@+id/menuMaps"
-        android:name="com.example.mobiledevproject.MapsFragment"
+        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_RV"
         android:label="Maps"
-        tools:layout="@layout/fragment_maps" />
+        tools:layout="@layout/fragment_beatsaver_maps_rv" />
     <fragment
         android:id="@+id/menuRankedMaps"
         android:name="com.example.mobiledevproject.RankedMapsFragment"

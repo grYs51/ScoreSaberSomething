@@ -50,7 +50,7 @@ public class profile_Top_Songs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile__top__songs, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_top_songs, container, false);
 
         initRecyclerView(view);
 

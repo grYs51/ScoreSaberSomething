@@ -1,6 +1,5 @@
 package com.example.mobiledevproject;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
-import com.example.mobiledevproject.Models.ScoresaberMap;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -52,7 +50,7 @@ public class MapsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_maps, container, false);
+        View view = inflater.inflate(R.layout.fragment_beatsaver_maps_rv, container, false);
 
         recyclerView(view);
 
