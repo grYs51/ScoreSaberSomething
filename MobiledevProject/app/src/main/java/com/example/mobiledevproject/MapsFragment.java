@@ -33,11 +33,12 @@ public class MapsFragment extends Fragment {
     Call<MapsBeatsaver> mapList;
 
     private int page_number = 0;
-
     //vars
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 10;
+
+    private String sorting = "downloads";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,10 +53,41 @@ public class MapsFragment extends Fragment {
 
         recyclerView(view);
 
-        getMaps("hot", page_number);
+        getMaps(sorting, page_number);
 
-
+        addScrollListener();
+        
         return view;
+    }
+
+    private void addScrollListener() {
+        mapsbeatsaverRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                visibleItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getChildCount();
+                totalItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getItemCount();
+                pastVisibleItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                if(dy > 0){
+                    if (isLoading){
+                        if (totalItemCount > previous_total){
+                            isLoading = false;
+                            previous_total = totalItemCount;
+                        }
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
+                        performPagination();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+    }
+
+    private void performPagination(){
+        page_number++;
+        getMaps(sorting, page_number);
     }
 
     private void getMaps(final String sorting, final int page) {
@@ -70,17 +102,18 @@ public class MapsFragment extends Fragment {
                 }
                 MapsBeatsaver mapsExtra = response.body();
                 if(beatsaverMapAdapter.getItemCount() == 0){
+                    Log.d(TAG, "onResponse: setData" + mapsExtra.getBeatsaverMaps().toString());
                     beatsaverMapAdapter.setData(mapsExtra);
                 } else {
                     beatsaverMapAdapter.addData(mapsExtra);
-                    Log.d(TAG, "onResponse: page: "+ page+ " | sorting: "+ sorting);
+                    Log.d(TAG, "onResponse: AddData page: "+ page+ " | sorting: "+ sorting);
                 }
                 beatsaverMapAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
-
+                Log.d(TAG, "onFailure: "+ t.toString());
             }
         });
     }

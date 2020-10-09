@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.Models.ScoresaberMap;
 import com.example.mobiledevproject.R;
@@ -58,8 +60,21 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         ScoresaberMap scoresaberMap = scores.getScores().get(position);
         PpWeight ppWeight = new PpWeight(scoresaberMap.getPp(), scoresaberMap.getWeight());
-        ScoresaberAcc scoresaberAcc = new ScoresaberAcc(scoresaberMap.getScore(), scoresaberMap.getMaxScore());
+        ScoresaberAcc scoresaberAcc = new ScoresaberAcc();
         DiffColor diffColor = new DiffColor(scoresaberMap.getDifficulty());
+        Log.d(TAG, "onBindViewHolder: ");
+        Log.d(TAG, "onBindViewHolder: "+scoresaberMap.getSongName());
+        Log.d(TAG, "onBindViewHolder: "+ scoresaberMap.getMaxScore());
+        if(scoresaberMap.getMaxScore() > 0){
+            holder.acctext.setText("Acc");
+            double acc = scoresaberAcc.getAcc(scoresaberMap.getScore(),scoresaberMap.getMaxScore());
+            holder.acc.setText("" + df2.format( acc) + "%");
+
+        } else {
+            holder.acctext.setText("Score");
+            holder.acc.setText(""+ scoresaberMap.getScore());
+        }
+
 
         String dt = scoresaberMap.getTimeSet();
         try {
@@ -77,11 +92,11 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         holder.rank.setText("" + scoresaberMap.getRank());
         holder.pp.setText("" + scoresaberMap.getPp() + "pp ");
         holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + "pp)");
-        holder.acc.setText("" + df2.format(scoresaberAcc.getAcc()) + "%");
+
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 
-        Picasso.get()
+        Glide.with(context)
                 .load("https://scoresaber.com/imports/images/songs/" + scoresaberMap.getSongHash() + ".png")
                 .placeholder(R.drawable.profile) //has to change
                 .error(R.drawable.leaderbord)  // has to change
@@ -103,7 +118,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mapImage, songdiff;
-        TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc;
+        TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc, acctext;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -119,6 +134,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             pp = itemView.findViewById(R.id.item_pp);
             ppWeight = itemView.findViewById(R.id.item_ppWeight);
             acc = itemView.findViewById(R.id.item_Acc);
+            acctext = itemView.findViewById(R.id.item_acctext);
         }
     }
 }
