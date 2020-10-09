@@ -1,4 +1,4 @@
-package com.example.mobiledevproject;
+package com.example.mobiledevproject.Beatsaver;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +17,7 @@ import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import com.example.mobiledevproject.R;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,7 +26,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
-public class MapsFragment extends Fragment {
+public class Beatsaver_RV extends Fragment {
 
     private RecyclerView mapsbeatsaverRV;
     private BeatsaverMapAdapter beatsaverMapAdapter;

@@ -1,4 +1,4 @@
-package com.example.mobiledevproject;
+package com.example.mobiledevproject.Beatsaver;
 
 import android.os.Bundle;
 
@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class fragment_info_map extends Fragment {
+public class Beatsaver_map_info extends Fragment {
 
 
 }
