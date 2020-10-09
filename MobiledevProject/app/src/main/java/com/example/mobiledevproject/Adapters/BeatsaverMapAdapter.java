@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import com.example.mobiledevproject.Models.ScoresaberMap;
 import com.example.mobiledevproject.R;
 import org.ocpsoft.prettytime.PrettyTime;
 import java.text.DecimalFormat;
@@ -25,10 +26,11 @@ import static android.content.ContentValues.TAG;
 public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapter.ViewHolder> {
 
     private static DecimalFormat df2 = new DecimalFormat("#");
-    private MapsBeatsaver mapsBeatsaver;
+    public MapsBeatsaver mapsBeatsaver;
     private Context context;
     PrettyTime p;
     Instant i;
+    private  RVClickListener rvClickListener;
 
     public void setData(MapsBeatsaver mapsBeatsaver){
         this.mapsBeatsaver = mapsBeatsaver;
@@ -36,6 +38,10 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     }
     public void addData(MapsBeatsaver mapsBeatsaver){
         this.mapsBeatsaver.getBeatsaverMaps().addAll(mapsBeatsaver.getBeatsaverMaps());
+    }
+
+    public void setlistener(RVClickListener listener){
+        this.rvClickListener = listener;
     }
 
 
@@ -53,6 +59,13 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
         int rating = Integer.parseInt (df2.format(map.getStats().getRating() * 100));
 
+        setItem(holder, map, rating);
+
+
+
+    }
+
+    private void setItem(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
         String dt = map.getUploaded();
 
         try {
@@ -73,13 +86,17 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         }
         if(map.getMetaData().getDifficulties().isEasy()){
             holder.colorDiffEasy.setImageResource(R.color.easy);
-        } if (map.getMetaData().getDifficulties().isNormal()){
+        }
+        if (map.getMetaData().getDifficulties().isNormal()){
             holder.colorDiffNormal.setImageResource(R.color.mediums);
-        } if (map.getMetaData().getDifficulties().isHard()){
+        }
+        if (map.getMetaData().getDifficulties().isHard()){
             holder.colorDiffHard.setImageResource(R.color.hard);
-        } if (map.getMetaData().getDifficulties().isExpert()){
+        }
+        if (map.getMetaData().getDifficulties().isExpert()){
             holder.colorDiffExpert.setImageResource(R.color.expert);
-        } if (map.getMetaData().getDifficulties().isExpertPlus()){
+        }
+        if (map.getMetaData().getDifficulties().isExpertPlus()){
             holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
         }
 
@@ -96,7 +113,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
-
     }
 
     @Override
@@ -108,7 +124,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
 
         ImageView mapImage, mapDiffColor;
         ImageView colorDiffEasy, colorDiffNormal, colorDiffHard, colorDiffExpert, colorDiffExpertPlus;
@@ -117,6 +133,8 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            itemView.setOnClickListener(this);
 
             mapImage = itemView.findViewById(R.id.item_Map_image);
             mapDiffColor = itemView.findViewById(R.id.item_mapDiffColor);
@@ -130,9 +148,22 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             mapAuthorName = itemView.findViewById(R.id.item_songAuthorName);
             levelAuthorName = itemView.findViewById(R.id.item_levelAuthorName);
             mapRating = itemView.findViewById(R.id.item_mapRating);
-
-
-            
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.d(TAG, "onClick: adap"+ getAdapterPosition());
+            if(rvClickListener != null){
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION){
+                    rvClickListener.onClick( mapsBeatsaver.getBeatsaverMaps().get(getAdapterPosition()));
+                }
+            }
+
+
+        }
+    }
+    public interface RVClickListener{
+        void onClick(BeatsaverMap beatsaverMap);
     }
 }

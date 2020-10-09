@@ -1,5 +1,6 @@
 package com.example.mobiledevproject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,7 +31,9 @@ public class MapsFragment extends Fragment {
 
     private RecyclerView mapsbeatsaverRV;
     private BeatsaverMapAdapter beatsaverMapAdapter;
+    private BeatsaverMapAdapter.RVClickListener listener;
     Call<MapsBeatsaver> mapList;
+
 
     private int page_number = 0;
     //vars
@@ -119,9 +122,24 @@ public class MapsFragment extends Fragment {
     }
 
     private void recyclerView(View view) {
+        SetOnClickListener();
         mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
+        beatsaverMapAdapter.setlistener(listener);
         mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
         mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
         mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
+    }
+
+    private void SetOnClickListener() {
+
+        listener = new BeatsaverMapAdapter.RVClickListener() {
+            @Override
+            public void onClick(BeatsaverMap beatsaverMap) {
+
+                Log.d(TAG, "onClick: setonclicklistenet: "+ beatsaverMap.toString() );
+
+
+            }
+        };
     }
 }
