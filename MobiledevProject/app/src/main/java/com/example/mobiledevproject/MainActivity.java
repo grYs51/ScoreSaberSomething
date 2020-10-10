@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
+     DrawerLayout drawerLayout;
     private static final String TAG = "main";
 
     @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final DrawerLayout drawerLayout = findViewById(R.id.drawerLayout);
+        drawerLayout = findViewById(R.id.drawerLayout);
 
 
 

@@ -5,19 +5,27 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.LinearLayout;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
-import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
+import static android.content.ContentValues.TAG;
 
 public class Beatsaver_map_info extends Fragment {
+BeatsaverMap beatsaverMap;
+LinearLayout linearLayout;
+    public Beatsaver_map_info(BeatsaverMap beatsaverMap){
+        Log.d(TAG, "Beatsaver_map_info: "+beatsaverMap.toString());
 
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
     }
 
@@ -29,4 +37,5 @@ public class Beatsaver_map_info extends Fragment {
 
         return view;
     }
+
 }

@@ -1,28 +1,27 @@
 package com.example.mobiledevproject.Beatsaver;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
 import static android.content.ContentValues.TAG;
 
 
@@ -32,7 +31,7 @@ public class Beatsaver_RV extends Fragment {
     private BeatsaverMapAdapter beatsaverMapAdapter;
     private BeatsaverMapAdapter.RVClickListener listener;
     Call<MapsBeatsaver> mapList;
-
+    Context context;
 
     private int page_number = 0;
     //vars
@@ -42,10 +41,12 @@ public class Beatsaver_RV extends Fragment {
 
     private String sorting = "downloads";
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         beatsaverMapAdapter = new BeatsaverMapAdapter();
+        context = getContext();
     }
 
     @Nullable
@@ -134,10 +135,20 @@ public class Beatsaver_RV extends Fragment {
         listener = new BeatsaverMapAdapter.RVClickListener() {
             @Override
             public void onClick(BeatsaverMap beatsaverMap) {
-
                 Log.d(TAG, "onClick: setonclicklistenet: "+ beatsaverMap.toString() );
 
+                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getContext(),BeatsaverMapInfo.class);
+                intent.putExtra("ree", beatsaverMap.getName());
+
+                startActivity(intent);
+
+//                FragmentManager manager = getFragmentManager();
+//                FragmentTransaction transaction = manager.beginTransaction();
+//                transaction.add(R.id.beatsaver_fragment, new Beatsaver_map_info(beatsaverMap));
+//                transaction.addToBackStack(null);
+//                transaction.commit();
             }
         };
     }

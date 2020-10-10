@@ -28,9 +28,9 @@
         tools:layout="@layout/fragment_leaderboard" />
     <fragment
         android:id="@+id/menuMaps"
-        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_RV"
+        android:name="com.example.mobiledevproject.Beatsaver.BeatsaverFragment_adapter"
         android:label="Maps"
-        tools:layout="@layout/fragment_beatsaver_maps_rv" />
+        tools:layout="@layout/fragment_beatsaver_adapter" />
     <fragment
         android:id="@+id/menuRankedMaps"
         android:name="com.example.mobiledevproject.RankedMapsFragment"

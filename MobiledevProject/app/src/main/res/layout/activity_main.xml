@@ -28,7 +28,7 @@
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_menu"
                 app:tint="@color/white" />
-            
+
             <TextView
                 android:id="@+id/textTitle"
                 android:layout_width="match_parent"
