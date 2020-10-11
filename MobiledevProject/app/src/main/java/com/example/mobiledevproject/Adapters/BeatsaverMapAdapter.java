@@ -59,6 +59,10 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
         int rating = Integer.parseInt (df2.format(map.getStats().getRating() * 100));
 
+        Log.d(TAG, "onBindViewHolder: position: " + position );
+        Log.d(TAG, "onBindViewHolder: Name: "+ map.getName());
+        Log.d(TAG, "onBindViewHolder: diff: "+  map.getMetaData().getDifficulties().isEasy() + " | "+  map.getMetaData().getDifficulties().isNormal() + " | "+  map.getMetaData().getDifficulties().isHard() + " | "+  map.getMetaData().getDifficulties().isExpert() + " | "+  map.getMetaData().getDifficulties().isExpertPlus());
+        Log.d(TAG, "onBindViewHolder: ");
         setItem(holder, map, rating);
 
     }
@@ -82,20 +86,20 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             holder.mapRating.setText("" +  rating);
         }
 
-        if(map.getMetaData().getDifficulties().isEasy()){
-            holder.colorDiffEasy.setImageResource(R.color.easy);
+        if(map.getMetaData().getDifficulties().isEasy()){ holder.colorDiffEasy.setImageResource(R.color.easy);
+        } else { holder.colorDiffEasy.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isNormal()){
-            holder.colorDiffNormal.setImageResource(R.color.mediums);
+        if (map.getMetaData().getDifficulties().isNormal()){ holder.colorDiffNormal.setImageResource(R.color.mediums);
+        } else { holder.colorDiffNormal.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isHard()){
-            holder.colorDiffHard.setImageResource(R.color.hard);
+        if (map.getMetaData().getDifficulties().isHard()){ holder.colorDiffHard.setImageResource(R.color.hard);
+        } else { holder.colorDiffHard.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isExpert()){
-            holder.colorDiffExpert.setImageResource(R.color.expert);
+        if (map.getMetaData().getDifficulties().isExpert()){ holder.colorDiffExpert.setImageResource(R.color.expert);
+        } else{ holder.colorDiffExpert.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isExpertPlus()){
-            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
+        if (map.getMetaData().getDifficulties().isExpertPlus()){ holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
+        } else{ holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
         }
 
         if(rating >= 65 ){
@@ -111,6 +115,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
+
     }
 
     @Override

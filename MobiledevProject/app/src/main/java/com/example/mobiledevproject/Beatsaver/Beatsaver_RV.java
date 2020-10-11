@@ -119,7 +119,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
                     beatsaverMapAdapter.addData(mapsExtra);
                     Log.d(TAG, "onResponse: AddData page: " + page + " | sorting: " + sorting);
                 }
-                beatsaverMapAdapter.notifyDataSetChanged();
+                beatsaverMapAdapter.notifyItemRangeInserted(beatsaverMapAdapter.getItemCount() - mapsExtra.getBeatsaverMaps().size(), mapsExtra.getBeatsaverMaps().size());
             }
 
             @Override
