@@ -61,8 +61,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         setItem(holder, map, rating);
 
-
-
     }
 
     private void setItem(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
@@ -76,7 +74,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName());
         }
 
-//        Log.d(TAG, "onBindViewHolder: https://beatsaver.com"+ map.getCoverURL());
         holder.mapTitle.setText(map.getName());
         holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
         if(map.getStats().getUpVotes()+map.getStats().getDownVotes() == 0 ){
@@ -84,6 +81,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         } else{
             holder.mapRating.setText("" +  rating);
         }
+
         if(map.getMetaData().getDifficulties().isEasy()){
             holder.colorDiffEasy.setImageResource(R.color.easy);
         }

@@ -3,29 +3,37 @@ package com.example.mobiledevproject.Beatsaver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+import com.google.gson.annotations.SerializedName;
+
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 import static android.content.ContentValues.TAG;
 
 
-public class Beatsaver_RV extends Fragment {
+public class Beatsaver_RV extends Fragment implements Serializable {
 
     private RecyclerView mapsbeatsaverRV;
     private BeatsaverMapAdapter beatsaverMapAdapter;
@@ -59,7 +67,7 @@ public class Beatsaver_RV extends Fragment {
         getMaps(sorting, page_number);
 
         addScrollListener();
-        
+
         return view;
     }
 
@@ -69,17 +77,17 @@ public class Beatsaver_RV extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getChildCount();
-                totalItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getItemCount();
-                pastVisibleItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
+                totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
+                pastVisibleItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
-                if(dy > 0){
-                    if (isLoading){
-                        if (totalItemCount > previous_total){
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previous_total) {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)) {
                         performPagination();
                         isLoading = true;
                     }
@@ -88,35 +96,35 @@ public class Beatsaver_RV extends Fragment {
         });
     }
 
-    private void performPagination(){
+    private void performPagination() {
         page_number++;
         getMaps(sorting, page_number);
     }
 
     private void getMaps(final String sorting, final int page) {
-        Log.d(TAG, "getMaps: page: "+page);
+        Log.d(TAG, "getMaps: page: " + page);
         mapList = ApiClient.getallmapsSongs().getMaps(sorting, Integer.toString(page));
         mapList.enqueue(new Callback<MapsBeatsaver>() {
             @Override
             public void onResponse(Call<MapsBeatsaver> call, Response<MapsBeatsaver> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
                 MapsBeatsaver mapsExtra = response.body();
-                if(beatsaverMapAdapter.getItemCount() == 0){
+                if (beatsaverMapAdapter.getItemCount() == 0) {
                     Log.d(TAG, "onResponse: setData" + mapsExtra.getBeatsaverMaps().toString());
                     beatsaverMapAdapter.setData(mapsExtra);
                 } else {
                     beatsaverMapAdapter.addData(mapsExtra);
-                    Log.d(TAG, "onResponse: AddData page: "+ page+ " | sorting: "+ sorting);
+                    Log.d(TAG, "onResponse: AddData page: " + page + " | sorting: " + sorting);
                 }
                 beatsaverMapAdapter.notifyDataSetChanged();
             }
 
             @Override
             public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
-                Log.d(TAG, "onFailure: "+ t.toString());
+                Log.d(TAG, "onFailure: " + t.toString());
             }
         });
     }
@@ -126,7 +134,7 @@ public class Beatsaver_RV extends Fragment {
         mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
         beatsaverMapAdapter.setlistener(listener);
         mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
     }
 
@@ -135,20 +143,14 @@ public class Beatsaver_RV extends Fragment {
         listener = new BeatsaverMapAdapter.RVClickListener() {
             @Override
             public void onClick(BeatsaverMap beatsaverMap) {
-                Log.d(TAG, "onClick: setonclicklistenet: "+ beatsaverMap.toString() );
+                Log.d(TAG, "onClick: setonclicklistenet: " + beatsaverMap.toString());
 
                 Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(getContext(),BeatsaverMapInfo.class);
-                intent.putExtra("ree", beatsaverMap.getName());
-
+                Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
+                intent.putExtra("ree", beatsaverMap);
                 startActivity(intent);
 
-//                FragmentManager manager = getFragmentManager();
-//                FragmentTransaction transaction = manager.beginTransaction();
-//                transaction.add(R.id.beatsaver_fragment, new Beatsaver_map_info(beatsaverMap));
-//                transaction.addToBackStack(null);
-//                transaction.commit();
             }
         };
     }
