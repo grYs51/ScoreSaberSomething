@@ -4,7 +4,9 @@ import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.MetaData;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Stats;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Uploader;
 
-public class BeatsaverMap {
+import java.io.Serializable;
+
+public class BeatsaverMap implements Serializable {
 
     public MetaData getMetaData() {
         return metadata;

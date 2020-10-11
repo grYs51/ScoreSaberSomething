@@ -1,6 +1,8 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
-public class Characteristics {
+import java.io.Serializable;
+
+public class Characteristics implements Serializable {
 
     public DifficultiesSpecs getDifficulties() {
         return difficulties;

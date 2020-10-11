@@ -1,6 +1,8 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
-public class Difficulties {
+import java.io.Serializable;
+
+public class Difficulties implements Serializable {
     public boolean isEasy() {
         return easy;
     }

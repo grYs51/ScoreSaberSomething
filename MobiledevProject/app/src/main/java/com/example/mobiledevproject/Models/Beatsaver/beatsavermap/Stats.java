@@ -1,6 +1,8 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
-public class Stats {
+import java.io.Serializable;
+
+public class Stats implements Serializable {
     private int downloads;
     private int plays;
     private int downVotes;

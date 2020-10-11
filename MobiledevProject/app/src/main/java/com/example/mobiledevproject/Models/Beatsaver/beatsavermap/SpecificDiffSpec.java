@@ -1,6 +1,8 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
-public class SpecificDiffSpec {
+import java.io.Serializable;
+
+public class SpecificDiffSpec implements Serializable {
 
 
 

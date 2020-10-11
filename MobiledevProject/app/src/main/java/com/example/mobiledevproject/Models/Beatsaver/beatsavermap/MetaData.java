@@ -1,8 +1,9 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class MetaData {
+public class MetaData implements Serializable {
 
     private Difficulties difficulties;
     private int duration;
