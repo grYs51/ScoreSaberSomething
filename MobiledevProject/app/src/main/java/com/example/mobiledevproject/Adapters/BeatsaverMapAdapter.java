@@ -1,7 +1,6 @@
 package com.example.mobiledevproject.Adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
-import com.example.mobiledevproject.Models.ScoresaberMap;
 import com.example.mobiledevproject.R;
 import org.ocpsoft.prettytime.PrettyTime;
 import java.text.DecimalFormat;

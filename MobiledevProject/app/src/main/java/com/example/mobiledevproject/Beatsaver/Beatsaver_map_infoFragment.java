@@ -14,10 +14,10 @@ import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
 import static android.content.ContentValues.TAG;
 
-public class Beatsaver_map_info extends Fragment {
+public class Beatsaver_map_infoFragment extends Fragment {
 BeatsaverMap beatsaverMap;
 LinearLayout linearLayout;
-    public Beatsaver_map_info(BeatsaverMap beatsaverMap){
+    public Beatsaver_map_infoFragment(BeatsaverMap beatsaverMap){
         Log.d(TAG, "Beatsaver_map_info: "+beatsaverMap.toString());
 
     }

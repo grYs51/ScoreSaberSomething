@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_beatsaver_maps_rv" />
     <fragment
         android:id="@+id/beatsaver_map_info"
-        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_map_info"
+        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_map_infoFragment"
         android:label="fragment_beatsaver_info_map"
         tools:layout="@layout/fragment_beatsaver_info_map" />
 </navigation>

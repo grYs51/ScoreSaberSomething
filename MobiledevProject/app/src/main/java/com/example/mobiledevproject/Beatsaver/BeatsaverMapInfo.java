@@ -6,10 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,10 +35,8 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beatsaver_map_info);
 
-
-
         beatsaverMap = (BeatsaverMap) getIntent().getSerializableExtra("ree");
-        Log.d(TAG, "onCreate: dataget: Title: "+ beatsaverMap.getName() );
+        Log.d(TAG, "onCreate: dataget: Title: "+ beatsaverMap.getMetaData().getSongName() );
 
         songName = findViewById(R.id.title);
         mapImage = findViewById(R.id.toolbar_image);
