@@ -64,8 +64,6 @@ dependencies {
     implementation 'jp.wasabeef:recyclerview-animators:3.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
 
-
-
     //momentjs
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.6.Final'
 
