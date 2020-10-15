@@ -45,15 +45,11 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         songName = findViewById(R.id.InfoTitle);
         songName.setText(beatsaverMap.getMetaData().getSongName());
 
-        TabItem tabInfo = findViewById(R.id.tabInfo);
-        TabItem tabDifficulties = findViewById(R.id.tabDifficulties);
-        TabItem tabDescription = findViewById(R.id.tabDescription);
-
 
         //setviewpager
 
         ViewPager viewPager = findViewById(R.id.infoPager);
-        PagerAdapter pA = new InfoPagerAdapter(getSupportFragmentManager());
+        PagerAdapter pA = new InfoPagerAdapter(getSupportFragmentManager(), beatsaverMap);
         viewPager.setAdapter(pA);
         //tablayout
 

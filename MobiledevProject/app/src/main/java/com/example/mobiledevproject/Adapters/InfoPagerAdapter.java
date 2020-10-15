@@ -12,16 +12,18 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DescriptionMapFragment;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DifficultiesMapFragment;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.InfoMapFragment;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 
 public class InfoPagerAdapter extends FragmentPagerAdapter {
 
     private static final String TAG = "InfoAdapter";
 
     private String tabTitles[] = new String[]{"Tab 1", "Tab 2"};
+    private BeatsaverMap beatsaverMap;
 
-
-    public InfoPagerAdapter(@NonNull FragmentManager fm) {
+    public InfoPagerAdapter(@NonNull FragmentManager fm, BeatsaverMap beatsaverMap) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        this.beatsaverMap = beatsaverMap;
     }
 
     @NonNull
@@ -30,7 +32,7 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
         Log.d(TAG, "getItem: position: " + position);
         switch (position) {
             case 0:
-                return new InfoMapFragment();
+                return new InfoMapFragment(beatsaverMap);
             case 1:
                 return new DifficultiesMapFragment();
 //            case 2:

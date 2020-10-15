@@ -32,27 +32,7 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:minHeight="?attr/actionBarSize"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Info" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabDifficulties"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Difficulties" />
-
-        <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabDescription"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Description" />
-
-    </com.google.android.material.tabs.TabLayout>
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/infoPager"
