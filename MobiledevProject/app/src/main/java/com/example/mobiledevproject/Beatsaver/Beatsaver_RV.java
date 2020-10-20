@@ -3,7 +3,6 @@ package com.example.mobiledevproject.Beatsaver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,12 +16,11 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.mobiledevproject.Adapters.BeatsaverMapAdapter;
+import com.example.mobiledevproject.Adapters.RV.BeatsaverMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
-import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
@@ -47,7 +45,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 10;
 
-    private String sorting = "downloads";
+    private String sorting = "hot";
 
 
     @Override

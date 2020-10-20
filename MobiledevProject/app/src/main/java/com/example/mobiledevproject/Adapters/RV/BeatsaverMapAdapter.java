@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.Adapters;
+package com.example.mobiledevproject.Adapters.RV;
 
 import android.content.Context;
 import android.util.Log;

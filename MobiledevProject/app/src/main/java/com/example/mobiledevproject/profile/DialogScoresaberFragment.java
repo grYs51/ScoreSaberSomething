@@ -1,10 +1,11 @@
-package com.example.mobiledevproject;
+package com.example.mobiledevproject.profile;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,11 +18,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mobiledevproject.R;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class DialogScoresaberFragment extends DialogFragment {
+public class DialogScoresaberFragment extends AppCompatDialogFragment {
 
     private static final String TAG = "DialogScoresaberFragmen";
 
@@ -31,7 +34,7 @@ public class DialogScoresaberFragment extends DialogFragment {
     public OnInputSelected mOnInputSelected;
 
     private EditText mInput;
-    private TextView mActionOk, mActionCancel;
+   private TextView mActionOk, mActionCancel;
 
 
     Pattern scoresaberPattern = Pattern.compile("(?:http(?:s)?:/)?(?:new\\.)?(?:scoresaber\\.com/u/)?(\\d{16,})(?:/.*)?");

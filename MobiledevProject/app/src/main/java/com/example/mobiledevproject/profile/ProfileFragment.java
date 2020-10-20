@@ -19,23 +19,31 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements DialogScoresaberFragment.OnInputSelected {
 
     private static final String TAG = "ProfileFragment";
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Log.d(TAG, "onClick: Opening Dialog");
+        DialogScoresaberFragment dialog = new DialogScoresaberFragment();
+        dialog.setTargetFragment(ProfileFragment.this, 1);
+        dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+
+    }
+    public void sendInput(String input) {
+        Log.d(TAG, "sendInput: found incoming input: " + input);
+
+
         Log.d(TAG, "onViewCreated: Creating BottomNav");
         BottomNavigationView navigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottomNav);
         navigationView.setOnNavigationItemSelectedListener(bottomNavListener);
 
-        if (savedInstanceState == null) {
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.profileFragment,
-                    new profile_User_Profile()).commit();
-            Log.d(TAG, "onViewCreated: Opened userProfile");
-        }
+
 
     }
 

@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.mobiledevproject.Adapters.ScoresaberMapAdapter;
+import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.R;
@@ -54,7 +54,7 @@ public class profile_Top_Songs extends Fragment {
 
         initRecyclerView(view);
 
-        getTopSongs("76561198075540765", page_number);
+//        getTopSongs("76561198075540765", page_number);
 
         addScrolllistener();
 

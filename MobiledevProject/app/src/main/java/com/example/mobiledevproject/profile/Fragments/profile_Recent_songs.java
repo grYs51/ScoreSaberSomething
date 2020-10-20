@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.mobiledevproject.Adapters.ScoresaberMapAdapter;
+import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.R;
@@ -90,7 +90,7 @@ public class profile_Recent_songs extends Fragment {
 
     private void performPagination(){
         page_number++;
-        getRecentSongs("76561198075540765", page_number);
+//        getRecentSongs("76561198075540765", page_number);
     }
 
     public void getRecentSongs(String userId, final int page) {
