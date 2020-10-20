@@ -7,9 +7,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-
-import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DescriptionMapFragment;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DifficultiesMapFragment;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.InfoMapFragment;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
@@ -18,7 +15,7 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
 
     private static final String TAG = "InfoAdapter";
 
-    private String tabTitles[] = new String[]{"Tab 1", "Tab 2"};
+    private String tabTitles[] = new String[]{"Info", "Extra"};
     private BeatsaverMap beatsaverMap;
 
     public InfoPagerAdapter(@NonNull FragmentManager fm, BeatsaverMap beatsaverMap) {
