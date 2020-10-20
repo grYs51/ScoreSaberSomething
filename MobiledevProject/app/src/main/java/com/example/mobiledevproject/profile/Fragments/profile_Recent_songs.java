@@ -37,9 +37,16 @@ public class profile_Recent_songs extends Fragment {
     private int page_number = 1;
 
     //vars
+    String playerId;
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
+
+    public profile_Recent_songs(String input){
+
+        this.playerId = input;
+
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,7 +62,7 @@ public class profile_Recent_songs extends Fragment {
 
         recyclerView(view);
 
-        getRecentSongs("76561198075540765", page_number);
+        getRecentSongs(playerId, page_number);
 
         addScrollListener();
 
@@ -90,7 +97,7 @@ public class profile_Recent_songs extends Fragment {
 
     private void performPagination(){
         page_number++;
-//        getRecentSongs("76561198075540765", page_number);
+        getRecentSongs(playerId, page_number);
     }
 
     public void getRecentSongs(String userId, final int page) {

@@ -29,16 +29,20 @@ import static android.content.ContentValues.TAG;
 public class profile_Top_Songs extends Fragment {
 
     private RecyclerView topsongRecyclerView;
-    private ProgressBar progressBar;
     ScoresaberMapAdapter scoresaberMapAdapter;
     Call<Scores> mapList;
-
     private int page_number = 1;
-
     //vars
+    private String playerId;
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
+
+    public profile_Top_Songs(String input){
+
+        this.playerId = input;
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -54,7 +58,7 @@ public class profile_Top_Songs extends Fragment {
 
         initRecyclerView(view);
 
-//        getTopSongs("76561198075540765", page_number);
+        getTopSongs(playerId, page_number);
 
         addScrolllistener();
 
@@ -87,8 +91,11 @@ public class profile_Top_Songs extends Fragment {
     }
 
     private void performPagination(){
+
         page_number++;
-        getTopSongs("76561198075540765", page_number);
+
+        getTopSongs(playerId, page_number);
+
     }
 
     public void getTopSongs(String userId, int page){

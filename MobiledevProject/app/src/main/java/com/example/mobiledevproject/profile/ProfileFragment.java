@@ -1,9 +1,14 @@
 package com.example.mobiledevproject.profile;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,70 +16,72 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mobiledevproject.Adapters.InfoPagerAdapter;
+import com.example.mobiledevproject.Adapters.ProfilePagerAdapter;
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
 import com.example.mobiledevproject.profile.Fragments.profile_Recent_songs;
 import com.example.mobiledevproject.profile.Fragments.profile_Top_Songs;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.google.android.material.tabs.TabLayout;
 
 
 public class ProfileFragment extends Fragment implements DialogScoresaberFragment.OnInputSelected {
 
     private static final String TAG = "ProfileFragment";
 
-
-
+    ViewPager viewPager;
+    PagerAdapter pagerAdapter;
+    TabLayout tabLayout;
+    String input;
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Log.d(TAG, "onClick: Opening Dialog");
-        DialogScoresaberFragment dialog = new DialogScoresaberFragment();
-        dialog.setTargetFragment(ProfileFragment.this, 1);
-        dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        input = sharedPref.getString("playerId",null);
+
+        if (input == null) {
+            Log.d(TAG, "onClick: Opening Dialog");
+            DialogScoresaberFragment dialog = new DialogScoresaberFragment();
+            dialog.setTargetFragment(ProfileFragment.this, 1);
+            dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+        } else {
+            createPager();
+        }
 
     }
+
     public void sendInput(String input) {
         Log.d(TAG, "sendInput: found incoming input: " + input);
+        this.input = input;
 
+        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("playerId", input);
+        editor.apply();
 
-        Log.d(TAG, "onViewCreated: Creating BottomNav");
-        BottomNavigationView navigationView = (BottomNavigationView) getActivity().findViewById(R.id.bottomNav);
-        navigationView.setOnNavigationItemSelectedListener(bottomNavListener);
-
+        createPager();
 
 
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener bottomNavListener = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            Fragment selectedFragment = null;
-
-            switch (item.getItemId()){
-                case R.id.navProfile:
-                    selectedFragment = new profile_User_Profile();
-                    break;
-                case R.id.navProfileTopScore:
-                    selectedFragment = new profile_Top_Songs();
-                    break;
-                case R.id.navProfileRecentScore:
-                    selectedFragment = new profile_Recent_songs();
-                    break;
-            }
-            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.profileFragment, selectedFragment).commit();
-            Log.d(TAG, "onNavigationItemSelected: Switched to "+ selectedFragment.getTag());
-            return true;
-        }
-    };
+    private void createPager() {
+        PagerAdapter pA = new ProfilePagerAdapter(getChildFragmentManager(), this.input);
+        viewPager.setOffscreenPageLimit(2);
+        viewPager.setAdapter(pA);
+        tabLayout.setupWithViewPager(viewPager);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        View view = inflater.inflate(R.layout.fragment_profile_adapter, container, false);
 
+        viewPager = view.findViewById(R.id.infoPagerProfile);
+        tabLayout = view.findViewById(R.id.tabLayoutProfile);
 
-        return inflater.inflate(R.layout.fragment_profile_adapter, container, false);
+        return view;
     }
 }

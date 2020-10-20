@@ -28,27 +28,27 @@ import retrofit2.Response;
 
 public class profile_User_Profile extends Fragment  {
 
+    private static final String TAG = "Profile_User_Profile";
+    String playerId;
     private Player player_response;
-
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag;
 
-    private static final String TAG = "Profile_User_Profile";
+    public profile_User_Profile(String input){
+
+        this.playerId = input;
+
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_profile_user_profile, container, false);
 
-
         findViews(view);
 
-
-//        getUserData("76561198075540765");
-
-
-
-
+        getUserData(playerId);
 
         return view;
     }
