@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.Adapters;
+package com.example.mobiledevproject.Adapters.RV;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,12 +20,9 @@ import com.example.mobiledevproject.Shared.ScoresaberAcc;
 import org.ocpsoft.prettytime.PrettyTime;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
-import java.util.TimeZone;
 
 import static android.content.ContentValues.TAG;
 
@@ -91,7 +88,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         holder.rank.setText("" + scoresaberMap.getRank());
         holder.pp.setText("" + scoresaberMap.getPp() + "pp ");
         holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + "pp)");
-
+        holder.position.setText(position +1 +"" );
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 
@@ -117,7 +114,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mapImage, songdiff;
-        TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc, acctext;
+        TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc, acctext, position;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -128,6 +125,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             songName = itemView.findViewById(R.id.item_songName);
             songAuthor = itemView.findViewById(R.id.item_songAuthorName);
             levelAuthor = itemView.findViewById(R.id.item_levelAuthorName);
+            position = itemView.findViewById(R.id.item_position);
 
             rank = itemView.findViewById(R.id.item_rank);
             pp = itemView.findViewById(R.id.item_pp);
