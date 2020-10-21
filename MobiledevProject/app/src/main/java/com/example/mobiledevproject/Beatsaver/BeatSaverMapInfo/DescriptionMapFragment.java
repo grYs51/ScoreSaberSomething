@@ -14,7 +14,6 @@ import com.example.mobiledevproject.R;
 
 public class DescriptionMapFragment extends Fragment {
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

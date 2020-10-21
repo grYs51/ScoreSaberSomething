@@ -38,7 +38,7 @@ public class profile_Top_Songs extends Fragment {
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
 
-    public profile_Top_Songs(String input){
+    public profile_Top_Songs(String input) {
 
         this.playerId = input;
 
@@ -71,17 +71,17 @@ public class profile_Top_Songs extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getChildCount();
-                totalItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getItemCount();
-                pastVisibleItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
+                totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
+                pastVisibleItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
-                if(dy > 0){
-                    if (isLoading){
-                        if (totalItemCount > previous_total){
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previous_total) {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)) {
                         performPagination();
                         isLoading = true;
                     }
@@ -90,7 +90,7 @@ public class profile_Top_Songs extends Fragment {
         });
     }
 
-    private void performPagination(){
+    private void performPagination() {
 
         page_number++;
 
@@ -98,22 +98,22 @@ public class profile_Top_Songs extends Fragment {
 
     }
 
-    public void getTopSongs(String userId, int page){
-        Log.d(TAG, "getTopSongs: "+ userId + " - " + page);
+    public void getTopSongs(String userId, int page) {
+        Log.d(TAG, "getTopSongs: " + userId + " - " + page);
 
-        mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString( page));
-        
+        mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString(page));
+
         mapList.enqueue(new Callback<Scores>() {
             @Override
             public void onResponse(Call<Scores> call, Response<Scores> response) {
-                if (!response.isSuccessful()){
-                    Log.d(TAG, "isSucces: "+ response.code());
+                if (!response.isSuccessful()) {
+                    Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
                 Scores scoresaberMaps = response.body();
-                if (scoresaberMapAdapter.getItemCount() == 0){
+                if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresaberMaps);
-                } else{
+                } else {
                     scoresaberMapAdapter.addData(scoresaberMaps);
                 }
                 scoresaberMapAdapter.notifyDataSetChanged();
@@ -124,7 +124,7 @@ public class profile_Top_Songs extends Fragment {
 
             }
         });
-        
+
 
     }
 

@@ -12,16 +12,13 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
-     DrawerLayout drawerLayout;
+    DrawerLayout drawerLayout;
     private static final String TAG = "main";
 
     @Override
@@ -30,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-
 
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
@@ -51,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
-                Log.d(TAG, "onCreate: "+ destination );
+                Log.d(TAG, "onCreate: " + destination);
                 textTitle.setText(destination.getLabel());
             }
         });
-        }
+    }
 }

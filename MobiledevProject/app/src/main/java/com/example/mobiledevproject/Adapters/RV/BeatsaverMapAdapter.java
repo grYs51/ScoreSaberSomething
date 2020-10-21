@@ -7,13 +7,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+
 import org.ocpsoft.prettytime.PrettyTime;
+
 import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
@@ -28,17 +32,18 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private Context context;
     PrettyTime p;
     Instant i;
-    private  RVClickListener rvClickListener;
+    private RVClickListener rvClickListener;
 
-    public void setData(MapsBeatsaver mapsBeatsaver){
+    public void setData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver = mapsBeatsaver;
         notifyDataSetChanged();
     }
-    public void addData(MapsBeatsaver mapsBeatsaver){
+
+    public void addData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver.getBeatsaverMaps().addAll(mapsBeatsaver.getBeatsaverMaps());
     }
 
-    public void setlistener(RVClickListener listener){
+    public void setlistener(RVClickListener listener) {
         this.rvClickListener = listener;
     }
 
@@ -49,17 +54,17 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         context = parent.getContext();
         p = new PrettyTime();
 
-        return new BeatsaverMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_beatsaver,parent,false));
+        return new BeatsaverMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_beatsaver, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull BeatsaverMapAdapter.ViewHolder holder, int position) {
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
-        int rating = Integer.parseInt (df2.format(map.getStats().getRating() * 100));
+        int rating = Integer.parseInt(df2.format(map.getStats().getRating() * 100));
 
-        Log.d(TAG, "onBindViewHolder: position: " + position );
-        Log.d(TAG, "onBindViewHolder: Name: "+ map.getName());
-        Log.d(TAG, "onBindViewHolder: diff: "+  map.getMetaData().getDifficulties().isEasy() + " | "+  map.getMetaData().getDifficulties().isNormal() + " | "+  map.getMetaData().getDifficulties().isHard() + " | "+  map.getMetaData().getDifficulties().isExpert() + " | "+  map.getMetaData().getDifficulties().isExpertPlus());
+        Log.d(TAG, "onBindViewHolder: position: " + position);
+        Log.d(TAG, "onBindViewHolder: Name: " + map.getName());
+        Log.d(TAG, "onBindViewHolder: diff: " + map.getMetaData().getDifficulties().isEasy() + " | " + map.getMetaData().getDifficulties().isNormal() + " | " + map.getMetaData().getDifficulties().isHard() + " | " + map.getMetaData().getDifficulties().isExpert() + " | " + map.getMetaData().getDifficulties().isExpertPlus());
         Log.d(TAG, "onBindViewHolder: ");
         setItem(holder, map, rating);
 
@@ -71,45 +76,55 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         try {
             i = Instant.parse(dt);
             holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
-        } catch ( DateTimeParseException dtpe){
-            Log.d(TAG, "catch: "+ dtpe);
+        } catch (DateTimeParseException dtpe) {
+            Log.d(TAG, "catch: " + dtpe);
             holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName());
         }
 
         holder.mapTitle.setText(map.getName());
         holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
-        if(map.getStats().getUpVotes()+map.getStats().getDownVotes() == 0 ){
+        if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {
             holder.mapRating.setText("?");
-        } else{
-            holder.mapRating.setText("" +  rating);
+        } else {
+            holder.mapRating.setText("" + rating);
         }
 
-        if(map.getMetaData().getDifficulties().isEasy()){ holder.colorDiffEasy.setImageResource(R.color.easy);
-        } else { holder.colorDiffEasy.setImageResource(R.color.greyText);
+        if (map.getMetaData().getDifficulties().isEasy()) {
+            holder.colorDiffEasy.setImageResource(R.color.easy);
+        } else {
+            holder.colorDiffEasy.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isNormal()){ holder.colorDiffNormal.setImageResource(R.color.mediums);
-        } else { holder.colorDiffNormal.setImageResource(R.color.greyText);
+        if (map.getMetaData().getDifficulties().isNormal()) {
+            holder.colorDiffNormal.setImageResource(R.color.mediums);
+        } else {
+            holder.colorDiffNormal.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isHard()){ holder.colorDiffHard.setImageResource(R.color.hard);
-        } else { holder.colorDiffHard.setImageResource(R.color.greyText);
+        if (map.getMetaData().getDifficulties().isHard()) {
+            holder.colorDiffHard.setImageResource(R.color.hard);
+        } else {
+            holder.colorDiffHard.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isExpert()){ holder.colorDiffExpert.setImageResource(R.color.expert);
-        } else{ holder.colorDiffExpert.setImageResource(R.color.greyText);
+        if (map.getMetaData().getDifficulties().isExpert()) {
+            holder.colorDiffExpert.setImageResource(R.color.expert);
+        } else {
+            holder.colorDiffExpert.setImageResource(R.color.greyText);
         }
-        if (map.getMetaData().getDifficulties().isExpertPlus()){ holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
-        } else{ holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
+        if (map.getMetaData().getDifficulties().isExpertPlus()) {
+            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
+        } else {
+            holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
         }
 
-        if(rating >= 65 ){
+        if (rating >= 65) {
             holder.mapDiffColor.setImageResource(R.color.easy);
-        } else if ( rating < 65){
+        } else if (rating < 65) {
             holder.mapDiffColor.setImageResource(R.color.hard);
-        } else if ( rating < 50){
+        } else if (rating < 50) {
             holder.mapDiffColor.setImageResource(R.color.expert);
         }
 
         Glide.with(context)
-                .load("https://beatsaver.com"+ map.getCoverURL())
+                .load("https://beatsaver.com" + map.getCoverURL())
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
@@ -117,15 +132,15 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     }
 
     @Override
-    public int getItemCount(){
-        if(mapsBeatsaver == null){
+    public int getItemCount() {
+        if (mapsBeatsaver == null) {
             return 0;
         } else {
             return mapsBeatsaver.getBeatsaverMaps().size();
         }
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener  {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView mapImage, mapDiffColor;
         ImageView colorDiffEasy, colorDiffNormal, colorDiffHard, colorDiffExpert, colorDiffExpertPlus;
@@ -141,7 +156,8 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             mapDiffColor = itemView.findViewById(R.id.item_mapDiffColor);
             colorDiffEasy = itemView.findViewById(R.id.colorDiffEasy);
             colorDiffNormal = itemView.findViewById(R.id.colorDiffNormal);
-            colorDiffHard = itemView.findViewById(R.id.colorDiffHard);;
+            colorDiffHard = itemView.findViewById(R.id.colorDiffHard);
+            ;
             colorDiffExpert = itemView.findViewById(R.id.colorDiffExpert);
             colorDiffExpertPlus = itemView.findViewById(R.id.colorDiffExpertPlus);
 
@@ -153,18 +169,19 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         @Override
         public void onClick(View v) {
-            Log.d(TAG, "onClick: adap"+ getAdapterPosition());
-            if(rvClickListener != null){
+            Log.d(TAG, "onClick: adap" + getAdapterPosition());
+            if (rvClickListener != null) {
                 int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION){
-                    rvClickListener.onClick( mapsBeatsaver.getBeatsaverMaps().get(getAdapterPosition()));
+                if (position != RecyclerView.NO_POSITION) {
+                    rvClickListener.onClick(mapsBeatsaver.getBeatsaverMaps().get(getAdapterPosition()));
                 }
             }
 
 
         }
     }
-    public interface RVClickListener{
+
+    public interface RVClickListener {
         void onClick(BeatsaverMap beatsaverMap);
     }
 }

@@ -11,10 +11,9 @@ import com.example.mobiledevproject.profile.Fragments.profile_Top_Songs;
 import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
 
 
-
 public class ProfilePagerAdapter extends FragmentPagerAdapter {
 
-    private String tabTitles[] = new String[]{"Profile", "Top Songs", "Recent Songs" };
+    private String tabTitles[] = new String[]{"Profile", "Top Songs", "Recent Songs"};
     String input;
 
     public ProfilePagerAdapter(@NonNull FragmentManager fm, String input) {
@@ -25,7 +24,7 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        switch (position){
+        switch (position) {
             case 0:
                 return new profile_User_Profile(input);
             case 1:

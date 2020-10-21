@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class SpecificDiffSpec implements Serializable {
 
 
-
     public double getDuration() {
         return duration;
     }

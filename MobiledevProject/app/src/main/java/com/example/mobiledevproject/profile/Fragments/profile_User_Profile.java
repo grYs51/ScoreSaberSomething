@@ -34,7 +34,7 @@ public class profile_User_Profile extends Fragment  {
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag;
 
-    public profile_User_Profile(String input){
+    public profile_User_Profile(String input) {
 
         this.playerId = input;
 

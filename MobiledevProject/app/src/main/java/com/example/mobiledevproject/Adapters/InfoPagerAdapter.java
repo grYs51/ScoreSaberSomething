@@ -7,7 +7,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DifficultiesMapFragment;
+
+import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DescriptionMapFragment;
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.InfoMapFragment;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 
@@ -31,7 +32,7 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new InfoMapFragment(beatsaverMap);
             case 1:
-                return new DifficultiesMapFragment();
+                return new DescriptionMapFragment();
 //            case 2:
 //                return new DescriptionMapFragment();
             default:

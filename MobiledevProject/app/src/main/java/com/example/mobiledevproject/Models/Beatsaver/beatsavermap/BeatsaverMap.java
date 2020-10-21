@@ -1,9 +1,5 @@
 package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.MetaData;
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Stats;
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Uploader;
-
 import java.io.Serializable;
 
 public class BeatsaverMap implements Serializable {

@@ -12,17 +12,15 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
 
-    String scoresaber = "https://new.scoresaber.com/";
-    String beatsaver = "https://beatsaver.com/";
+    static String scoresaber = "https://new.scoresaber.com/";
+    static String beatsaver = "https://beatsaver.com/";
 
-    private static Retrofit getRetrofit(String baseUrl){
+    private static Retrofit getRetrofit(String baseUrl) {
 
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-
         OkHttpClient okHttpClient = new OkHttpClient.Builder().addInterceptor(httpLoggingInterceptor).build();
-
 
         return new Retrofit.Builder()
                 .baseUrl(baseUrl)
@@ -31,21 +29,22 @@ public class ApiClient {
                 .build();
     }
 
-    public static PlayerFullApi getPlayerService(){
+    public static PlayerFullApi getPlayerService() {
 
-        return getRetrofit( "https://new.scoresaber.com/").create(PlayerFullApi.class);
+        return getRetrofit(scoresaber).create(PlayerFullApi.class);
     }
 
-    public static TopSongApi getPlayerTopSongs(){
+    public static TopSongApi getPlayerTopSongs() {
 
-        return getRetrofit( "https://new.scoresaber.com/").create(TopSongApi.class);
+        return getRetrofit(scoresaber).create(TopSongApi.class);
     }
 
-    public static RecentSongApi getPlayerRecentSongs(){
+    public static RecentSongApi getPlayerRecentSongs() {
 
-        return getRetrofit( "https://new.scoresaber.com/").create(RecentSongApi.class);
+        return getRetrofit(scoresaber).create(RecentSongApi.class);
     }
-    public static AllmapsBeatsaverApi getallmapsSongs(){
-        return getRetrofit("https://beatsaver.com/").create(AllmapsBeatsaverApi.class);
+
+    public static AllmapsBeatsaverApi getallmapsSongs() {
+        return getRetrofit(beatsaver).create(AllmapsBeatsaverApi.class);
     }
 }

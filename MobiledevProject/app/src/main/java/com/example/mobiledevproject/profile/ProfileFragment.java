@@ -6,23 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mobiledevproject.Adapters.InfoPagerAdapter;
 import com.example.mobiledevproject.Adapters.ProfilePagerAdapter;
 import com.example.mobiledevproject.R;
-import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
-import com.example.mobiledevproject.profile.Fragments.profile_Recent_songs;
-import com.example.mobiledevproject.profile.Fragments.profile_Top_Songs;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -34,12 +27,13 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     PagerAdapter pagerAdapter;
     TabLayout tabLayout;
     String input;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
-        input = sharedPref.getString("playerId",null);
+        input = sharedPref.getString("playerId", null);
 
         if (input == null) {
             Log.d(TAG, "onClick: Opening Dialog");

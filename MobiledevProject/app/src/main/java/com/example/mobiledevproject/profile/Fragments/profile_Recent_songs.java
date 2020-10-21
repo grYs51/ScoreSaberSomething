@@ -30,7 +30,6 @@ import static android.content.ContentValues.TAG;
 public class profile_Recent_songs extends Fragment {
 
     private RecyclerView recentsongRecyclerView;
-    private ProgressBar progressBar;
     ScoresaberMapAdapter scoresaberMapAdapter;
     Call<Scores> mapList;
 
@@ -42,7 +41,7 @@ public class profile_Recent_songs extends Fragment {
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
 
-    public profile_Recent_songs(String input){
+    public profile_Recent_songs(String input) {
 
         this.playerId = input;
 
@@ -76,17 +75,17 @@ public class profile_Recent_songs extends Fragment {
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getChildCount();
-                totalItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getItemCount();
-                pastVisibleItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                visibleItemCount = recyclerView.getLayoutManager().getChildCount();
+                totalItemCount = recyclerView.getLayoutManager().getItemCount();
+                pastVisibleItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
-                if(dy > 0){
-                    if (isLoading){
-                        if (totalItemCount > previous_total){
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previous_total) {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)) {
                         performPagination();
                         isLoading = true;
                     }
@@ -95,7 +94,7 @@ public class profile_Recent_songs extends Fragment {
         });
     }
 
-    private void performPagination(){
+    private void performPagination() {
         page_number++;
         getRecentSongs(playerId, page_number);
     }
@@ -117,14 +116,14 @@ public class profile_Recent_songs extends Fragment {
                 // progressbar gone
 
                 Scores scoresabermaps = response.body();
-                if (scoresaberMapAdapter.getItemCount() == 0){
+                if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresabermaps);
 //                    Toast.makeText(getActivity(), "First page is loaded", Toast.LENGTH_LONG);
                     Log.d(TAG, "onResponse: First page is loaded");
-                } else{
+                } else {
                     scoresaberMapAdapter.addData(scoresabermaps);
 //                    Toast.makeText(getContext(), "page "+ page + " loaded", Toast.LENGTH_LONG);
-                    Log.d(TAG, "onResponse: page: "+page+ " loaded");
+                    Log.d(TAG, "onResponse: page: " + page + " loaded");
                 }
 
                 scoresaberMapAdapter.notifyDataSetChanged();

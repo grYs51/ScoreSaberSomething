@@ -1,4 +1,5 @@
 package com.example.mobiledevproject.Adapters.RV;
+
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -6,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -59,16 +61,16 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         ScoresaberAcc scoresaberAcc = new ScoresaberAcc();
         DiffColor diffColor = new DiffColor(scoresaberMap.getDifficulty());
         Log.d(TAG, "onBindViewHolder: ");
-        Log.d(TAG, "onBindViewHolder: "+scoresaberMap.getSongName());
-        Log.d(TAG, "onBindViewHolder: "+ scoresaberMap.getMaxScore());
-        if(scoresaberMap.getMaxScore() > 0){
+        Log.d(TAG, "onBindViewHolder: " + scoresaberMap.getSongName());
+        Log.d(TAG, "onBindViewHolder: " + scoresaberMap.getMaxScore());
+        if (scoresaberMap.getMaxScore() > 0) {
             holder.acctext.setText("Acc");
-            double acc = scoresaberAcc.getAcc(scoresaberMap.getScore(),scoresaberMap.getMaxScore());
-            holder.acc.setText("" + df2.format( acc) + "%");
+            double acc = scoresaberAcc.getAcc(scoresaberMap.getScore(), scoresaberMap.getMaxScore());
+            holder.acc.setText("" + df2.format(acc) + "%");
 
         } else {
             holder.acctext.setText("Score");
-            holder.acc.setText(""+ scoresaberMap.getScore());
+            holder.acc.setText("" + scoresaberMap.getScore());
         }
 
 
@@ -88,7 +90,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         holder.rank.setText("" + scoresaberMap.getRank());
         holder.pp.setText("" + scoresaberMap.getPp() + "pp ");
         holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + "pp)");
-        holder.position.setText(position +1 +"" );
+        holder.position.setText(position + 1 + "");
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 

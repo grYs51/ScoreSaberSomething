@@ -1,8 +1,5 @@
 package com.example.mobiledevproject.Shared;
 
-
-import android.graphics.Color;
-
 import com.example.mobiledevproject.R;
 
 public class DiffColor {
@@ -13,10 +10,10 @@ public class DiffColor {
         this.diff = diff;
     }
 
-    public int getDiffColor(){
+    public int getDiffColor() {
 
 
-        switch (diff){
+        switch (diff) {
             case 1: //easy
                 return R.color.easy;
             case 3: //medium

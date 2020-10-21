@@ -3,6 +3,7 @@ package com.example.mobiledevproject.Models.Beatsaver.beatsavermap;
 import java.io.Serializable;
 
 public class Uploader implements Serializable {
+
     public String get_id() {
         return _id;
     }
