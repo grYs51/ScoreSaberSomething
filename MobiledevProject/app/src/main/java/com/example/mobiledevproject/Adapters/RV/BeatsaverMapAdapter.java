@@ -62,66 +62,25 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
         int rating = Integer.parseInt(df2.format(map.getStats().getRating() * 100));
 
-        Log.d(TAG, "onBindViewHolder: position: " + position);
-        Log.d(TAG, "onBindViewHolder: Name: " + map.getName());
-        Log.d(TAG, "onBindViewHolder: diff: " + map.getMetaData().getDifficulties().isEasy() + " | " + map.getMetaData().getDifficulties().isNormal() + " | " + map.getMetaData().getDifficulties().isHard() + " | " + map.getMetaData().getDifficulties().isExpert() + " | " + map.getMetaData().getDifficulties().isExpertPlus());
-        Log.d(TAG, "onBindViewHolder: ");
+        Logs(position, map);
         setItem(holder, map, rating);
 
     }
 
+
     private void setItem(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
+
         String dt = map.getUploaded();
 
-        try {
-            i = Instant.parse(dt);
-            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
-        } catch (DateTimeParseException dtpe) {
-            Log.d(TAG, "catch: " + dtpe);
-            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName());
-        }
+        parseTimeUploaded(holder, map, dt);
 
         holder.mapTitle.setText(map.getName());
         holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
-        if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {
-            holder.mapRating.setText("?");
-        } else {
-            holder.mapRating.setText("" + rating);
-        }
 
-        if (map.getMetaData().getDifficulties().isEasy()) {
-            holder.colorDiffEasy.setImageResource(R.color.easy);
-        } else {
-            holder.colorDiffEasy.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isNormal()) {
-            holder.colorDiffNormal.setImageResource(R.color.mediums);
-        } else {
-            holder.colorDiffNormal.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isHard()) {
-            holder.colorDiffHard.setImageResource(R.color.hard);
-        } else {
-            holder.colorDiffHard.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isExpert()) {
-            holder.colorDiffExpert.setImageResource(R.color.expert);
-        } else {
-            holder.colorDiffExpert.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isExpertPlus()) {
-            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
-        } else {
-            holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
-        }
 
-        if (rating >= 65) {
-            holder.mapDiffColor.setImageResource(R.color.easy);
-        } else if (rating < 65) {
-            holder.mapDiffColor.setImageResource(R.color.hard);
-        } else if (rating < 50) {
-            holder.mapDiffColor.setImageResource(R.color.expert);
-        }
+        setDifficultyImages(holder, map);
+
+        setRating(holder, map, rating);
 
         Glide.with(context)
                 .load("https://beatsaver.com" + map.getCoverURL())
@@ -130,6 +89,8 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
                 .into(holder.mapImage);
 
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -150,6 +111,10 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            setViews(itemView);
+        }
+
+        private void setViews(@NonNull View itemView) {
             itemView.setOnClickListener(this);
 
             mapImage = itemView.findViewById(R.id.item_Map_image);
@@ -178,6 +143,68 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             }
 
 
+        }
+    }
+    private void parseTimeUploaded(@NonNull ViewHolder holder, BeatsaverMap map, String dt) {
+        try {
+            i = Instant.parse(dt);
+            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
+        } catch (DateTimeParseException dtpe) {
+            Log.d(TAG, "catch: " + dtpe);
+            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName());
+        }
+    }
+
+    private void Logs(int position, BeatsaverMap map) {
+        Log.d(TAG, "onBindViewHolder: position: " + position);
+        Log.d(TAG, "onBindViewHolder: Name: " + map.getName());
+        Log.d(TAG, "onBindViewHolder: diff: " + map.getMetaData().getDifficulties().isEasy() + " | " + map.getMetaData().getDifficulties().isNormal() + " | " + map.getMetaData().getDifficulties().isHard() + " | " + map.getMetaData().getDifficulties().isExpert() + " | " + map.getMetaData().getDifficulties().isExpertPlus());
+        Log.d(TAG, "onBindViewHolder: ");
+    }
+
+    private void setRating(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
+        if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {
+            holder.mapRating.setText("?");
+        } else {
+            holder.mapRating.setText("" + rating);
+        }
+
+        if (rating >= 65) {
+            holder.mapDiffColor.setImageResource(R.color.easy);
+        } else if (rating < 65) {
+            holder.mapDiffColor.setImageResource(R.color.hard);
+        } else if (rating < 50) {
+            holder.mapDiffColor.setImageResource(R.color.expert);
+        } else {
+            holder.mapDiffColor.setImageResource(R.color.greyText);
+        }
+    }
+
+    private void setDifficultyImages(@NonNull ViewHolder holder, BeatsaverMap map) {
+        if (map.getMetaData().getDifficulties().isEasy()) {
+            holder.colorDiffEasy.setImageResource(R.color.easy);
+        } else {
+            holder.colorDiffEasy.setImageResource(R.color.greyText);
+        }
+        if (map.getMetaData().getDifficulties().isNormal()) {
+            holder.colorDiffNormal.setImageResource(R.color.mediums);
+        } else {
+            holder.colorDiffNormal.setImageResource(R.color.greyText);
+        }
+        if (map.getMetaData().getDifficulties().isHard()) {
+            holder.colorDiffHard.setImageResource(R.color.hard);
+        } else {
+            holder.colorDiffHard.setImageResource(R.color.greyText);
+        }
+        if (map.getMetaData().getDifficulties().isExpert()) {
+            holder.colorDiffExpert.setImageResource(R.color.expert);
+        } else {
+            holder.colorDiffExpert.setImageResource(R.color.greyText);
+        }
+        if (map.getMetaData().getDifficulties().isExpertPlus()) {
+            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
+        } else {
+            holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
         }
     }
 
