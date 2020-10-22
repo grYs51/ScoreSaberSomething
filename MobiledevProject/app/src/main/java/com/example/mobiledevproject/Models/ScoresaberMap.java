@@ -2,52 +2,70 @@ package com.example.mobiledevproject.Models;
 
 public class ScoresaberMap {
 
-    public int getRank() { return rank; }
+    public int getRank() {
+        return rank;
+    }
+
     public int getScoreId() {
         return scoreId;
     }
+
     public int getScore() {
         return score;
     }
+
     public int getUnmodififiedScore() {
         return unmodififiedScore;
     }
+
     public String getMods() {
         return mods;
     }
+
     public double getPp() {
         return pp;
     }
+
     public double getWeight() {
         return weight;
     }
+
     public String getTimeSet() {
         return timeSet;
     }
+
     public int getLeaderboardId() {
         return leaderboardId;
     }
+
     public String getSongHash() {
         return songHash;
     }
+
     public String getSongName() {
         return songName;
     }
+
     public String getSongSubName() {
         return songSubName;
     }
+
     public String getSongAuthorName() {
         return songAuthorName;
     }
+
     public String getLevelAuthorName() {
         return levelAuthorName;
     }
+
     public int getDifficulty() {
         return difficulty;
     }
+
     public String getDifficultyRaw() {
         return difficultyRaw;
     }
+
     public int getMaxScore() {
         return maxScore;
     }

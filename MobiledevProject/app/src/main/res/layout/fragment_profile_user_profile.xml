@@ -20,7 +20,6 @@
             android:layout_height="200dp"
             android:layout_margin="40dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -31,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="User"
+            android:text="No User"
             android:textSize="30dp"
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -67,7 +66,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        tools:text="#555 - "
 
                         />
 
@@ -83,7 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="20sp"
-                        tools:text=" #9" />
+ />
 
                 </LinearLayout>
 
@@ -92,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
-                    android:text="9000pp"
+
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -114,7 +112,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text=" 14 Places"
                         android:textAlignment="center"
                         android:textSize="20sp" />
 

@@ -1,4 +1,5 @@
 package com.example.mobiledevproject.ApiCall.Interfaces;
+
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 
 import retrofit2.Call;

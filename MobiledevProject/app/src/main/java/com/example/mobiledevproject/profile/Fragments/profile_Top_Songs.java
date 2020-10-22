@@ -14,7 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
-import com.example.mobiledevproject.Adapters.Scoresaber.ScoresaberMapAdapter;
+import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Scores;
 import com.example.mobiledevproject.R;
@@ -29,17 +29,20 @@ import static android.content.ContentValues.TAG;
 public class profile_Top_Songs extends Fragment {
 
     private RecyclerView topsongRecyclerView;
-    private ProgressBar progressBar;
     ScoresaberMapAdapter scoresaberMapAdapter;
     Call<Scores> mapList;
-
     private int page_number = 1;
-    private int item_count = 8;
-
     //vars
+    private String playerId;
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
-    private int view_treshold = 8;
+    private int view_threshold = 8;
+
+    public profile_Top_Songs(String input) {
+
+        this.playerId = input;
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,61 +54,66 @@ public class profile_Top_Songs extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_profile__top__songs, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile_top_songs, container, false);
 
         initRecyclerView(view);
 
-        getTopSongs("76561198075540765", page_number);
+        getTopSongs(playerId, page_number);
 
+        addScrolllistener();
+
+        return view;
+    }
+
+    private void addScrolllistener() {
         topsongRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
 
-                visibleItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getChildCount();
-                totalItemCount = ((LinearLayoutManager)recyclerView.getLayoutManager()).getItemCount();
-                pastVisibleItems = ((LinearLayoutManager)recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+                visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
+                totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
+                pastVisibleItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
 
-                if(dy > 0){
-                    if (isLoading){
-                        if (totalItemCount > previous_total){
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previous_total) {
                             isLoading = false;
                             previous_total = totalItemCount;
                         }
-                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_treshold)){
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)) {
                         performPagination();
                         isLoading = true;
                     }
                 }
             }
         });
-
-        return view;
     }
 
-    private void performPagination(){
+    private void performPagination() {
+
         page_number++;
-        getTopSongs("76561198075540765", page_number);
+
+        getTopSongs(playerId, page_number);
+
     }
 
+    public void getTopSongs(String userId, int page) {
+        Log.d(TAG, "getTopSongs: " + userId + " - " + page);
 
+        mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString(page));
 
-    public void getTopSongs(String userId, int page){
-        Log.d(TAG, "getTopSongs: "+ userId + " - " + page);
-
-        Call<Scores> mapList = ApiClient.getPlayerTopSongs().getTopSongs(userId, Integer.toString( page));
-        
         mapList.enqueue(new Callback<Scores>() {
             @Override
             public void onResponse(Call<Scores> call, Response<Scores> response) {
-                if (!response.isSuccessful()){
-                    Log.d(TAG, "isSucces: "+ response.code());
+                if (!response.isSuccessful()) {
+                    Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
                 Scores scoresaberMaps = response.body();
-                if (scoresaberMapAdapter.getItemCount() == 0){
+                if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresaberMaps);
-                } else{
+                } else {
                     scoresaberMapAdapter.addData(scoresaberMaps);
                 }
                 scoresaberMapAdapter.notifyDataSetChanged();
@@ -116,7 +124,7 @@ public class profile_Top_Songs extends Fragment {
 
             }
         });
-        
+
 
     }
 

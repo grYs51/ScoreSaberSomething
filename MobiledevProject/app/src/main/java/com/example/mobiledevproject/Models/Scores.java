@@ -1,6 +1,5 @@
 package com.example.mobiledevproject.Models;
 
-import com.example.mobiledevproject.Models.ScoresaberMap;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

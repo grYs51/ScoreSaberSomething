@@ -1,13 +1,11 @@
-package com.example.mobiledevproject;
+package com.example.mobiledevproject.profile;
 
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatDialogFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,17 +15,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mobiledevproject.R;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class DialogScoresaberFragment extends DialogFragment {
+public class DialogScoresaberFragment extends AppCompatDialogFragment {
 
-    private static final String TAG = "DialogScoresaberFragmen";
+    private static final String TAG = "DialogScoresaberFragment";
 
-    public interface OnInputSelected{
-        void sendInput (String input);
+    public interface OnInputSelected {
+        void sendInput(String input);
     }
+
     public OnInputSelected mOnInputSelected;
 
     private EditText mInput;
@@ -35,6 +36,7 @@ public class DialogScoresaberFragment extends DialogFragment {
 
 
     Pattern scoresaberPattern = Pattern.compile("(?:http(?:s)?:/)?(?:new\\.)?(?:scoresaber\\.com/u/)?(\\d{16,})(?:/.*)?");
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -43,8 +45,6 @@ public class DialogScoresaberFragment extends DialogFragment {
         mActionOk = view.findViewById(R.id.OkButton);
         mActionCancel = view.findViewById(R.id.cancelButton);
         mInput = view.findViewById(R.id.scoresaberId);
-
-
 
         mActionCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,40 +62,40 @@ public class DialogScoresaberFragment extends DialogFragment {
                 String input = mInput.getText().toString();
                 Matcher scoresaber = scoresaberPattern.matcher(input);
 
-                if(!input.equals("")){
-                    while( scoresaber.find()){
-                        if(scoresaber.group(1) != null){
+                if (!input.equals("")) {
+                    while (scoresaber.find()) {
+                        if (scoresaber.group(1) != null) {
 
                             Log.d(TAG, "ScoresaberIdInput: Regex match");
-                            Toast.makeText(getActivity(),"Regex Matched!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Regex Matched!", Toast.LENGTH_SHORT).show();
                             mOnInputSelected.sendInput(scoresaber.group(1));
                             getDialog().dismiss();
                             flag = false;
                         }
                     }
-                    if(flag){
+                    if (flag) {
 
                         Log.d(TAG, "ScoresaberIdInput: Regex no match");
-                        Toast.makeText(getActivity(),"Regex doesn't match",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Regex doesn't match", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
 
                     Log.d(TAG, "ScoresaberIdInput: No Input");
-                    Toast.makeText(getActivity(),"No input found!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "No input found!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
-        return  view;
+        return view;
     }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        try{
+        try {
             mOnInputSelected = (OnInputSelected) getTargetFragment();
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             Log.e(TAG, "onAttach: ClassCastExeption" + e.getMessage());
         }
     }
