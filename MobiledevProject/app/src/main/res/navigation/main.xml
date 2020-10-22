@@ -13,8 +13,8 @@
 
     <fragment
         android:id="@+id/menuSettings"
-        android:name="com.example.mobiledevproject.SettingsFragment"
-        android:label="Settings"
+        android:name="com.example.mobiledevproject.Settings.SettingsFragment"
+        android:label=""
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/menuAbout"
