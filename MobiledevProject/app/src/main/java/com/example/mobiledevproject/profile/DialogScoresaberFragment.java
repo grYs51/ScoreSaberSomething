@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class DialogScoresaberFragment extends AppCompatDialogFragment {
 
-    private static final String TAG = "DialogScoresaberFragmen";
+    private static final String TAG = "DialogScoresaberFragment";
 
     public interface OnInputSelected {
         void sendInput(String input);

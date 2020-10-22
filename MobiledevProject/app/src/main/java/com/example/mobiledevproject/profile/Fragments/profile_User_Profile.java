@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -81,51 +82,14 @@ public class profile_User_Profile extends Fragment  {
                 PlayerScoreStats playerScoreStats = player_response.getScore_stats();
                 PlayerPlayerInfo playerPlayerInfo = player_response.getPlayer_info();
 
-                profile_Username.setText(playerPlayerInfo.getPlayer_Name());
-                profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " - ");
-                profile_Rank_Local.setText("#" + playerPlayerInfo.getCountry_Rank());
-                profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
-//                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+                setText(playerPlayerInfo);
 
 
-                Glide.with(getContext())
-                        .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
-                        .centerCrop()
-                        .placeholder(R.drawable.leaderbord)
-                        .into(profile_User_Image);
 
-                Glide.with(getContext())
-                        .load("https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png")
-                        .placeholder(R.drawable.profile)
-                        .error(R.drawable.leaderbord)
-                        .into(profile_User_Country_Flag);
 
 
                 Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png");
-                String historyString = playerPlayerInfo.getHistory();
-                String[] stringTokens = historyString.split(",");
-                int size = stringTokens.length;
-                int[] arr = new int[size];
-                for (int i = 0; i < size; i++) {
-                    arr[i] = Integer.parseInt(stringTokens[i]);
-                }
-
-                Log.d(TAG, "onResponse: History: " + arr[0]);
-                Log.d(TAG, "onResponse: History1: " + playerPlayerInfo.getRank());
-
-                int historyDiff = arr[size - 6] - playerPlayerInfo.getRank();
-                profile_Diff.setText(historyDiff + "");
-
-//
-//                if (historyDiff < 0){
-//                    profile_Diff.setTextColor(Integer.parseInt("#FF0000"));
-//                } else if(historyDiff > 0){
-//                    profile_Diff.setTextColor(Integer.parseInt("#00FF00"));
-//
-//                } else {
-//                    profile_Diff.setTextColor(Integer.parseInt(String.valueOf(R.color.greyText)));
-//                }
-                Log.d(TAG, "onResponse: Done");
+                getHistory(playerPlayerInfo);
             }
 
             @Override
@@ -133,5 +97,50 @@ public class profile_User_Profile extends Fragment  {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+    }
+
+    private void setText(PlayerPlayerInfo playerPlayerInfo) {
+        profile_Username.setText(playerPlayerInfo.getPlayer_Name());
+        profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " - ");
+        profile_Rank_Local.setText("#" + playerPlayerInfo.getCountry_Rank());
+        profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
+//                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+
+
+        Glide.with(getContext())
+                .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
+                .centerCrop()
+                .placeholder(R.drawable.leaderbord)
+                .into(profile_User_Image);
+
+        Glide.with(getContext())
+                .load("https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png")
+                .placeholder(R.drawable.profile)
+                .error(R.drawable.leaderbord)
+                .into(profile_User_Country_Flag);
+    }
+
+    private void getHistory(PlayerPlayerInfo playerPlayerInfo) {
+        String historyString = playerPlayerInfo.getHistory();
+        String[] stringTokens = historyString.split(",");
+        int size = stringTokens.length;
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = Integer.parseInt(stringTokens[i]);
+        }
+
+        int historyDiff = arr[size - 6] - playerPlayerInfo.getRank();
+        profile_Diff.setText(historyDiff + "");
+
+
+        if (historyDiff < 0){
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
+        } else if(historyDiff > 0){
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+
+        } else {
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.greyText));
+        }
+        Log.d(TAG, "onResponse: Done");
     }
 }
