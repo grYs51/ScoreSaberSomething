@@ -3,13 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LeaderboardFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Leaderboard.LeaderboardFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:text="@string/leaderboard" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/leaderboardRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="20dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:listitem="@layout/item_player_board" />
 
 </FrameLayout>
