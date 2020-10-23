@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_Map_image"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:padding="5dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:riv_corner_radius="10dp" />
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/roundedImageView"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:riv_oval="true"/>
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/item_mapDiffColor"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/roundedImageView"
+                app:layout_constraintEnd_toEndOf="@+id/roundedImageView"
+                app:layout_constraintStart_toStartOf="@+id/roundedImageView"
+                app:layout_constraintTop_toTopOf="@+id/roundedImageView"
+                app:riv_oval="true" />
+
+            <TextView
+                android:id="@+id/item_position"
+                android:gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="@id/item_mapDiffColor"
+                app:layout_constraintRight_toRightOf="@id/item_mapDiffColor"
+                app:layout_constraintBottom_toBottomOf="@id/item_mapDiffColor"
+                app:layout_constraintLeft_toLeftOf="@id/item_mapDiffColor"/>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/item_Map_image"
+                app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/item_songName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Map Title"
+                                android:textSize="18sp"
+                                android:textStyle="bold"
+
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/item_songAuthorName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="songAuthorName"
+                                android:textSize="16sp"
+                                app:layout_constraintStart_toEndOf="@+id/static_dash"
+                                app:layout_constraintTop_toTopOf="parent"
+                                android:textColor="@color/black"/>
+
+                            <TextView
+                                android:id="@+id/item_levelAuthorName"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="levelAuthorName - date"
+                                android:textSize="15sp"
+                                app:layout_constraintLeft_toRightOf="@id/item_Map_image"
+                                app:layout_constraintTop_toBottomOf="@id/item_songName" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:padding="6dp"
+                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:gravity="center">
+
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rank"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/item_rank"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="---"/>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.5"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PP"
+                            android:textStyle="bold" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/item_pp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="--- "/>
+
+                            <TextView
+                                android:id="@+id/item_ppWeight"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" (---)"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_weight="0.3"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal">
+
+                        <TextView
+                            android:id="@+id/item_acctext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Acc"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/item_Acc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="---"/>
+
+                    </LinearLayout>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

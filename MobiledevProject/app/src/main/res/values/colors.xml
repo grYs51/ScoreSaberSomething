@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#512DA8</color>
-    <color name="colorAccent">#FF5252</color>
-    <color name="colorPrimaryText">#212121</color>
-    <color name="colorWhite">#FFFFFF</color>
-    <color name="colorGreen">#32CD32</color>
+    <color name="colorPrimary">#50289a</color>
+    <color name="colorPrimaryDark">#50289a</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="toolbarColor">#673bb8</color>
+    <color name="white">#ffffff</color>
+    <color name="darkPurple">#50289a</color>
+    <color name="transperentColor">#00000000</color>
+    <color name="hintColor">#8b000000</color>
+    <color name="black">#000000</color>
+    <color name="greyText">#29000000</color>
+    <color name="geryText2">#93000000</color>
+    <color name="greyText3">#969696</color>
+    <color name="viewlineColor">#dedede</color>
+    <color name="readBookBg">#303030</color>
+    <color name="gerytxtcolor4">#cdd6d9</color>
+    <color name="toolbar3Color">#202020</color>
+    <color name="transparent">#00000000</color>
+    <color name="circleColor">#ff5521</color>
+    <color name="yellow">#ffdf74</color>
+    <color name="background">#f5f5f5</color>
+    <color name="red">#FF0000</color>
+    <color name="green">#00FF00</color>
+
+<!--    difficulty colors-->
+    <color name="easy">#4caf50</color>
+    <color name="mediums">#00bcd4</color>
+    <color name="hard">#ff8f00</color>
+    <color name="expert">#c62828</color>
+    <color name="expertPlus">#ab47bc</color>
 </resources>

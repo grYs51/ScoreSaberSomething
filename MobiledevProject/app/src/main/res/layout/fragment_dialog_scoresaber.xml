@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/scoresaberId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:hint="Scoresaber Id/Url"
+        android:inputType="text"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+    <TextView
+        android:id="@+id/OkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ok"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:layout_below="@id/scoresaberId"
+        android:layout_alignRight="@id/scoresaberId"
+        android:textColor="@color/darkPurple"/>
+
+    <TextView
+        android:id="@+id/cancelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        android:textSize="20sp"
+        android:text="Cancel"
+        android:layout_below="@id/scoresaberId"
+        android:layout_toLeftOf="@id/OkButton"
+         />
+
+</RelativeLayout>

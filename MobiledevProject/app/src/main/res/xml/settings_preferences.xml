@@ -1,0 +1,42 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        app:title="Player">
+
+        <Preference
+            android:key="user_Id"
+            android:title="Player Id"
+            android:summary="None"
+            app:enableCopying="true"/>
+
+        <Preference
+            android:key="remove_Player"
+            android:title="Remove Player"
+            android:selectable="true"
+            />
+
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Storage">
+
+        <Preference
+            android:key="used_Storage"
+            android:title="Used Cache"
+            android:summary="50 mb"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="About the app">
+
+        <Preference
+            android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^"/>
+        <Preference
+            android:title="Any Problems?"
+            android:summary="grYs#0011 (discord)"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

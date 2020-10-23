@@ -36,10 +36,6 @@
                 android:title="@string/settings"
                 android:icon="@drawable/settings" />
 
-            <item android:id="@+id/menuAbout"
-                android:title="@string/about"
-                android:icon="@drawable/about" />
-
         </menu>
     </item>
 

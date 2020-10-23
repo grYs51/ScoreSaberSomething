@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/beatsaver_maps"
+    app:startDestination="@id/beatsaver_RV">
+
+    <fragment
+        android:id="@+id/beatsaver_RV"
+        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_RV"
+        android:label="fragment_beatsaver_maps_rv"
+        tools:layout="@layout/fragment_beatsaver_maps_rv" />
+
+</navigation>

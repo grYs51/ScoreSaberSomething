@@ -10,7 +10,13 @@
     <string name="about">About</string>
     <string name="search">Search</string>
     <string name="scoresaber">ScoreSaber</string>
-    <string name="username">GrYs</string>
+    <string name="username">User</string>
     <string name="pp">pp</string>
+    <string name="scoresabersignin">Sign in</string>
+    <string name="sing_in">Sign in</string>
+    <string name="cancel">Cancel</string>
+    <string name="rank">Rank</string>
+    <string name="topScore">Top Songs</string>
+    <string name="recentScore">Recent Songs</string>
 
 </resources>
