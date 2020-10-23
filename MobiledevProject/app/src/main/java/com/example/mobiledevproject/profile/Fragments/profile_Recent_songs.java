@@ -29,7 +29,7 @@ import static android.content.ContentValues.TAG;
 
 public class profile_Recent_songs extends Fragment {
 
-    private RecyclerView recentsongRecyclerView;
+    RecyclerView recentsongRecyclerView;
     ScoresaberMapAdapter scoresaberMapAdapter;
     Call<Scores> mapList;
 

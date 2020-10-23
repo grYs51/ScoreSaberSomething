@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DifficultyInfoPar;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Difficulties;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.DifficultiesSpecs;
 import com.example.mobiledevproject.R;
 
 import java.util.List;
@@ -33,21 +35,27 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Log.d(TAG, "getItem: position: " + position);
 
-        switch (difficulties.get(position)) {
-            case "Easy":
-                return new DifficultyInfoPar(characteristics.get(0).getDifficulties().getEasy(), R.color.easy, duration);
-            case "Normal":
-                return new DifficultyInfoPar(characteristics.get(0).getDifficulties().getNormal(), R.color.mediums, duration);
-            case "Hard":
-                return new DifficultyInfoPar(characteristics.get(0).getDifficulties().getHard(), R.color.hard, duration);
-            case "Expert":
-                return new DifficultyInfoPar(characteristics.get(0).getDifficulties().getExpert(), R.color.expert, duration);
-            case "ExpertPlus":
-                return new DifficultyInfoPar(characteristics.get(0).getDifficulties().getExpertPlus(), R.color.expertPlus, duration);
-        }
+        for (Characteristics characteristicsItem : characteristics) {
 
+            if (characteristicsItem.getName().toLowerCase().equals("standard")) {
+                switch (difficulties.get(position)) {
+                    case "Easy":
+                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getEasy(), R.color.easy, duration, difficulties.get(position));
+                    case "Normal":
+                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getNormal(), R.color.mediums, duration, difficulties.get(position));
+                    case "Hard":
+                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getHard(), R.color.hard, duration, difficulties.get(position));
+                    case "Expert":
+                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getExpert(), R.color.expert, duration, difficulties.get(position));
+                    case "ExpertPlus":
+                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getExpertPlus(), R.color.expertPlus, duration, difficulties.get(position));
+                }
+            }
+
+        }
         return null;
     }
+
 
     @Override
     public int getCount() {

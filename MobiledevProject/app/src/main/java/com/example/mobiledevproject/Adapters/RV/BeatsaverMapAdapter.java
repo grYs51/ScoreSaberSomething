@@ -91,7 +91,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     }
 
 
-
     @Override
     public int getItemCount() {
         if (mapsBeatsaver == null) {
@@ -145,6 +144,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         }
     }
+
     private void parseTimeUploaded(@NonNull ViewHolder holder, BeatsaverMap map, String dt) {
         try {
             i = Instant.parse(dt);
@@ -165,19 +165,18 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private void setRating(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
         if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {
             holder.mapRating.setText("?");
+            holder.mapDiffColor.setImageResource(R.color.greyText);
         } else {
             holder.mapRating.setText("" + rating);
+            if (65 <= rating) {
+                holder.mapDiffColor.setImageResource(R.color.easy);
+            } else if (rating >= 50) {
+                holder.mapDiffColor.setImageResource(R.color.hard);
+            } else if (rating >= 0) {
+                holder.mapDiffColor.setImageResource(R.color.expert);
+            }
         }
 
-        if (rating >= 65) {
-            holder.mapDiffColor.setImageResource(R.color.easy);
-        } else if (rating < 65) {
-            holder.mapDiffColor.setImageResource(R.color.hard);
-        } else if (rating < 50) {
-            holder.mapDiffColor.setImageResource(R.color.expert);
-        } else {
-            holder.mapDiffColor.setImageResource(R.color.greyText);
-        }
     }
 
     private void setDifficultyImages(@NonNull ViewHolder holder, BeatsaverMap map) {

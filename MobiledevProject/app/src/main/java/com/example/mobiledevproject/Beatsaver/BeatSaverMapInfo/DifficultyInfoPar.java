@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,8 @@ import java.text.DecimalFormat;
 
 public class DifficultyInfoPar extends Fragment {
 
+    private static final String TAG = "Difficulty par";
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +31,11 @@ public class DifficultyInfoPar extends Fragment {
 
     TextView notes, bombs, njs;
 
-    public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec, int color, int duration) {
+    public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec, int color, int duration, String diff) {
         this.specificDiffSpec = specificDiffSpec;
         this.color = color;
         this.duration = duration;
+        Log.d(TAG, "DifficultyInfoPar: "+ diff);
     }
 
     @Override

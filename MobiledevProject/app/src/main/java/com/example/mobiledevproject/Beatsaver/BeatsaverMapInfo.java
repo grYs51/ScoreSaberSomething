@@ -47,12 +47,11 @@ public class BeatsaverMapInfo extends AppCompatActivity {
 
 
         //setviewpager
-
         ViewPager viewPager = findViewById(R.id.infoPager);
         PagerAdapter pA = new InfoPagerAdapter(getSupportFragmentManager(), beatsaverMap);
         viewPager.setAdapter(pA);
-        //tablayout
 
+        //tablayout
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
 
