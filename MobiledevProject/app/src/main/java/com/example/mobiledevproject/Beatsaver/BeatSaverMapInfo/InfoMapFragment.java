@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -81,11 +82,11 @@ public class InfoMapFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
-        List<String> myList = new ArrayList<String>();
+        List<String> strings = new ArrayList();
         for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
-            myList.add(characteristics.getName());
+            strings.add(characteristics.getName());
         }
-        IA = new InfoMapAdapter(myList);
+        IA = new InfoMapAdapter(strings);
         RV = view.findViewById(R.id.RVInfoMap);
         RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         RV.setAdapter(IA);

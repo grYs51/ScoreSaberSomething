@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/menuLeaderboard"
-        android:name="com.example.mobiledevproject.Leaderboard.LeaderboardFragment"
+        android:name="com.example.mobiledevproject.LeaderboardFragment"
         android:label="Leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
     <fragment
