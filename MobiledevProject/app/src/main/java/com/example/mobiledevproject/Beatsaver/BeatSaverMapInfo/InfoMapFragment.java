@@ -5,6 +5,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -17,7 +20,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Adapters.InfoDifficultyPagerAdapter;
+import com.example.mobiledevproject.Adapters.RV.InfoMapAdapter;
+import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,7 +44,8 @@ public class InfoMapFragment extends Fragment {
     TextView songDuration, songBpm, songDownloads, songRating;
     PrettyTime p;
     Instant i;
-
+    RecyclerView RV;
+    InfoMapAdapter IA;
     private BeatsaverMap beatsaverMap;
 
     private List<String> difficulties = new ArrayList<>();
@@ -75,7 +82,31 @@ public class InfoMapFragment extends Fragment {
         TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
         tabLayout.setupWithViewPager(viewPager);
 
+        List<String> strings = new ArrayList();
+        for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
+            strings.add(characteristics.getName());
+        }
+        IA = new InfoMapAdapter(strings);
+        RV = view.findViewById(R.id.RVInfoMap);
+        RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RV.setAdapter(IA);
+
         return view;
+    }
+
+
+    private void findViews(View view) {
+        //info
+        title = view.findViewById(R.id.infoSongName);
+        mapper = view.findViewById(R.id.infoMapper);
+        songAuthor = view.findViewById(R.id.infosongAuthorName);
+        songImage = view.findViewById(R.id.infoImage);
+
+        //stats
+        songDuration = view.findViewById(R.id.infoSongDuration);
+        songBpm = view.findViewById(R.id.infoSongBpm);
+        songDownloads = view.findViewById(R.id.infoSongDownloads);
+        songRating = view.findViewById(R.id.infoSongRating);
     }
 
     private void setTekst(String dt) {
@@ -100,20 +131,6 @@ public class InfoMapFragment extends Fragment {
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(songImage);
-    }
-
-    private void findViews(View view) {
-        //info
-        title = view.findViewById(R.id.infoSongName);
-        mapper = view.findViewById(R.id.infoMapper);
-        songAuthor = view.findViewById(R.id.infosongAuthorName);
-        songImage = view.findViewById(R.id.infoImage);
-
-        //stats
-        songDuration = view.findViewById(R.id.infoSongDuration);
-        songBpm = view.findViewById(R.id.infoSongBpm);
-        songDownloads = view.findViewById(R.id.infoSongDownloads);
-        songRating = view.findViewById(R.id.infoSongRating);
     }
 
     private String getDurationString(int seconds) {
