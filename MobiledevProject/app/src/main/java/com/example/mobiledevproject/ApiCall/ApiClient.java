@@ -1,9 +1,11 @@
 package com.example.mobiledevproject.ApiCall;
 
 import com.example.mobiledevproject.ApiCall.Interfaces.AllmapsBeatsaverApi;
+import com.example.mobiledevproject.ApiCall.Interfaces.LeaderboardPlayersApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.PlayerFullApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.RecentSongApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.TopSongApi;
+import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -46,5 +48,9 @@ public class ApiClient {
 
     public static AllmapsBeatsaverApi getallmapsSongs() {
         return getRetrofit(beatsaver).create(AllmapsBeatsaverApi.class);
+    }
+
+    public static LeaderboardPlayersApi getLeaderboardPlayers() {
+        return getRetrofit(scoresaber).create(LeaderboardPlayersApi.class);
     }
 }

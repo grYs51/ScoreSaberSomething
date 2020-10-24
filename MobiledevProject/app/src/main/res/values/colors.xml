@@ -30,7 +30,9 @@
     <color name="expert">#c62828</color>
     <color name="expertPlus">#ab47bc</color>
 
-
+<!--    leaderboard colors-->
+<color name="leaderboardUp">#42B129</color>
+<color name="leaderboardDown">#F94022</color>
     <!--    Drawer-->
     <color name="colorPrimary">#18BDD6</color>
     <color name="colorPrimaryDark">#0F6088</color>
