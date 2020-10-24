@@ -166,9 +166,9 @@ public class profile_User_Profile extends Fragment  {
 
 
         if (historyDiff < 0){
-            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardDown));
         } else if(historyDiff > 0){
-            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardUp));
 
         } else {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.greyText));

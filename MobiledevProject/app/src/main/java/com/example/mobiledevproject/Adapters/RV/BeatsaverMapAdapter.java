@@ -30,7 +30,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private static DecimalFormat df2 = new DecimalFormat("#");
     public MapsBeatsaver mapsBeatsaver;
     private Context context;
-    PrettyTime p;
+    PrettyTime p = new PrettyTime();
     Instant i;
     private RVClickListener rvClickListener;
 
@@ -52,8 +52,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     @Override
     public BeatsaverMapAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        p = new PrettyTime();
-
         return new BeatsaverMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_beatsaver, parent, false));
     }
 
@@ -117,14 +115,13 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             itemView.setOnClickListener(this);
 
             mapImage = itemView.findViewById(R.id.item_Map_image);
+
             mapDiffColor = itemView.findViewById(R.id.item_mapDiffColor);
             colorDiffEasy = itemView.findViewById(R.id.colorDiffEasy);
             colorDiffNormal = itemView.findViewById(R.id.colorDiffNormal);
             colorDiffHard = itemView.findViewById(R.id.colorDiffHard);
-            ;
             colorDiffExpert = itemView.findViewById(R.id.colorDiffExpert);
             colorDiffExpertPlus = itemView.findViewById(R.id.colorDiffExpertPlus);
-
             mapTitle = itemView.findViewById(R.id.item_songName);
             mapAuthorName = itemView.findViewById(R.id.item_songAuthorName);
             levelAuthorName = itemView.findViewById(R.id.item_levelAuthorName);
