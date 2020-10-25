@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:background="?android:selectableItemBackground"
                 android:id="@+id/imageMenu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
