@@ -6,6 +6,7 @@
     tools:context=".Beatsaver.BeatSaverMapInfo.DifficultyInfoPar">
 
     <LinearLayout
+        android:id="@+id/infoparLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -48,6 +49,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/infoparLinearifnonotes"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:visibility="gone"
+        >
+        <TextView
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textAlignment="center"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Is not a standard map!"/>
 
     </LinearLayout>
     

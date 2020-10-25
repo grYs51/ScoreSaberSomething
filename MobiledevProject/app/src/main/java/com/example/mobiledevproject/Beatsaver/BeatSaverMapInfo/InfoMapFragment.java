@@ -155,7 +155,8 @@ public class InfoMapFragment extends Fragment {
     }
 
     private void Filldifficulties() {
-        int count = 0;
+
+
 
         if (beatsaverMap.getMetaData().getDifficulties().isEasy()) {
             difficulties.add("Easy");

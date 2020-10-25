@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
@@ -26,6 +27,7 @@ public class DifficultyInfoPar extends Fragment {
     }
 
     SpecificDiffSpec specificDiffSpec;
+    LinearLayout hasNotes, noNotes;
     int color, duration;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
 
@@ -46,13 +48,26 @@ public class DifficultyInfoPar extends Fragment {
         notes = view.findViewById(R.id.InfoNotes);
         bombs = view.findViewById(R.id.InfoBombs);
         njs = view.findViewById(R.id.InfoNjs);
-        if (duration != 0) {
-            notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
+        hasNotes = view.findViewById(R.id.infoparLinear);
+        noNotes = view.findViewById(R.id.infoparLinearifnonotes);
+
+        if (specificDiffSpec != null){
+            if (duration != 0) {
+                notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
+            } else {
+
+            }
+            bombs.setText(specificDiffSpec.getBombs() + "");
+            njs.setText(specificDiffSpec.getNjs() + "");
+
         } else {
 
+            hasNotes.setVisibility(View.GONE);
+            noNotes.setVisibility(View.VISIBLE);
         }
-        bombs.setText(specificDiffSpec.getBombs() + "");
-        njs.setText(specificDiffSpec.getNjs() + "");
+
+
+
 
 
         return view;
