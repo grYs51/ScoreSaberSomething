@@ -34,7 +34,6 @@ public class DifficultyInfoPar extends Fragment {
     TextView notes, bombs, njs;
 
     public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec,
-                             int color,
                              int duration) {
         this.specificDiffSpec = specificDiffSpec;
         this.color = color;

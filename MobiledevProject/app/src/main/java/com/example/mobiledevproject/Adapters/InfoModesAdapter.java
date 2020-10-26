@@ -30,13 +30,12 @@ int duration;
     @Override
     public Fragment getItem(int position) {
 
-        for (Characteristics item: characteristics) {
-            return new ModesInfo(item.getDifficulties(), duration, item.getName() );
-        }
+//        for (Characteristics item: characteristics) {
+//            return new ModesInfo(item.getDifficulties(), duration, item.getName() );
+//        }
 
-
-
-        return null;
+        return new ModesInfo(characteristics.get(position).getDifficulties(), duration, characteristics.get(position).getName());
+//        return null;
     }
 
     @Override
