@@ -213,34 +213,47 @@
                 />
 
 
-            <androidx.cardview.widget.CardView
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayoutModes"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_marginTop="4dp"
-                app:cardCornerRadius="2dp">
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/infoModePager"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"/>
 
-                    <com.google.android.material.tabs.TabLayout
 
-                        android:id="@+id/infoDifficultyTabLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/white"
-                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"
-                        app:tabTextColor="@color/black" />
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="200dp"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                app:cardCornerRadius="2dp">-->
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/infoDifficultyPager"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:orientation="vertical">-->
 
-                </LinearLayout>
+<!--                    <com.google.android.material.tabs.TabLayout-->
 
-            </androidx.cardview.widget.CardView>
+<!--                        android:id="@+id/infoDifficultyTabLayout"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:background="@color/white"-->
+<!--                        app:tabTextAppearance="@android:style/TextAppearance.Widget.TabWidget"-->
+<!--                        app:tabTextColor="@color/black" />-->
+
+<!--                    <androidx.viewpager.widget.ViewPager-->
+<!--                        android:id="@+id/infoDifficultyPager"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content" />-->
+
+<!--                </LinearLayout>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
 
         </LinearLayout>
 

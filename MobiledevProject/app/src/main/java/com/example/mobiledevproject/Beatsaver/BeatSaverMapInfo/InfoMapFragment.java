@@ -5,10 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -19,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.mobiledevproject.Adapters.InfoDifficultyPagerAdapter;
+import com.example.mobiledevproject.Adapters.InfoModesAdapter;
 import com.example.mobiledevproject.Adapters.RV.InfoMapAdapter;
-import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.R;
@@ -44,8 +40,10 @@ public class InfoMapFragment extends Fragment {
     TextView songDuration, songBpm, songDownloads, songRating;
     PrettyTime p;
     Instant i;
+
     RecyclerView RV;
     InfoMapAdapter IA;
+
     private BeatsaverMap beatsaverMap;
 
     private List<String> difficulties = new ArrayList<>();
@@ -73,23 +71,34 @@ public class InfoMapFragment extends Fragment {
         findViews(view);
         setTekst(dt);
 
-        //fill adapter
-        Filldifficulties();
-        ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), difficulties, beatsaverMap.getMetaData().getDuration());
-        viewPager.setAdapter(pA);
+//        //fill adapter
+//        Filldifficulties();
+//        ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
+//        PagerAdapter pA = new InfoDifficultyPagerAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), difficulties, beatsaverMap.getMetaData().getDuration());
+//        viewPager.setAdapter(pA);
+//
+//        TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
+//        tabLayout.setupWithViewPager(viewPager);
 
-        TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
-        tabLayout.setupWithViewPager(viewPager);
+
 
         List<String> myList = new ArrayList<String>();
         for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
             myList.add(characteristics.getName());
         }
-        IA = new InfoMapAdapter(myList);
-        RV = view.findViewById(R.id.RVInfoMap);
-        RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RV.setAdapter(IA);
+
+        ViewPager viewPager = view.findViewById(R.id.infoModePager);
+        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration());
+         viewPager.setAdapter(infoModesAdapter);
+
+        TabLayout tabLayout = view.findViewById(R.id.tabLayoutModes);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+//        IA = new InfoMapAdapter(myList);
+//        RV = view.findViewById(R.id.RVInfoMap);
+//        RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+//        RV.setAdapter(IA);
 
         return view;
     }
@@ -155,7 +164,6 @@ public class InfoMapFragment extends Fragment {
     }
 
     private void Filldifficulties() {
-
 
 
         if (beatsaverMap.getMetaData().getDifficulties().isEasy()) {

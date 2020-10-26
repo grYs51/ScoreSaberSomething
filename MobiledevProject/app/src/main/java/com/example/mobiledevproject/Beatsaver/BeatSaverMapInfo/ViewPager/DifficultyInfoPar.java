@@ -1,4 +1,4 @@
-package com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo;
+package com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.ViewPager;
 
 import android.os.Bundle;
 
@@ -35,12 +35,10 @@ public class DifficultyInfoPar extends Fragment {
 
     public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec,
                              int color,
-                             int duration,
-                             String diff) {
+                             int duration) {
         this.specificDiffSpec = specificDiffSpec;
         this.color = color;
         this.duration = duration;
-        Log.d(TAG, "DifficultyInfoPar: "+ diff);
     }
 
     @Override
@@ -54,7 +52,7 @@ public class DifficultyInfoPar extends Fragment {
         hasNotes = view.findViewById(R.id.infoparLinear);
         noNotes = view.findViewById(R.id.infoparLinearifnonotes);
 
-        if (specificDiffSpec != null){
+        if (specificDiffSpec != null) {
             if (duration != 0) {
                 notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
             } else {
@@ -68,9 +66,6 @@ public class DifficultyInfoPar extends Fragment {
             hasNotes.setVisibility(View.GONE);
             noNotes.setVisibility(View.VISIBLE);
         }
-
-
-
 
 
         return view;
