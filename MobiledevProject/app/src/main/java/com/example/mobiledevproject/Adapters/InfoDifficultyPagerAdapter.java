@@ -35,8 +35,9 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Log.d(TAG, "getItem: position: " + position);
 
-        for (Characteristics characteristicsItem : characteristics) {
 
+
+        for (Characteristics characteristicsItem : characteristics) {
             if (characteristicsItem.getName().toLowerCase().equals("standard")) {
                 switch (difficulties.get(position)) {
                     case "Easy":
@@ -53,7 +54,7 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
             }
 
         }
-        return null;
+        return new DifficultyInfoPar(null, R.color.easy, duration, difficulties.get(position)); 
     }
 
 
