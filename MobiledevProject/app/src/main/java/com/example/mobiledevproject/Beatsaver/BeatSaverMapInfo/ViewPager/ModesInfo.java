@@ -44,7 +44,7 @@ public class ModesInfo extends Fragment {
 
         //fill adapter
         ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getParentFragmentManager(), difficultiesSpecs, duration);
+        PagerAdapter pA = new InfoDifficultyPagerAdapter(getChildFragmentManager(), difficultiesSpecs, duration);
         viewPager.setAdapter(pA);
 
         TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);

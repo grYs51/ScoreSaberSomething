@@ -33,15 +33,15 @@ DifficultiesSpecs difficultiesSpecs;
         this.difficultiesSpecs = difficultiesSpecs;
         this.duration = duration;
 
-        if(difficultiesSpecs.getEasy() != null){
+        if(this.difficultiesSpecs.getEasy() != null){
             strings.add("Easy");
-        }        if(difficultiesSpecs.getNormal() != null){
+        }        if(this.difficultiesSpecs.getNormal() != null){
             strings.add("Normal");
-        }        if(difficultiesSpecs.getHard() != null){
+        }        if(this.difficultiesSpecs.getHard() != null){
             strings.add("Hard");
-        }        if(difficultiesSpecs.getExpert() != null){
+        }        if(this.difficultiesSpecs.getExpert() != null){
             strings.add("Expert");
-        }        if(difficultiesSpecs.getExpertPlus() != null){
+        }        if(this.difficultiesSpecs.getExpertPlus() != null){
             strings.add("ExpertPlus");
         }
 
@@ -57,18 +57,20 @@ DifficultiesSpecs difficultiesSpecs;
 
         switch (strings.get(position)){
             case "Easy":
-                new DifficultyInfoPar(difficultiesSpecs.getEasy(), duration);
+                return new DifficultyInfoPar(difficultiesSpecs.getEasy(), duration);
             case "Normal":
-                new DifficultyInfoPar(difficultiesSpecs.getNormal(), duration);
+                return new DifficultyInfoPar(difficultiesSpecs.getNormal(), duration);
             case "Hard":
-                new DifficultyInfoPar(difficultiesSpecs.getHard(), duration);
+                return new DifficultyInfoPar(difficultiesSpecs.getHard(), duration);
             case "Expert":
-                new DifficultyInfoPar(difficultiesSpecs.getExpert(), duration);
+                return new DifficultyInfoPar(difficultiesSpecs.getExpert(), duration);
             case "ExpertPlus":
-                new DifficultyInfoPar(difficultiesSpecs.getExpertPlus(), duration);
+                return new DifficultyInfoPar(difficultiesSpecs.getExpertPlus(), duration);
+            default:
+                return new DifficultyInfoPar(null, duration);
         }
 
-        return new DifficultyInfoPar(null, duration);
+
     }
 
 
