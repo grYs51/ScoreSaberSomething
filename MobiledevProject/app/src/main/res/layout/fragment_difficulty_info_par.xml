@@ -53,6 +53,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
         android:id="@+id/infoparLinearifnonotes"
         android:layout_width="match_parent"
         android:layout_height="100dp"
@@ -66,7 +68,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Is not a standard map!"/>
+            android:text="This maptype doesn't have any notes"/>
+
+
+        <Button
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Preview map"
+            />
+
 
     </LinearLayout>
     

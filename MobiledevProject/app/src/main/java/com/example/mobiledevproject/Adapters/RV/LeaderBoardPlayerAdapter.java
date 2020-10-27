@@ -1,7 +1,6 @@
 package com.example.mobiledevproject.Adapters.RV;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,11 +46,17 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         holder.playerRank.setText("#"+player.getRank());
         holder.playerpp.setText(player.getPp()+"pp");
 
+        // TODO: Update placeholder
+
+
         Glide.with(context)
                 .load("https://new.scoresaber.com" + player.getAvatar())
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.avatar);
+
+        // TODO: Update placeholder
+
 
         Glide.with(context)
                 .load("https://new.scoresaber.com/api/static/flags/" + player.getCountry().toLowerCase()+ ".png")

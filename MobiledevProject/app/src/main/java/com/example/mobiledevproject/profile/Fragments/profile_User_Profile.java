@@ -126,12 +126,14 @@ public class profile_User_Profile extends Fragment  {
         profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
 
+        // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
                 .centerCrop()
                 .placeholder(R.drawable.leaderbord)
                 .into(profile_User_Image);
+        // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png")
@@ -143,6 +145,7 @@ public class profile_User_Profile extends Fragment  {
 
         headerRank.setText("Rank: "+playerPlayerInfo.getRank());
         headerName.setText(playerPlayerInfo.getPlayer_Name());
+        // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())

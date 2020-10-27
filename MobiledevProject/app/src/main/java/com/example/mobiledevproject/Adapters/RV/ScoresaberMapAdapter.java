@@ -94,6 +94,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 
+        // TODO: Update placeholder
         Glide.with(context)
                 .load("https://scoresaber.com/imports/images/songs/" + scoresaberMap.getSongHash() + ".png")
                 .placeholder(R.drawable.profile) //has to change

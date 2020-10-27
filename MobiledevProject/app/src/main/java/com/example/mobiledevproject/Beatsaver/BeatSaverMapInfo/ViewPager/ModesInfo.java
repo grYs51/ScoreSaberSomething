@@ -23,13 +23,14 @@ public class ModesInfo extends Fragment {
 
     DifficultiesSpecs difficultiesSpecs;
     int duration;
-    String name;
+    String key;
 
-    public ModesInfo(DifficultiesSpecs difficultiesSpecs, int duration, String name) {
+    public ModesInfo(DifficultiesSpecs difficultiesSpecs, int duration, String key) {
         Log.d(TAG, "ModesInfo: Difficulties");
         this.difficultiesSpecs = difficultiesSpecs;
         this.duration = duration;
-        this.name = name;
+
+        this.key = key;
     }
 
     @Override
@@ -44,7 +45,7 @@ public class ModesInfo extends Fragment {
 
         //fill adapter
         ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getChildFragmentManager(), difficultiesSpecs, duration);
+        PagerAdapter pA = new InfoDifficultyPagerAdapter(getChildFragmentManager(), difficultiesSpecs, duration, key);
         viewPager.setAdapter(pA);
 
         TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);

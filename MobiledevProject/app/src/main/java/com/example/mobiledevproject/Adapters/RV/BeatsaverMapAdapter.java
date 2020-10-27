@@ -79,7 +79,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         setDifficultyImages(holder, map);
 
         setRating(holder, map, rating);
-
+    // TODO: Update placeholder
         Glide.with(context)
                 .load("https://beatsaver.com" + map.getCoverURL())
                 .placeholder(R.drawable.about)

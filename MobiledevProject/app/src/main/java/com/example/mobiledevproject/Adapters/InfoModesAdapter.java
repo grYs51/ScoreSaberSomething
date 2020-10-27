@@ -17,12 +17,14 @@ public class InfoModesAdapter extends FragmentPagerAdapter{
 List<Characteristics> characteristics;
 List<String> modelist;
 int duration;
-    public InfoModesAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> modeList, int duration) {
+String key;
+    public InfoModesAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> modeList, int duration, String key) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         this.characteristics = characteristics;
         this.modelist = modeList;
         this.duration = duration;
+        this.key = key;
 
     }
 
@@ -34,7 +36,7 @@ int duration;
 //            return new ModesInfo(item.getDifficulties(), duration, item.getName() );
 //        }
 
-        return new ModesInfo(characteristics.get(position).getDifficulties(), duration, characteristics.get(position).getName());
+        return new ModesInfo(characteristics.get(position).getDifficulties(), duration, key);
 //        return null;
     }
 
