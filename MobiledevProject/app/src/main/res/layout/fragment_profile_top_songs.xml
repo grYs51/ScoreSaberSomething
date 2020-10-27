@@ -16,7 +16,8 @@
         android:id="@+id/recycler_view_profile_topscore"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_map_scoresaber"/>
 
 
 </FrameLayout>

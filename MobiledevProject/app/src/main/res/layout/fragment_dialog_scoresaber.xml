@@ -7,17 +7,27 @@
     android:layout_height="wrap_content"
     android:padding="15dp">
 
+    <TextView
+        android:id="@+id/tekst"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please, enter your scoresaber id or url"
+        android:textSize="15sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:padding="3dp"/>
+
     <EditText
         android:id="@+id/scoresaberId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15sp"
+        android:layout_below="@+id/tekst"
         android:hint="Scoresaber Id/Url"
         android:inputType="text"
         android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="@id/tekst"
+        app:layout_constraintStart_toStartOf="@id/tekst" />
+
     <TextView
         android:id="@+id/OkButton"
         android:layout_width="wrap_content"

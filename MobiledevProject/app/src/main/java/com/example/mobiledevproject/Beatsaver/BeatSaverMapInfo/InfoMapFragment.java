@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.PagerAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -16,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.mobiledevproject.Adapters.InfoDifficultyPagerAdapter;
+import com.example.mobiledevproject.Adapters.InfoModesAdapter;
+import com.example.mobiledevproject.Adapters.RV.InfoMapAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -38,6 +40,7 @@ public class InfoMapFragment extends Fragment {
     TextView songDuration, songBpm, songDownloads, songRating;
     PrettyTime p;
     Instant i;
+
 
     private BeatsaverMap beatsaverMap;
 
@@ -66,16 +69,34 @@ public class InfoMapFragment extends Fragment {
         findViews(view);
         setTekst(dt);
 
-        //fill adapter
-        Filldifficulties();
-        ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), difficulties, beatsaverMap.getMetaData().getDuration());
-        viewPager.setAdapter(pA);
+        List<String> myList = new ArrayList<String>();
+        for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
+            myList.add(characteristics.getName());
+        }
 
-        TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
+        ViewPager viewPager = view.findViewById(R.id.infoModePager);
+        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration(), beatsaverMap.getKey());
+        viewPager.setAdapter(infoModesAdapter);
+
+        TabLayout tabLayout = view.findViewById(R.id.tabLayoutModes);
         tabLayout.setupWithViewPager(viewPager);
 
         return view;
+    }
+
+
+    private void findViews(View view) {
+        //info
+        title = view.findViewById(R.id.infoSongName);
+        mapper = view.findViewById(R.id.infoMapper);
+        songAuthor = view.findViewById(R.id.infosongAuthorName);
+        songImage = view.findViewById(R.id.infoImage);
+
+        //stats
+        songDuration = view.findViewById(R.id.infoSongDuration);
+        songBpm = view.findViewById(R.id.infoSongBpm);
+        songDownloads = view.findViewById(R.id.infoSongDownloads);
+        songRating = view.findViewById(R.id.infoSongRating);
     }
 
     private void setTekst(String dt) {
@@ -95,25 +116,13 @@ public class InfoMapFragment extends Fragment {
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRating.setText(beatsaverMap.getStats().getUpVotes() + " up ( " + beatsaverMap.getStats().getDownVotes() + " down )");
 
+
+//TODO: change placeholder
         Glide.with(getContext())
                 .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(songImage);
-    }
-
-    private void findViews(View view) {
-        //info
-        title = view.findViewById(R.id.infoSongName);
-        mapper = view.findViewById(R.id.infoMapper);
-        songAuthor = view.findViewById(R.id.infosongAuthorName);
-        songImage = view.findViewById(R.id.infoImage);
-
-        //stats
-        songDuration = view.findViewById(R.id.infoSongDuration);
-        songBpm = view.findViewById(R.id.infoSongBpm);
-        songDownloads = view.findViewById(R.id.infoSongDownloads);
-        songRating = view.findViewById(R.id.infoSongRating);
     }
 
     private String getDurationString(int seconds) {
@@ -138,7 +147,6 @@ public class InfoMapFragment extends Fragment {
     }
 
     private void Filldifficulties() {
-        int count = 0;
 
         if (beatsaverMap.getMetaData().getDifficulties().isEasy()) {
             difficulties.add("Easy");

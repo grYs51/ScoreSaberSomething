@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -16,11 +17,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.ApiCall.ApiClient;
+import com.example.mobiledevproject.MainActivity;
 import com.example.mobiledevproject.profile.DialogScoresaberFragment;
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
+import com.google.android.material.navigation.NavigationView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +37,12 @@ public class profile_User_Profile extends Fragment  {
     private Player player_response;
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag;
+
+
+    //header
+    TextView headerName, headerRank;
+    ImageView headerImage;
+
 
     public profile_User_Profile(String input) {
 
@@ -63,6 +72,17 @@ public class profile_User_Profile extends Fragment  {
 //        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
         profile_User_Image = view.findViewById(R.id.imageProfile);
         profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
+
+
+        //header?
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
+        View header = navigationView.getHeaderView(0);
+
+
+         headerRank =  header.findViewById(R.id.header_rank);
+         headerName =   header.findViewById(R.id.header_User);
+         headerImage=  header.findViewById(R.id.imageProfile);
+
     }
 
     public void getUserData(String input) {
@@ -106,18 +126,33 @@ public class profile_User_Profile extends Fragment  {
         profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
 //                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
 
+        // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
                 .centerCrop()
                 .placeholder(R.drawable.leaderbord)
                 .into(profile_User_Image);
+        // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png")
                 .placeholder(R.drawable.profile)
                 .error(R.drawable.leaderbord)
                 .into(profile_User_Country_Flag);
+
+        //header?
+
+        headerRank.setText("Rank: "+playerPlayerInfo.getRank());
+        headerName.setText(playerPlayerInfo.getPlayer_Name());
+        // TODO: Update placeholder
+
+        Glide.with(getContext())
+                .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
+                .centerCrop()
+                .placeholder(R.drawable.leaderbord)
+                .into(headerImage);
+
     }
 
     private void getHistory(PlayerPlayerInfo playerPlayerInfo) {
@@ -134,9 +169,9 @@ public class profile_User_Profile extends Fragment  {
 
 
         if (historyDiff < 0){
-            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.red));
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardDown));
         } else if(historyDiff > 0){
-            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.green));
+            profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardUp));
 
         } else {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.greyText));

@@ -28,4 +28,15 @@
             android:summary="50 mb"/>
 
     </PreferenceCategory>
+
+    <PreferenceCategory
+        app:title="About the app">
+
+        <Preference
+            android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^"/>
+        <Preference
+            android:title="Any Problems?"
+            android:summary="grYs#0011 (discord)"/>
+
+    </PreferenceCategory>
 </PreferenceScreen>

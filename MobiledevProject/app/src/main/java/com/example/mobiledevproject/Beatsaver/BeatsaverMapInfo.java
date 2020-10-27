@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,28 +35,38 @@ public class BeatsaverMapInfo extends AppCompatActivity {
 
     private static final String TAG = "MapInfoActivity";
     BeatsaverMap beatsaverMap;
+    ImageButton returnButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beatsaver_map_info);
 
         beatsaverMap = (BeatsaverMap) getIntent().getSerializableExtra("ree");
-        Log.d(TAG, "onCreate: dataget: Title: "+ beatsaverMap.getMetaData().getSongName() );
+        Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetaData().getSongName());
 
         songName = findViewById(R.id.InfoTitle);
         songName.setText(beatsaverMap.getMetaData().getSongName());
 
 
-        //setviewpager
+        //return
+        returnButton = findViewById(R.id.returnbutton);
+        returnButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
+
+        //setviewpager
         ViewPager viewPager = findViewById(R.id.infoPager);
         PagerAdapter pA = new InfoPagerAdapter(getSupportFragmentManager(), beatsaverMap);
         viewPager.setAdapter(pA);
-        //tablayout
 
+        //tablayout
         TabLayout tabLayout = findViewById(R.id.tablayout);
         tabLayout.setupWithViewPager(viewPager);
-
 
 
     }
@@ -63,7 +74,6 @@ public class BeatsaverMapInfo extends AppCompatActivity {
     @Nullable
     @Override
     public View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
-
 
         return super.onCreateView(parent, name, context, attrs);
     }
