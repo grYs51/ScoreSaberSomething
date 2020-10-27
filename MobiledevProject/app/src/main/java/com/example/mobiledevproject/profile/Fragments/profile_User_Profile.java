@@ -25,14 +25,17 @@ import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DecimalFormat;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class profile_User_Profile extends Fragment  {
+public class profile_User_Profile extends Fragment {
 
     private static final String TAG = "Profile_User_Profile";
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     String playerId;
     private Player player_response;
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
@@ -69,7 +72,7 @@ public class profile_User_Profile extends Fragment  {
         profile_Rank_Local = view.findViewById(R.id.profile_User_Rank_Local);
         profile_pp = view.findViewById(R.id.profile_user_PP);
         profile_Diff = view.findViewById(R.id.profile_history_amount);
-//        profile_Average_Rank_Acc = view.findViewById(R.id.profileAverageRankedAcc);
+        profile_Average_Rank_Acc = view.findViewById(R.id.profile_Acc);
         profile_User_Image = view.findViewById(R.id.imageProfile);
         profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
 
@@ -79,9 +82,9 @@ public class profile_User_Profile extends Fragment  {
         View header = navigationView.getHeaderView(0);
 
 
-         headerRank =  header.findViewById(R.id.header_rank);
-         headerName =   header.findViewById(R.id.header_User);
-         headerImage=  header.findViewById(R.id.imageProfile);
+        headerRank = header.findViewById(R.id.header_rank);
+        headerName = header.findViewById(R.id.header_User);
+        headerImage = header.findViewById(R.id.imageProfile);
 
     }
 
@@ -102,10 +105,7 @@ public class profile_User_Profile extends Fragment  {
                 PlayerScoreStats playerScoreStats = player_response.getScore_stats();
                 PlayerPlayerInfo playerPlayerInfo = player_response.getPlayer_info();
 
-                setText(playerPlayerInfo);
-
-
-
+                setText(playerPlayerInfo, playerScoreStats);
 
 
                 Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png");
@@ -119,12 +119,12 @@ public class profile_User_Profile extends Fragment  {
         });
     }
 
-    private void setText(PlayerPlayerInfo playerPlayerInfo) {
+    private void setText(PlayerPlayerInfo playerPlayerInfo, PlayerScoreStats playerScoreStats) {
         profile_Username.setText(playerPlayerInfo.getPlayer_Name());
-        profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " - ");
-        profile_Rank_Local.setText("#" + playerPlayerInfo.getCountry_Rank());
+        profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " |  ");
+        profile_Rank_Local.setText(" #" + playerPlayerInfo.getCountry_Rank());
         profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
-//                profile_Average_Rank_Acc.setText( Double.toString( Math.round(playerScoreStats.getAverage_ranked_Accuracy())) );
+        profile_Average_Rank_Acc.setText(df2.format(playerScoreStats.getAverage_ranked_Accuracy())+ "%");
 
         // TODO: Update placeholder
 
@@ -143,7 +143,7 @@ public class profile_User_Profile extends Fragment  {
 
         //header?
 
-        headerRank.setText("Rank: "+playerPlayerInfo.getRank());
+        headerRank.setText("Rank: " + playerPlayerInfo.getRank());
         headerName.setText(playerPlayerInfo.getPlayer_Name());
         // TODO: Update placeholder
 
@@ -168,9 +168,9 @@ public class profile_User_Profile extends Fragment  {
         profile_Diff.setText(historyDiff + "");
 
 
-        if (historyDiff < 0){
+        if (historyDiff < 0) {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardDown));
-        } else if(historyDiff > 0){
+        } else if (historyDiff > 0) {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardUp));
 
         } else {
