@@ -20,9 +20,9 @@
                 android:icon="@drawable/profile"
                 android:title="@string/profile" />
 
-            <item android:id="@+id/menuSearch"
-                android:icon="@drawable/search"
-                android:title="@string/search" />
+            <item android:id="@+id/menuFriends"
+                android:icon="@drawable/leaderbord"
+                android:title="Friends" />
         </menu>
     </item>
 
