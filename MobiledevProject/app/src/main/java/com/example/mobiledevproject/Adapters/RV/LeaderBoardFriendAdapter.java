@@ -47,7 +47,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     public void setPosition(int position) {
         this.position = position;
     }
-    public LPlayer getData(int position){
+    public Player getData(int position){
         return testings.get(position).getlPlayer();
     }
 
@@ -65,7 +65,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
     }
 
-    public void addData(FriendsSharedPref friendsSharedPref, LPlayer lPlayer) {
+    public void addData(FriendsSharedPref friendsSharedPref, Player lPlayer) {
         Testing fullPlayer = new Testing();
         fullPlayer.setFriendsSharedPref(friendsSharedPref);
         fullPlayer.setlPlayer(lPlayer);
@@ -115,39 +115,9 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
                     Player player = response.body();
 
-                    LPlayer playerObject = new LPlayer();
+                    testings.get(position).setlPlayer(player);
+                    setItem(holder, player);
 
-                    setobject(player, playerObject);
-
-                    String historyString = player.getPlayer_info().getHistory();
-                    String[] stringTokens = historyString.split(",");
-                    int size = stringTokens.length;
-                    int[] arr = new int[size];
-                    for (int i = 0; i < size; i++) {
-                        arr[i] = Integer.parseInt(stringTokens[i]);
-                    }
-                    int historyDiff;
-                    if (arr.length < 6) {
-                        historyDiff = arr[size - (size - 1)] - player.getPlayer_info().getRank();
-                    } else {
-                        historyDiff = arr[size - 6] - player.getPlayer_info().getRank();
-                    }
-                    playerObject.setDifference(historyDiff);
-
-
-                    testings.get(position).setlPlayer(playerObject);
-                    setItem(holder, playerObject);
-
-                }
-
-                private void setobject(Player player, LPlayer playerObject) {
-                    playerObject.setPlayerId(player.getPlayer_info().getPlayer_Id());
-                    playerObject.setPlayerName(player.getPlayer_info().getPlayer_Name());
-                    playerObject.setRank(player.getPlayer_info().getRank());
-                    playerObject.setPp(player.getPlayer_info().getPp());
-                    playerObject.setAvatar(player.getPlayer_info().getAvatar());
-                    playerObject.setCountry(player.getPlayer_info().getCountry());
-                    playerObject.setHistory(player.getPlayer_info().getHistory());
                 }
 
                 @Override
@@ -159,16 +129,12 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
             setItem(holder, testings.get(position).getlPlayer());
         }
 
-        //list
-        LPlayer player;
-
-
     }
 
-    private void setItem(ViewHolder holder, LPlayer lPlayer) {
-        holder.playerName.setText(lPlayer.getPlayerName());
-        holder.playerRank.setText("#" + lPlayer.getRank());
-        holder.playerpp.setText(lPlayer.getPp() + "pp");
+    private void setItem(ViewHolder holder, Player lPlayer) {
+        holder.playerName.setText(lPlayer.getPlayer_info().getPlayer_Name());
+        holder.playerRank.setText("#" + lPlayer.getPlayer_info().getRank());
+        holder.playerpp.setText(lPlayer.getPlayer_info().getPp() + "pp");
 
         // TODO: Update placeholder
 
@@ -182,14 +148,29 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
 
         Glide.with(context)
-                .load("https://new.scoresaber.com/api/static/flags/" + lPlayer.getCountry().toLowerCase() + ".png")
+                .load("https://new.scoresaber.com/api/static/flags/" + lPlayer.getPlayer_info().getCountry().toLowerCase() + ".png")
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.flag);
-        Log.d(TAG, "setItem: Difference: " + lPlayer.getDifference());
-        if (lPlayer.getDifference() > 0) {
+
+        String historyString = lPlayer.getPlayer_info().getHistory();
+        String[] stringTokens = historyString.split(",");
+        int size = stringTokens.length;
+        int[] arr = new int[size];
+        for (int i = 0; i < size; i++) {
+            arr[i] = Integer.parseInt(stringTokens[i]);
+        }
+        int historyDiff;
+        if (arr.length < 6) {
+            historyDiff = arr[size - (size - 1)] - lPlayer.getPlayer_info().getRank();
+        } else {
+            historyDiff = arr[size - 6] - lPlayer.getPlayer_info().getRank();
+        }
+
+        Log.d(TAG, "setItem: Difference: " + historyDiff);
+        if (historyDiff > 0) {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.leaderboardUp));
-        } else if (lPlayer.getDifference() == 0) {
+        } else if (historyDiff == 0) {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.greyText));
         } else {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.leaderboardDown));

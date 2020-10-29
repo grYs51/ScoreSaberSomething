@@ -1,6 +1,7 @@
 package com.example.mobiledevproject.Models.Friends;
 
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
+import com.example.mobiledevproject.Models.PlayerProfile.Player;
 
 public class Testing {
     public FriendsSharedPref getFriendsSharedPref() {
@@ -11,14 +12,14 @@ public class Testing {
         this.friendsSharedPref = friendsSharedPref;
     }
 
-    public LPlayer getlPlayer() {
+    public Player getlPlayer() {
         return lPlayer;
     }
 
-    public void setlPlayer(LPlayer lPlayer) {
+    public void setlPlayer(Player lPlayer) {
         this.lPlayer = lPlayer;
     }
 
     private FriendsSharedPref friendsSharedPref;
-    private LPlayer lPlayer;
+    private Player lPlayer;
 }
