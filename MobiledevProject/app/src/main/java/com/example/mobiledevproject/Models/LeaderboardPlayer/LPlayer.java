@@ -2,8 +2,7 @@ package com.example.mobiledevproject.Models.LeaderboardPlayer;
 
 public class LPlayer {
 
-    private String playerId;
-    private String playerName;
+
 
     public String getPlayerId() {
         return playerId;
@@ -37,6 +36,41 @@ public class LPlayer {
         return difference;
     }
 
+
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public void setRank(int rank) {
+        this.rank = rank;
+    }
+
+    public void setPp(double pp) {
+        this.pp = pp;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
+
+    public void setDifference(int difference) {
+        this.difference = difference;
+    }
+
+    private String playerId;
+    private String playerName;
     private int rank;
     private double pp;
     private String avatar;
