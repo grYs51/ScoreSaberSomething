@@ -2,13 +2,14 @@ package com.example.mobiledevproject.Adapters.RV;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -21,12 +22,10 @@ import com.example.mobiledevproject.Models.Friends.FriendList;
 import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.Friends.Testing;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
-import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +37,19 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     private Context context;
 
     ArrayList<Testing> testings = new ArrayList<>();
+
+    private int position;
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+    public LPlayer getData(int position){
+        return testings.get(position).getlPlayer();
+    }
 
     public void setData(FriendList friendList) {
         if (friendList != null) {
@@ -71,10 +83,12 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.playerName.setText(testings.get(position).getFriendsSharedPref().getName());
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                setPosition(position);
+                return false;
             }
         });
         Glide.with(context)
@@ -188,7 +202,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         ImageView avatar, flag;
         TextView playerName, playerpp, playerRank;
         LinearLayout linearLayout;
@@ -197,15 +211,26 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+
             avatar = itemView.findViewById(R.id.leaderboard_ImagePlayer);
             flag = itemView.findViewById(R.id.leaderboard_Local_Flag);
+
             cardView = itemView.findViewById(R.id.item_leaderboardPlayerCard);
+            itemView.setOnCreateContextMenuListener(this);
+
 
             playerName = itemView.findViewById(R.id.leaderboard_PlayerName);
             playerpp = itemView.findViewById(R.id.leaderboard_Pp);
             playerRank = itemView.findViewById(R.id.leaderboard_Position);
 
             linearLayout = itemView.findViewById(R.id.leaderboard_Linear);
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(Menu.NONE, R.id.showProfile, Menu.NONE, "Show Profile");
+            menu.add(Menu.NONE, R.id.removePlayer, Menu.NONE, "Remove Player");
 
         }
     }

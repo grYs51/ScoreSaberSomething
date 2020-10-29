@@ -39,10 +39,7 @@ public class BeatsaverFragment_adapter extends Fragment {
         return inflater.inflate(R.layout.fragment_beatsaver_adapter, container, false);
     }
 
-    public void swapfragment() {
-        Log.d(TAG, "swapfragment: ");
 
-    }
 
 
 }

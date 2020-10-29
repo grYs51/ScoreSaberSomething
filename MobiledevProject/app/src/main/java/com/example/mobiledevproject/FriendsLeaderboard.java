@@ -1,9 +1,11 @@
 package com.example.mobiledevproject;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobiledevproject.Adapters.RV.LeaderBoardFriendAdapter;
 import com.example.mobiledevproject.Adapters.RV.LeaderBoardPlayerAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
+import com.example.mobiledevproject.Beatsaver.BeatsaverMapInfo;
 import com.example.mobiledevproject.Models.Friends.FriendList;
 import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.Friends.Testing;
@@ -56,6 +59,33 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
         getFriends();
 
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = -1;
+        try {
+            position = ((LeaderBoardFriendAdapter)recyclerView.getAdapter()).getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()) {
+            case R.id.showProfile:
+                Log.d(TAG, "onContextItemSelected: onclick: show profile" );
+                leaderBoardPlayerAdapter.getData(position);
+
+//                Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
+//                intent.putExtra("ree", beatsaverMap);
+//                startActivity(intent);
+
+                break;
+            case R.id.removePlayer:
+                Log.d(TAG, "onContextItemSelected: onclick: Delete" );
+
+                break;
+        }
+        return super.onContextItemSelected(item);
     }
 
     @Nullable
@@ -169,7 +199,9 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
                 fSP.setName(player.getPlayer_info().getPlayer_Name());
                 fSP.setAvatar(player.getPlayer_info().getAvatar());
 
-                setObject(player);
+//                setObject(player);
+
+
 
                 //object fsp
                 if (friendList.getFriends() == null) {
@@ -197,32 +229,32 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
             }
 
-            private void setObject(Player player) {
-                playerObject.setPlayerId(player.getPlayer_info().getPlayer_Id());
-                playerObject.setPlayerName(player.getPlayer_info().getPlayer_Name());
-                playerObject.setRank(player.getPlayer_info().getRank());
-                playerObject.setPp(player.getPlayer_info().getPp());
-                playerObject.setAvatar(player.getPlayer_info().getAvatar());
-                playerObject.setCountry(player.getPlayer_info().getCountry());
-                playerObject.setHistory(player.getPlayer_info().getHistory());
-
-                String historyString = player.getPlayer_info().getHistory();
-                String[] stringTokens = historyString.split(",");
-                int size = stringTokens.length;
-                int[] arr = new int[size];
-                for (int i = 0; i < size; i++) {
-                    arr[i] = Integer.parseInt(stringTokens[i]);
-                }
-
-                int historyDiff;
-                if (arr.length < 6) {
-                    historyDiff = arr.length;
-                } else {
-                    historyDiff = arr[size - 6] - player.getPlayer_info().getRank();
-                }
-                Log.d(TAG, "onResponse: historyDiff: " +historyDiff);
-                playerObject.setDifference(historyDiff);
-            }
+//            private void setObject(Player player) {
+//                playerObject.setPlayerId(player.getPlayer_info().getPlayer_Id());
+//                playerObject.setPlayerName(player.getPlayer_info().getPlayer_Name());
+//                playerObject.setRank(player.getPlayer_info().getRank());
+//                playerObject.setPp(player.getPlayer_info().getPp());
+//                playerObject.setAvatar(player.getPlayer_info().getAvatar());
+//                playerObject.setCountry(player.getPlayer_info().getCountry());
+//                playerObject.setHistory(player.getPlayer_info().getHistory());
+//
+//                String historyString = player.getPlayer_info().getHistory();
+//                String[] stringTokens = historyString.split(",");
+//                int size = stringTokens.length;
+//                int[] arr = new int[size];
+//                for (int i = 0; i < size; i++) {
+//                    arr[i] = Integer.parseInt(stringTokens[i]);
+//                }
+//
+//                int historyDiff;
+//                if (arr.length < 6) {
+//                    historyDiff = arr.length;
+//                } else {
+//                    historyDiff = arr[size - 6] - player.getPlayer_info().getRank();
+//                }
+//                Log.d(TAG, "onResponse: historyDiff: " +historyDiff);
+//                playerObject.setDifference(historyDiff);
+//            }
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
