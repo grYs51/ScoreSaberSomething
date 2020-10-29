@@ -8,8 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -69,6 +71,12 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         holder.playerName.setText(testings.get(position).getFriendsSharedPref().getName());
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         Glide.with(context)
                 .load("https://new.scoresaber.com" + testings.get(position).getFriendsSharedPref().getAvatar())
                 .placeholder(R.drawable.about)
@@ -144,12 +152,11 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     }
 
     private void setItem(ViewHolder holder, LPlayer lPlayer) {
-//        holder.playerName.setText(lPlayer.getPlayerName());
+        holder.playerName.setText(lPlayer.getPlayerName());
         holder.playerRank.setText("#" + lPlayer.getRank());
         holder.playerpp.setText(lPlayer.getPp() + "pp");
 
         // TODO: Update placeholder
-
 
 //        Glide.with(context)
 //                .load("https://new.scoresaber.com" + lPlayer.getAvatar())
@@ -185,12 +192,14 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         ImageView avatar, flag;
         TextView playerName, playerpp, playerRank;
         LinearLayout linearLayout;
+        CardView cardView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             avatar = itemView.findViewById(R.id.leaderboard_ImagePlayer);
             flag = itemView.findViewById(R.id.leaderboard_Local_Flag);
+            cardView = itemView.findViewById(R.id.item_leaderboardPlayerCard);
 
             playerName = itemView.findViewById(R.id.leaderboard_PlayerName);
             playerpp = itemView.findViewById(R.id.leaderboard_Pp);

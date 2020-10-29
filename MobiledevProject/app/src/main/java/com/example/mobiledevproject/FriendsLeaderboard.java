@@ -113,8 +113,12 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
     private void addPerson() {
         Log.d(TAG, "addPerson: ");
-
-        showDialog();
+        if(friendList.getFriends().size()>= 7)
+        {
+            Toast.makeText(getActivity(), "Max 7 players!", Toast.LENGTH_SHORT).show();
+        } else {
+            showDialog();
+        }
     }
 
     public void sendInput(String id) {
