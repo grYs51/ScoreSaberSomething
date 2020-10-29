@@ -32,10 +32,10 @@
         android:label="Ranked Maps"
         tools:layout="@layout/fragment_ranked_maps" />
     <fragment
-        android:id="@+id/menuSearch"
-        android:name="com.example.mobiledevproject.SearchFragment"
-        android:label="Search"
-        tools:layout="@layout/fragment_search" />
+        android:id="@+id/menuFriends"
+        android:name="com.example.mobiledevproject.FriendsLeaderboard"
+        android:label="Friends"
+        tools:layout="@layout/fragment_friends_leaderboard" />
 
 
 
