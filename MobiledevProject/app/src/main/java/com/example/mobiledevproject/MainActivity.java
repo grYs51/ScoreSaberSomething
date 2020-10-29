@@ -13,6 +13,7 @@ import androidx.navigation.ui.NavigationUI;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
@@ -20,14 +21,13 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     private static final String TAG = "main";
-
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        imageView = findViewById(R.id.addPerson);
         drawerLayout = findViewById(R.id.drawerLayout);
-
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 Log.d(TAG, "onCreate: " + destination);
+                imageView.setVisibility(View.GONE);
                 textTitle.setText(destination.getLabel());
             }
         });

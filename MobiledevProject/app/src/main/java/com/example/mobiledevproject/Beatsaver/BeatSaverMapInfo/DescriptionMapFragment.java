@@ -10,9 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
 
 public class DescriptionMapFragment extends Fragment {
+    BeatsaverMap beatsaverMap;
+
+    public DescriptionMapFragment(BeatsaverMap beatsaverMap){
+        this.beatsaverMap = beatsaverMap;
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

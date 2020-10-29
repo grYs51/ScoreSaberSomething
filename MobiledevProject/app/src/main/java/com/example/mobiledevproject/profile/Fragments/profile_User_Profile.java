@@ -145,6 +145,7 @@ public class profile_User_Profile extends Fragment {
 
         headerRank.setText("Rank: " + playerPlayerInfo.getRank());
         headerName.setText(playerPlayerInfo.getPlayer_Name());
+
         // TODO: Update placeholder
 
         Glide.with(getContext())
