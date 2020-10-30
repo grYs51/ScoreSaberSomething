@@ -48,6 +48,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     String playerId;
     FriendList friendList;
     SharedPreferences sharedPref;
+    Gson gson = new Gson();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -73,11 +74,13 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
         switch (item.getItemId()) {
             case R.id.showProfile:
                 Log.d(TAG, "onContextItemSelected: onclick: show profile");
-                leaderBoardPlayerAdapter.getData(position);
+                Player Pl = leaderBoardPlayerAdapter.getData(position);
 
-//                Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
-//                intent.putExtra("ree", beatsaverMap);
-//                startActivity(intent);
+                String json = gson.toJson(Pl);
+
+                        Intent intent = new Intent(getContext(), ProfileNotOwner.class);
+                intent.putExtra("playerNotOwner", json);
+                startActivity(intent);
 
                 break;
             case R.id.removePlayer:
@@ -99,7 +102,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
         return view;
     }
-    
+
     private Boolean checkIfExist(String id) {
         for (FriendsSharedPref fr : friendList.getFriends()) {
             if (fr.getId().equals(id))
@@ -144,7 +147,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
                 //TODO: addtosharedpref
 
-                Gson gson = new Gson();
+
                 String json = gson.toJson(friendList);
                 Log.d(TAG, "onResponse: json: " + json);
                 SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
@@ -160,7 +163,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
-                Log.d(TAG, "onFailure: "+ t.toString());
+                Log.d(TAG, "onFailure: " + t.toString());
             }
         });
 

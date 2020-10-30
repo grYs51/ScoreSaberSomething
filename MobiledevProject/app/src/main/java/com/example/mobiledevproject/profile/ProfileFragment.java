@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobiledevproject.Adapters.ProfilePagerAdapter;
+import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,14 +28,17 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     PagerAdapter pagerAdapter;
     TabLayout tabLayout;
     String input;
-    String idImported;
+    Player playerimported;
+    Boolean isOwner = true;
 
     public ProfileFragment(){
-        this.idImported = null;
+
     }
 
-    public ProfileFragment(String idImported){
-        this.idImported = idImported;
+    public ProfileFragment(Player player){
+        this.playerimported = player;
+        this.isOwner = false;
+
     }
 
     @Override
@@ -45,7 +49,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         input = sharedPref.getString("playerId", null);
 
-        if (idImported == null){
+        if (playerimported == null){
             if (input == null) {
                 Log.d(TAG, "onClick: Opening Dialog");
                 DialogScoresaberFragment dialog = new DialogScoresaberFragment();
@@ -55,7 +59,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                 createPager(input);
             }
         } else {
-            createPager(idImported);
+            createPager(playerimported.getPlayer_info().getPlayer_Id());
         }
 
 
@@ -76,7 +80,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     }
 
     private void createPager(String input) {
-        PagerAdapter pA = new ProfilePagerAdapter(getChildFragmentManager(), input);
+        PagerAdapter pA = new ProfilePagerAdapter(getChildFragmentManager(), input, isOwner);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(pA);
         tabLayout.setupWithViewPager(viewPager);

@@ -1,5 +1,6 @@
 package com.example.mobiledevproject.profile.Fragments;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -7,6 +8,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceManager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
+import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.DecimalFormat;
@@ -45,12 +48,12 @@ public class profile_User_Profile extends Fragment {
     //header
     TextView headerName, headerRank;
     ImageView headerImage;
+    Boolean isOwner;
 
-
-    public profile_User_Profile(String input) {
+    public profile_User_Profile(String input, Boolean isOwner) {
 
         this.playerId = input;
-
+        this.isOwner = isOwner;
     }
 
 
@@ -78,13 +81,13 @@ public class profile_User_Profile extends Fragment {
 
 
         //header?
-        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
-        View header = navigationView.getHeaderView(0);
-
-
-        headerRank = header.findViewById(R.id.header_rank);
-        headerName = header.findViewById(R.id.header_User);
-        headerImage = header.findViewById(R.id.imageProfile);
+        if(isOwner){
+            NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
+            View header = navigationView.getHeaderView(0);
+            headerRank = header.findViewById(R.id.header_rank);
+            headerName = header.findViewById(R.id.header_User);
+            headerImage = header.findViewById(R.id.imageProfile);
+        }
 
     }
 
@@ -124,7 +127,7 @@ public class profile_User_Profile extends Fragment {
         profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " |  ");
         profile_Rank_Local.setText(" #" + playerPlayerInfo.getCountry_Rank());
         profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
-        profile_Average_Rank_Acc.setText(df2.format(playerScoreStats.getAverage_ranked_Accuracy())+ "%");
+        profile_Average_Rank_Acc.setText(df2.format(playerScoreStats.getAverage_ranked_Accuracy()) + "%");
 
         // TODO: Update placeholder
 
@@ -142,19 +145,21 @@ public class profile_User_Profile extends Fragment {
                 .into(profile_User_Country_Flag);
 
         //header?
+        if(isOwner){
+            headerRank.setText("Rank: " + playerPlayerInfo.getRank());
+            headerName.setText(playerPlayerInfo.getPlayer_Name());
 
-        headerRank.setText("Rank: " + playerPlayerInfo.getRank());
-        headerName.setText(playerPlayerInfo.getPlayer_Name());
+            // TODO: Update placeholder
 
-        // TODO: Update placeholder
-
-        Glide.with(getContext())
-                .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
-                .centerCrop()
-                .placeholder(R.drawable.leaderbord)
-                .into(headerImage);
+            Glide.with(getContext())
+                    .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
+                    .centerCrop()
+                    .placeholder(R.drawable.leaderbord)
+                    .into(headerImage);
+        }
 
     }
+
 
     private void getHistory(PlayerPlayerInfo playerPlayerInfo) {
         String historyString = playerPlayerInfo.getHistory();
