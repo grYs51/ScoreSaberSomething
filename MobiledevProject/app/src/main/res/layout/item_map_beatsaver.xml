@@ -35,7 +35,7 @@
                 android:src="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:riv_oval="true"></com.makeramen.roundedimageview.RoundedImageView>
+                app:riv_oval="true"/>
 
 
             <com.makeramen.roundedimageview.RoundedImageView
@@ -91,7 +91,6 @@
                     android:text="songAuthorName"
                     android:textSize="15sp"
                     app:layout_constraintStart_toEndOf="@+id/static_dash"
-                    app:layout_constraintTop_toTopOf="parent"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -99,17 +98,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="levelAuthorName - date"
-                    android:textSize="15sp"
-                    app:layout_constraintLeft_toRightOf="@id/item_Map_image"
-                    app:layout_constraintTop_toBottomOf="@id/item_songName" />
+                    android:textSize="15sp" />
 
                 <LinearLayout
 
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:orientation="horizontal"
-                    android:layout_marginEnd="150dp"
-                    android:gravity="bottom"
                     >
 
                     <com.makeramen.roundedimageview.RoundedImageView

@@ -41,19 +41,8 @@ public class InfoMapFragment extends Fragment {
     PrettyTime p;
     Instant i;
 
-
     private BeatsaverMap beatsaverMap;
-
-    private List<String> difficulties = new ArrayList<>();
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
+    
     public InfoMapFragment(BeatsaverMap beatsaverMap) {
         this.beatsaverMap = beatsaverMap;
         p = new PrettyTime();
@@ -146,23 +135,4 @@ public class InfoMapFragment extends Fragment {
         return String.valueOf(number);
     }
 
-    private void Filldifficulties() {
-
-        if (beatsaverMap.getMetaData().getDifficulties().isEasy()) {
-            difficulties.add("Easy");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isNormal()) {
-            difficulties.add("Normal");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isHard()) {
-            difficulties.add("Hard");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isExpert()) {
-            difficulties.add("Expert");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isExpertPlus()) {
-            difficulties.add("ExpertPlus");
-        }
-        Log.d(TAG, "Filldifficulties: " + difficulties.size());
-    }
 }

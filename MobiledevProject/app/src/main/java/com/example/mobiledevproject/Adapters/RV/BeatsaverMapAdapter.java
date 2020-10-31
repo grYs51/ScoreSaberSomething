@@ -72,6 +72,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         parseTimeUploaded(holder, map, dt);
 
+        //TODO: ifMap Name is too long
         holder.mapTitle.setText(map.getName());
         holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
 

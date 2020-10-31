@@ -14,8 +14,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mobiledevproject.Beatsaver.BeatsaverMapInfo;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.WebViewMap;
 
 import java.text.DecimalFormat;
 
@@ -72,7 +74,12 @@ public class DifficultyInfoPar extends Fragment {
                 playbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://skystudioapps.com/bs-viewer/?id="+key)));
+//                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://skystudioapps.com/bs-viewer/?id="+key)));
+                        String url = "https://skystudioapps.com/bs-viewer/?id="+key;
+                        Log.d(TAG, "onClick: " + url);
+                        Intent intent = new Intent(getContext(), WebViewMap.class);
+                        intent.putExtra("page", url);
+                        startActivity(intent);
                     }
                 });
             }

@@ -29,22 +29,29 @@
         app:layout_constraintStart_toStartOf="@id/tekst" />
 
     <TextView
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/OkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ok"
         android:layout_margin="15sp"
+        android:padding="5dp"
         android:textSize="20sp"
         android:layout_below="@id/scoresaberId"
         android:layout_alignRight="@id/scoresaberId"
         android:textColor="@color/darkPurple"/>
 
     <TextView
+
+        android:clickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:id="@+id/cancelButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15sp"
         android:textSize="20sp"
+        android:padding="5dp"
         android:text="Cancel"
         android:layout_below="@id/scoresaberId"
         android:layout_toLeftOf="@id/OkButton"
