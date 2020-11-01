@@ -5,26 +5,26 @@ import com.google.gson.annotations.SerializedName;
 public class PlayerScoreStats {
 
     @SerializedName("totalScore")
-    private Integer total_Score;
+    private long total_Score;
 
     @SerializedName("totalRankedScore")
-    private Integer total_Ranked_Score;
+    private long total_Ranked_Score;
 
     @SerializedName("averageRankedAccuracy")
     private Double average_ranked_Accuracy;
 
     @SerializedName("totalPlayCount")
-    private Integer total_Play_Count;
+    private int total_Play_Count;
 
     @SerializedName("rankedPlayCount")
-    private Integer ranked_Play_Count;
+    private int ranked_Play_Count;
 
 
-    public Integer getTotal_Score() {
+    public long getTotal_Score() {
         return total_Score;
     }
 
-    public Integer getTotal_Ranked_Score() {
+    public long getTotal_Ranked_Score() {
         return total_Ranked_Score;
     }
 
@@ -32,11 +32,11 @@ public class PlayerScoreStats {
         return average_ranked_Accuracy;
     }
 
-    public Integer getTotal_Play_Count() {
+    public int getTotal_Play_Count() {
         return total_Play_Count;
     }
 
-    public Integer getRanked_Play_Count() {
+    public int getRanked_Play_Count() {
         return ranked_Play_Count;
     }
 
