@@ -22,10 +22,8 @@ public class WebViewMap extends AppCompatActivity {
         myWebView.getSettings().setAllowFileAccess(true);
         myWebView.getSettings().setLoadWithOverviewMode(true);
         myWebView.getSettings().setUseWideViewPort(true);
-        myWebView.getSettings().setBuiltInZoomControls(true);
         myWebView.getSettings().setDomStorageEnabled(true);
         myWebView.loadUrl(url);
-//        myWebView.loa
     }
 
     @Override
