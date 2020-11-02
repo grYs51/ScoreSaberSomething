@@ -60,7 +60,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
         int rating = Integer.parseInt(df2.format(map.getStats().getRating() * 100));
 
-        Logs(position, map);
         setItem(holder, map, rating);
 
     }
@@ -72,10 +71,26 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         parseTimeUploaded(holder, map, dt);
 
-        //TODO: ifMap Name is too long
-        holder.mapTitle.setText(map.getName());
-        holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
+        if(map.getName().length() >= 50){
+            String s;
+            s = map.getName().substring(0, Math.min(map.getName().length(), 55));
 
+            holder.mapTitle.setText(s+ "...");
+
+        } else {
+            holder.mapTitle.setText(map.getName());
+        }
+
+        Log.d(TAG, "setItem: length: " + map.getMetaData().getSongAuthorName());
+        Log.d(TAG, "setItem: length: " + map.getMetaData().getSongAuthorName().length());
+
+        if(map.getMetaData().getSongAuthorName().length() >= 35){
+            String s;
+            s = map.getMetaData().getSongAuthorName().substring(0, Math.min(+ map.getMetaData().getSongAuthorName().length(), 35));
+            holder.mapAuthorName.setText(s+ "...");
+        } else{
+            holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
+        }
 
         setDifficultyImages(holder, map);
 
@@ -86,7 +101,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
-
     }
 
 
@@ -153,12 +167,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         }
     }
 
-    private void Logs(int position, BeatsaverMap map) {
-        Log.d(TAG, "onBindViewHolder: position: " + position);
-        Log.d(TAG, "onBindViewHolder: Name: " + map.getName());
-        Log.d(TAG, "onBindViewHolder: diff: " + map.getMetaData().getDifficulties().isEasy() + " | " + map.getMetaData().getDifficulties().isNormal() + " | " + map.getMetaData().getDifficulties().isHard() + " | " + map.getMetaData().getDifficulties().isExpert() + " | " + map.getMetaData().getDifficulties().isExpertPlus());
-        Log.d(TAG, "onBindViewHolder: ");
-    }
 
     private void setRating(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
         if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {

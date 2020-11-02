@@ -48,7 +48,7 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
             strings.add("Expert");
         }
         if (this.difficultiesSpecs.getExpertPlus() != null) {
-            strings.add("ExpertPlus");
+            strings.add("Expert+");
         }
 
     }
@@ -69,7 +69,7 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
                 return new DifficultyInfoPar(difficultiesSpecs.getHard(), duration, key);
             case "Expert":
                 return new DifficultyInfoPar(difficultiesSpecs.getExpert(), duration, key);
-            case "ExpertPlus":
+            case "Expert+":
                 return new DifficultyInfoPar(difficultiesSpecs.getExpertPlus(), duration, key);
             default:
                 return new DifficultyInfoPar(null, duration, key);

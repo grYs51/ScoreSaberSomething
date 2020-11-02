@@ -124,9 +124,9 @@ public class profile_User_Profile extends Fragment {
 
     private void setText(PlayerPlayerInfo playerPlayerInfo, PlayerScoreStats playerScoreStats) {
         profile_Username.setText(playerPlayerInfo.getPlayer_Name());
-        profile_Rank_Global.setText("#" + playerPlayerInfo.getRank() + " |  ");
+        profile_Rank_Global.setText("#" + playerPlayerInfo.getRank());
         profile_Rank_Local.setText(" #" + playerPlayerInfo.getCountry_Rank());
-        profile_pp.setText(Double.toString(playerPlayerInfo.getPp()) + "pp");
+        profile_pp.setText(Double.toString(playerPlayerInfo.getPp()));
         profile_Average_Rank_Acc.setText(df2.format(playerScoreStats.getAverage_ranked_Accuracy()) + "%");
 
         // TODO: Update placeholder

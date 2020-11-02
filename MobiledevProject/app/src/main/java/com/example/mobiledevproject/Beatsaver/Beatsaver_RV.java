@@ -143,7 +143,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             public void onClick(BeatsaverMap beatsaverMap) {
                 Log.d(TAG, "onClick: setonclicklistenet: " + beatsaverMap.toString());
 
-                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
                 intent.putExtra("ree", beatsaverMap);

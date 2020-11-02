@@ -70,33 +70,37 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Map Title"
-                                android:textSize="18sp"
+                                android:textSize="16sp"
                                 android:textStyle="bold"
 
                                 android:textColor="@color/black"/>
 
                             <TextView
+                                android:layout_marginTop="-3dp"
                                 android:id="@+id/item_songAuthorName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="songAuthorName"
-                                android:textSize="16sp"
+                                android:textSize="14sp"
                                 app:layout_constraintStart_toEndOf="@+id/static_dash"
                                 app:layout_constraintTop_toTopOf="parent"
                                 android:textColor="@color/black"/>
 
                             <TextView
+                                android:layout_marginTop="-3dp"
                                 android:id="@+id/item_levelAuthorName"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="levelAuthorName - date"
-                                android:textSize="15sp"
+                                android:textSize="13.4sp"
                                 app:layout_constraintLeft_toRightOf="@id/item_Map_image"
                                 app:layout_constraintTop_toBottomOf="@id/item_songName" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:padding="6dp"
-                    android:layout_height="match_parent"
+                    android:layout_marginTop="7dp"
+
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:layout_width="match_parent"
                     android:gravity="center">
 
@@ -106,12 +110,15 @@
                         android:layout_weight="0.3"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
+
                         android:gravity="center_horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Rank"
+                            android:textSize="13.5sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold" />
                         <TextView
                             android:id="@+id/item_rank"
@@ -133,6 +140,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="PP"
+                            android:textSize="13.5sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold" />
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -140,12 +149,15 @@
 
                             <TextView
                                 android:id="@+id/item_pp"
+                                android:textSize="13.5sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="--- "/>
 
                             <TextView
                                 android:id="@+id/item_ppWeight"
+                                android:textSize="13.5sp"
+
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text=" (---)"/>
@@ -166,6 +178,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Acc"
+                            android:textSize="13.5sp"
+                            android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
