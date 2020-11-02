@@ -1,6 +1,7 @@
 package com.example.mobiledevproject.Adapters.RV;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -24,8 +26,13 @@ import com.example.mobiledevproject.Models.Friends.Testing;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,10 +42,15 @@ import static android.content.ContentValues.TAG;
 
 public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFriendAdapter.ViewHolder> {
     private Context context;
-
+    FragmentActivity activity;
     ArrayList<Testing> testings = new ArrayList<>();
 
     private int position;
+    private int count;
+
+    public LeaderBoardFriendAdapter(FragmentActivity context){
+        this.activity = context; ;
+    }
 
     public int getPosition() {
         return position;
@@ -50,7 +62,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     public Player getData(int position){
         return testings.get(position).getlPlayer();
     }
-
     public void setData(FriendList friendList) {
         if (friendList != null) {
 
@@ -60,16 +71,59 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
                 fullPlayer.setlPlayer(null);
                 testings.add(fullPlayer);
             }
+
         }
 
 
     }
-
     public void addData(FriendsSharedPref friendsSharedPref, Player lPlayer) {
         Testing fullPlayer = new Testing();
         fullPlayer.setFriendsSharedPref(friendsSharedPref);
         fullPlayer.setlPlayer(lPlayer);
         testings.add(fullPlayer);
+        sortList();
+    }
+    public void RemovePlayer(int position){
+        Log.d(TAG, "RemovePlayer: "+ testings.get(position).toString());
+        testings.remove(position);
+    }
+
+    public void sortList(){
+        for ( Testing test : testings){
+            Log.d(TAG, "sortList: noSorted: "+ test.getlPlayer().getPlayer_info().getPlayer_Name());
+        }
+        Collections.sort(testings, new Comparator<Testing>() {
+            @Override
+            public int compare(Testing o1, Testing o2) {
+                return o1.getlPlayer().getPlayer_info().getRank().compareTo(o2.getlPlayer().getPlayer_info().getRank());
+            }
+        });
+        FriendList friendList = new FriendList();
+        for( Testing pl: testings)
+        {
+            if (friendList.getFriends() != null) {
+                friendList.getFriends().add(pl.getFriendsSharedPref());
+            } else{
+                List<FriendsSharedPref> friends = new ArrayList<>();
+                friends.add(pl.getFriendsSharedPref());
+                friendList.setFriends(friends);
+            }
+        }
+        Log.d(TAG, "sortList:");
+        for ( Testing test : testings){
+            Log.d(TAG, "sortList: Sorted: "+ test.getlPlayer().getPlayer_info().getPlayer_Name());
+        }
+            //TODO: save list in the right order
+        Gson gson = new Gson();
+        String json = gson.toJson(friendList);
+        Log.d(TAG, "onResponse: json: " + json);
+        SharedPreferences sharedPref =  activity.getPreferences(activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("playerFriends", json);
+        editor.apply();
+
+        notifyDataSetChanged();
+
     }
 
 
@@ -117,7 +171,12 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
                     testings.get(position).setlPlayer(player);
                     setItem(holder, player);
-
+                    Log.d(TAG, "onResponse: position " + position + " / "+ testings.size());
+                    if(count == testings.size()-1){
+                        sortList();
+                    } else {
+                        count++;
+                    }
                 }
 
                 @Override
