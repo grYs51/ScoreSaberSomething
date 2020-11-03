@@ -218,6 +218,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
     private void showAddButton() {
         imageView = getActivity().findViewById(R.id.addPerson);
+        imageView.setImageResource(R.drawable.ic_person_add);
         imageView.setVisibility(View.VISIBLE);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.ApiCall.ApiClient;
@@ -43,7 +45,7 @@ public class profile_User_Profile extends Fragment {
     private Player player_response;
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag;
-
+    private CardView cardShare;
 
     //header
     TextView headerName, headerRank;
@@ -64,6 +66,13 @@ public class profile_User_Profile extends Fragment {
 
         findViews(view);
 
+        cardShare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Still working on!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         getUserData(playerId);
 
         return view;
@@ -78,6 +87,7 @@ public class profile_User_Profile extends Fragment {
         profile_Average_Rank_Acc = view.findViewById(R.id.profile_Acc);
         profile_User_Image = view.findViewById(R.id.imageProfile);
         profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
+        cardShare = view.findViewById(R.id.shareButton);
 
 
         //header?
