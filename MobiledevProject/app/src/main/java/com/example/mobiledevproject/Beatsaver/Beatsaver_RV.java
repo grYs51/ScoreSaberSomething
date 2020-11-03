@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -38,7 +39,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
     private BeatsaverMapAdapter.RVClickListener listener;
     Call<MapsBeatsaver> mapList;
     Context context;
-
+    ImageView imageView;
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
@@ -53,6 +54,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         super.onCreate(savedInstanceState);
         beatsaverMapAdapter = new BeatsaverMapAdapter();
         context = getContext();
+        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -64,9 +66,24 @@ public class Beatsaver_RV extends Fragment implements Serializable {
 
         getMaps(sorting, page_number);
 
+        showAddButton();
+
         addScrollListener();
 
         return view;
+    }
+
+
+    private void showAddButton() {
+        imageView = getActivity().findViewById(R.id.addPerson);
+        imageView.setImageResource(R.drawable.ic_filter_list_24);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void addScrollListener() {
