@@ -61,6 +61,8 @@ public class profile_Recent_songs extends Fragment {
 
         recyclerView(view);
 
+        //TODO: get pull to refresh working in rv
+
         getRecentSongs(playerId, page_number);
 
         addScrollListener();

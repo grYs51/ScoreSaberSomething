@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +38,7 @@ public class profile_Top_Songs extends Fragment {
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
+    private SwipeRefreshLayout pullToRefresh;
 
     public profile_Top_Songs(String input) {
 
@@ -55,6 +57,20 @@ public class profile_Top_Songs extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_profile_top_songs, container, false);
+
+        //TODO: get pull to refresh working in rv
+//        pullToRefresh = view.findViewById(R.id.swipeRefreshTop);
+//        pullToRefresh.setRefreshing(true);
+//        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                Log.d(TAG, "onRefresh: Pulled Refresh");
+//                page_number = 1;
+//                scoresaberMapAdapter.setData(null);
+//                getTopSongs(playerId, page_number);
+//                addScrolllistener();
+//            }
+//        });
 
         initRecyclerView(view);
 
@@ -110,6 +126,7 @@ public class profile_Top_Songs extends Fragment {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
+                pullToRefresh.setRefreshing(false);
                 Scores scoresaberMaps = response.body();
                 if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresaberMaps);
