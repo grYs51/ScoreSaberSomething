@@ -1,15 +1,13 @@
 package com.example.mobiledevproject.profile.Fragments;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,13 +19,10 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.ApiCall.ApiClient;
-import com.example.mobiledevproject.MainActivity;
-import com.example.mobiledevproject.profile.DialogScoresaberFragment;
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 import com.google.android.material.navigation.NavigationView;
 
 import java.text.DecimalFormat;
@@ -46,6 +41,7 @@ public class profile_User_Profile extends Fragment {
     private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
     private ImageView profile_User_Image, profile_User_Country_Flag;
     private CardView cardShare;
+    private SwipeRefreshLayout pullToRefresh;
 
     //header
     TextView headerName, headerRank;
@@ -58,7 +54,6 @@ public class profile_User_Profile extends Fragment {
         this.isOwner = isOwner;
     }
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +61,8 @@ public class profile_User_Profile extends Fragment {
 
         findViews(view);
 
+        setpullRefresh(view);
+        pullToRefresh.setRefreshing(true);
         cardShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +73,17 @@ public class profile_User_Profile extends Fragment {
         getUserData(playerId);
 
         return view;
+    }
+
+    private void setpullRefresh(View view) {
+        pullToRefresh = view.findViewById(R.id.swipeRefresh);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "onRefresh: Pulled Refresh");
+                getUserData(playerId);
+            }
+        });
     }
 
     private void findViews(View view) {
@@ -91,7 +99,7 @@ public class profile_User_Profile extends Fragment {
 
 
         //header?
-        if(isOwner){
+        if (isOwner) {
             NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
             View header = navigationView.getHeaderView(0);
             headerRank = header.findViewById(R.id.header_rank);
@@ -123,11 +131,14 @@ public class profile_User_Profile extends Fragment {
 
                 Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png");
                 getHistory(playerPlayerInfo);
+                pullToRefresh.setRefreshing(false);
             }
 
             @Override
             public void onFailure(Call<Player> call, Throwable t) {
+                Toast.makeText(getContext(), "Failed to get data, try again later", Toast.LENGTH_SHORT);
                 Log.d(TAG, "onFailure: " + t.getMessage());
+                pullToRefresh.setRefreshing(false);
             }
         });
     }
@@ -155,7 +166,7 @@ public class profile_User_Profile extends Fragment {
                 .into(profile_User_Country_Flag);
 
         //header?
-        if(isOwner){
+        if (isOwner) {
             headerRank.setText("Rank: " + playerPlayerInfo.getRank());
             headerName.setText(playerPlayerInfo.getPlayer_Name());
 
@@ -169,7 +180,6 @@ public class profile_User_Profile extends Fragment {
         }
 
     }
-
 
     private void getHistory(PlayerPlayerInfo playerPlayerInfo) {
         String historyString = playerPlayerInfo.getHistory();
