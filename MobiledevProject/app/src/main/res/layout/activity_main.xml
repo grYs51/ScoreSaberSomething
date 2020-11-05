@@ -43,6 +43,13 @@
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp" />
 
+            <SearchView
+                android:id="@+id/searchView"
+                android:visibility="gone"
+                app:queryHint="Search a Map/Author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
             <ImageView
                 android:clickable="true"
                 android:visibility="gone"
