@@ -1,11 +1,18 @@
 package com.example.mobiledevproject.profile.Fragments;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -25,7 +32,12 @@ import com.example.mobiledevproject.Models.PlayerProfile.PlayerPlayerInfo;
 import com.example.mobiledevproject.Models.PlayerProfile.PlayerScoreStats;
 import com.google.android.material.navigation.NavigationView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.DecimalFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +55,9 @@ public class profile_User_Profile extends Fragment {
     private CardView cardShare;
     private SwipeRefreshLayout pullToRefresh;
 
+    String playerName, Date;
+
+
     //header
     TextView headerName, headerRank;
     ImageView headerImage;
@@ -57,7 +72,7 @@ public class profile_User_Profile extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_profile_user_profile, container, false);
+        final View view = inflater.inflate(R.layout.fragment_profile_user_profile, container, false);
 
         findViews(view);
 
@@ -66,7 +81,10 @@ public class profile_User_Profile extends Fragment {
         cardShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Still working on!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Still working on!", Toast.LENGTH_SHORT).show();
+                Bitmap bitmap = getBitmapFromView(view);
+                Uri uri = saveImage(bitmap);
+                shareImageUri(uri);
             }
         });
 
@@ -127,7 +145,7 @@ public class profile_User_Profile extends Fragment {
                 PlayerPlayerInfo playerPlayerInfo = player_response.getPlayer_info();
 
                 setText(playerPlayerInfo, playerScoreStats);
-
+                playerName = playerPlayerInfo.getPlayer_Name();
 
                 Log.d(TAG, "onResponse: Flag: " + "https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png");
                 getHistory(playerPlayerInfo);
@@ -203,5 +221,55 @@ public class profile_User_Profile extends Fragment {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.greyText));
         }
         Log.d(TAG, "onResponse: Done");
+    }
+
+    public static Bitmap getBitmapFromView(View view) {
+        //Define a bitmap with the same size as the view
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        //Bind a canvas to it
+        Canvas canvas = new Canvas(returnedBitmap);
+        //Get the view's background
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null)
+            //has background drawable, then draw it on the canvas
+            bgDrawable.draw(canvas);
+        else
+            //does not have background drawable, then draw white background on the canvas
+            canvas.drawColor(Color.WHITE);
+        // draw the view on the canvas
+        view.draw(canvas);
+        //return the bitmap
+        return returnedBitmap;
+    }
+
+    private Uri saveImage(Bitmap image) {
+        //TODO - Should be processed in another thread
+        File imagesFolder = new File(getActivity().getCacheDir(), "images");
+        ZonedDateTime dateTime = ZonedDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy_HH:mm:ss");
+
+        Uri uri = null;
+        try {
+            imagesFolder.mkdirs();
+            File file = new File(imagesFolder, playerName + "_profile_" + dateTime.format(formatter) + ".png");
+
+            FileOutputStream stream = new FileOutputStream(file);
+            image.compress(Bitmap.CompressFormat.PNG, 90, stream);
+            stream.flush();
+            stream.close();
+            uri = FileProvider.getUriForFile(getContext(), "com.example.mobiledevproject.fileprovider", file);
+
+        } catch (IOException e) {
+            Log.d(TAG, "IOException while trying to write file for sharing: " + e.getMessage());
+        }
+        return uri;
+    }
+
+    private void shareImageUri(Uri uri) {
+        Intent intent = new Intent(android.content.Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_STREAM, uri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        intent.setType("image/png");
+        startActivity(intent);
     }
 }

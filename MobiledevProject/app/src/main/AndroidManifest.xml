@@ -10,22 +10,31 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.mobiledevproject.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_path" />
+        </provider>
+
         <activity
             android:name=".WebViewMap"
             android:screenOrientation="sensorLandscape"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen" />
         <activity android:name=".ProfileNotOwner" />
         <activity
             android:name=".Beatsaver.BeatsaverMapInfo"
-                android:screenOrientation="sensorPortrait" />
+            android:screenOrientation="sensorPortrait" />
         <activity
             android:name=".MainActivity"
             android:screenOrientation="sensorPortrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

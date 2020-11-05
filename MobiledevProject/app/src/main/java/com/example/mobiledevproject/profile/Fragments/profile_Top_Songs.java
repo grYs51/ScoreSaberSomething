@@ -126,7 +126,7 @@ public class profile_Top_Songs extends Fragment {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
-                pullToRefresh.setRefreshing(false);
+//                pullToRefresh.setRefreshing(false);
                 Scores scoresaberMaps = response.body();
                 if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresaberMaps);
