@@ -180,18 +180,21 @@
 
                     </LinearLayout>
 
-                    <com.google.android.material.tabs.TabLayout
+            <com.google.android.material.tabs.TabLayout
+                android:layout_marginTop="13dp"
+                app:tabIndicator="@color/darkPurple"
+                app:tabBackground="@drawable/tablayout_selector"
 
-                        android:id="@+id/tabLayoutModes"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="?attr/actionBarSize"
-                        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                android:id="@+id/tabLayoutModes"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/infoModePager"
-                        android:layout_width="match_parent"
-                        android:layout_height="250dp"/>
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/infoModePager"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"/>
 
         </LinearLayout>
 
