@@ -6,10 +6,18 @@
     tools:context=".profile.Fragments.profile_Recent_songs"
     android:background="#ffffff">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view_profile_recentScore"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeRefreshRecent"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_profile_recentScore"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            tools:listitem="@layout/item_map_scoresaber"/>
+
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 </FrameLayout>

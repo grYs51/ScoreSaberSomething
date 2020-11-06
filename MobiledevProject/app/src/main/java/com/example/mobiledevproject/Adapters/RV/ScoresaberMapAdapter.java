@@ -87,13 +87,14 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
 
         holder.songName.setText(scoresaberMap.getSongName());
         holder.songAuthor.setText(scoresaberMap.getSongAuthorName());
-        holder.rank.setText("" + scoresaberMap.getRank());
-        holder.pp.setText("" + scoresaberMap.getPp() + "pp ");
-        holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + "pp)");
+        holder.rank.setText("#" + scoresaberMap.getRank());
+        holder.pp.setText("" + scoresaberMap.getPp() + " ");
+        holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + ")");
         holder.position.setText(position + 1 + "");
 
         holder.songdiff.setImageResource(diffColor.getDiffColor());
 
+        // TODO: Update placeholder
         Glide.with(context)
                 .load("https://scoresaber.com/imports/images/songs/" + scoresaberMap.getSongHash() + ".png")
                 .placeholder(R.drawable.profile) //has to change

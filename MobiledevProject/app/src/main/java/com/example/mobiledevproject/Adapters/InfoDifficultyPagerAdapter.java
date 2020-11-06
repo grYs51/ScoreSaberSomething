@@ -8,64 +8,85 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.DifficultyInfoPar;
+import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.ViewPager.DifficultyInfoPar;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Difficulties;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.DifficultiesSpecs;
+import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
 import com.example.mobiledevproject.R;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import kotlin.collections.ArrayDeque;
 
 public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
 
     private static final String TAG = "DifficultyAdapter";
-    private List<String> difficulties;
-    List<Characteristics> characteristics;
+    DifficultiesSpecs difficultiesSpecs;
     int duration;
+    List<String> strings = new ArrayList<String>();
+    String key;
 
-    public InfoDifficultyPagerAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> strings, int duration) {
+    public InfoDifficultyPagerAdapter(@NonNull FragmentManager fm, DifficultiesSpecs difficultiesSpecs, int duration, String key) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        this.characteristics = characteristics;
-        this.difficulties = strings;
+        this.difficultiesSpecs = difficultiesSpecs;
         this.duration = duration;
+        this.key = key;
+
+        if (this.difficultiesSpecs.getEasy() != null) {
+            strings.add("Easy");
+        }
+        if (this.difficultiesSpecs.getNormal() != null) {
+            strings.add("Normal");
+        }
+        if (this.difficultiesSpecs.getHard() != null) {
+            strings.add("Hard");
+        }
+        if (this.difficultiesSpecs.getExpert() != null) {
+            strings.add("Expert");
+        }
+        if (this.difficultiesSpecs.getExpertPlus() != null) {
+            strings.add("Expert+");
+        }
+
     }
+
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.d(TAG, "getItem: position: " + position);
+        Log.d(TAG, "getItem: difficultie; position: " + position);
+        Log.d(TAG, "getItem: difficultie: " + strings.get(position));
 
-        for (Characteristics characteristicsItem : characteristics) {
-
-            if (characteristicsItem.getName().toLowerCase().equals("standard")) {
-                switch (difficulties.get(position)) {
-                    case "Easy":
-                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getEasy(), R.color.easy, duration, difficulties.get(position));
-                    case "Normal":
-                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getNormal(), R.color.mediums, duration, difficulties.get(position));
-                    case "Hard":
-                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getHard(), R.color.hard, duration, difficulties.get(position));
-                    case "Expert":
-                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getExpert(), R.color.expert, duration, difficulties.get(position));
-                    case "ExpertPlus":
-                        return new DifficultyInfoPar(characteristicsItem.getDifficulties().getExpertPlus(), R.color.expertPlus, duration, difficulties.get(position));
-                }
-            }
-
+        switch (strings.get(position)) {
+            case "Easy":
+                return new DifficultyInfoPar(difficultiesSpecs.getEasy(), duration, key);
+            case "Normal":
+                return new DifficultyInfoPar(difficultiesSpecs.getNormal(), duration, key);
+            case "Hard":
+                return new DifficultyInfoPar(difficultiesSpecs.getHard(), duration, key);
+            case "Expert":
+                return new DifficultyInfoPar(difficultiesSpecs.getExpert(), duration, key);
+            case "Expert+":
+                return new DifficultyInfoPar(difficultiesSpecs.getExpertPlus(), duration, key);
+            default:
+                return new DifficultyInfoPar(null, duration, key);
         }
-        return null;
+
     }
 
 
     @Override
     public int getCount() {
-        return difficulties.size();
+        return strings.size();
     }
 
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
-        Log.d(TAG, "getPageTitle: " + difficulties.get(position));
-        return difficulties.get(position);
+        Log.d(TAG, "getPageTitle: " + difficultiesSpecs);
+        return strings.get(position);
     }
 }

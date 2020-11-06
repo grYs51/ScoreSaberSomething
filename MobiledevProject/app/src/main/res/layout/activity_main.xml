@@ -22,6 +22,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
+                android:background="?android:selectableItemBackground"
                 android:id="@+id/imageMenu"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
@@ -31,14 +32,33 @@
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginEnd="30dp"
                 android:text="@string/app_name"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:layout_marginLeft="15dp" />
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:visibility="gone"
+                app:queryHint="Search a Map/Author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:clickable="true"
+                android:visibility="gone"
+                android:id="@+id/addPerson"
+                android:background="?android:selectableItemBackground"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                app:tint="@color/white"
+                android:layout_alignParentEnd="true"/>
 
         </LinearLayout>
 

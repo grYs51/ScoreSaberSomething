@@ -32,9 +32,7 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new InfoMapFragment(beatsaverMap);
             case 1:
-                return new DescriptionMapFragment();
-//            case 2:
-//                return new DescriptionMapFragment();
+                return new DescriptionMapFragment(beatsaverMap);
             default:
                 return null;
         }

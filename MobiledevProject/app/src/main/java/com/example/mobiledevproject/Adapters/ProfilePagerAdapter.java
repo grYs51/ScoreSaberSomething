@@ -15,10 +15,12 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
 
     private String tabTitles[] = new String[]{"Profile", "Top Songs", "Recent Songs"};
     String input;
+    Boolean isOwner;
 
-    public ProfilePagerAdapter(@NonNull FragmentManager fm, String input) {
+    public ProfilePagerAdapter(@NonNull FragmentManager fm, String input, boolean isOwner) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         this.input = input;
+        this.isOwner = isOwner;
     }
 
     @NonNull
@@ -26,7 +28,7 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new profile_User_Profile(input);
+                return new profile_User_Profile(input, isOwner);
             case 1:
                 return new profile_Top_Songs(input);
             case 2:

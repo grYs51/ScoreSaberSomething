@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobiledevproject.Adapters.ProfilePagerAdapter;
+import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -27,22 +28,40 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     PagerAdapter pagerAdapter;
     TabLayout tabLayout;
     String input;
+    Player playerimported;
+    Boolean isOwner = true;
+
+    public ProfileFragment(){
+
+    }
+
+    public ProfileFragment(Player player){
+        this.playerimported = player;
+        this.isOwner = false;
+
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         input = sharedPref.getString("playerId", null);
 
-        if (input == null) {
-            Log.d(TAG, "onClick: Opening Dialog");
-            DialogScoresaberFragment dialog = new DialogScoresaberFragment();
-            dialog.setTargetFragment(ProfileFragment.this, 1);
-            dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+        if (playerimported == null){
+            if (input == null) {
+                Log.d(TAG, "onClick: Opening Dialog");
+                DialogScoresaberFragment dialog = new DialogScoresaberFragment();
+                dialog.setTargetFragment(ProfileFragment.this, 1);
+                dialog.show(getParentFragmentManager(), "DialogScoresaberFragment");
+            } else {
+                createPager(input);
+            }
         } else {
-            createPager();
+            createPager(playerimported.getPlayer_info().getPlayer_Id());
         }
+
 
     }
 
@@ -55,13 +74,13 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         editor.putString("playerId", input);
         editor.apply();
 
-        createPager();
+        createPager(input);
 
 
     }
 
-    private void createPager() {
-        PagerAdapter pA = new ProfilePagerAdapter(getChildFragmentManager(), this.input);
+    private void createPager(String input) {
+        PagerAdapter pA = new ProfilePagerAdapter(getChildFragmentManager(), input, isOwner);
         viewPager.setOffscreenPageLimit(2);
         viewPager.setAdapter(pA);
         tabLayout.setupWithViewPager(viewPager);

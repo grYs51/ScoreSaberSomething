@@ -5,10 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
@@ -19,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.mobiledevproject.Adapters.InfoDifficultyPagerAdapter;
+import com.example.mobiledevproject.Adapters.InfoModesAdapter;
 import com.example.mobiledevproject.Adapters.RV.InfoMapAdapter;
-import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.R;
@@ -39,25 +35,14 @@ import static android.content.ContentValues.TAG;
 
 public class InfoMapFragment extends Fragment {
 
-    ImageView songImage;
+//    ImageView songImage;
     TextView title, mapper, songAuthor;
-    TextView songDuration, songBpm, songDownloads, songRating;
+    TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
-    RecyclerView RV;
-    InfoMapAdapter IA;
+
     private BeatsaverMap beatsaverMap;
-
-    private List<String> difficulties = new ArrayList<>();
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-
+    
     public InfoMapFragment(BeatsaverMap beatsaverMap) {
         this.beatsaverMap = beatsaverMap;
         p = new PrettyTime();
@@ -73,23 +58,17 @@ public class InfoMapFragment extends Fragment {
         findViews(view);
         setTekst(dt);
 
-        //fill adapter
-        Filldifficulties();
-        ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), difficulties, beatsaverMap.getMetaData().getDuration());
-        viewPager.setAdapter(pA);
-
-        TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);
-        tabLayout.setupWithViewPager(viewPager);
-
-        List<String> strings = new ArrayList();
+        List<String> myList = new ArrayList<String>();
         for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
-            strings.add(characteristics.getName());
+            myList.add(characteristics.getName());
         }
-        IA = new InfoMapAdapter(strings);
-        RV = view.findViewById(R.id.RVInfoMap);
-        RV.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RV.setAdapter(IA);
+
+        ViewPager viewPager = view.findViewById(R.id.infoModePager);
+        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration(), beatsaverMap.getKey());
+        viewPager.setAdapter(infoModesAdapter);
+
+        TabLayout tabLayout = view.findViewById(R.id.tabLayoutModes);
+        tabLayout.setupWithViewPager(viewPager);
 
         return view;
     }
@@ -100,13 +79,13 @@ public class InfoMapFragment extends Fragment {
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
         songAuthor = view.findViewById(R.id.infosongAuthorName);
-        songImage = view.findViewById(R.id.infoImage);
 
         //stats
         songDuration = view.findViewById(R.id.infoSongDuration);
         songBpm = view.findViewById(R.id.infoSongBpm);
         songDownloads = view.findViewById(R.id.infoSongDownloads);
-        songRating = view.findViewById(R.id.infoSongRating);
+        songRatingUp = view.findViewById(R.id.infoSongRatingUp);
+        songRatingDown = view.findViewById(R.id.infoSongRatingDown);
     }
 
     private void setTekst(String dt) {
@@ -124,13 +103,16 @@ public class InfoMapFragment extends Fragment {
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
         songBpm.setText(beatsaverMap.getMetaData().getBpm() + "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
-        songRating.setText(beatsaverMap.getStats().getUpVotes() + " up ( " + beatsaverMap.getStats().getDownVotes() + " down )");
+        songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
+        songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");
 
-        Glide.with(getContext())
-                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
-                .into(songImage);
+
+//TODO: change placeholder
+//        Glide.with(getContext())
+//                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
+//                .placeholder(R.drawable.about)
+//                .error(R.drawable.leaderbord)
+//                .into(songImage);
     }
 
     private String getDurationString(int seconds) {
@@ -154,24 +136,4 @@ public class InfoMapFragment extends Fragment {
         return String.valueOf(number);
     }
 
-    private void Filldifficulties() {
-        int count = 0;
-
-        if (beatsaverMap.getMetaData().getDifficulties().isEasy()) {
-            difficulties.add("Easy");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isNormal()) {
-            difficulties.add("Normal");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isHard()) {
-            difficulties.add("Hard");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isExpert()) {
-            difficulties.add("Expert");
-        }
-        if (beatsaverMap.getMetaData().getDifficulties().isExpertPlus()) {
-            difficulties.add("ExpertPlus");
-        }
-        Log.d(TAG, "Filldifficulties: " + difficulties.size());
-    }
 }

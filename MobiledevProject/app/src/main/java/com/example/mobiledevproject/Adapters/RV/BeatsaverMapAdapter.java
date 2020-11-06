@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.Shared.GetSpecificStringLength;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -30,9 +31,10 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private static DecimalFormat df2 = new DecimalFormat("#");
     public MapsBeatsaver mapsBeatsaver;
     private Context context;
-    PrettyTime p;
+    PrettyTime p = new PrettyTime();
     Instant i;
     private RVClickListener rvClickListener;
+    private GetSpecificStringLength getSpecificStringLength = new GetSpecificStringLength();
 
     public void setData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver = mapsBeatsaver;
@@ -52,8 +54,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     @Override
     public BeatsaverMapAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         context = parent.getContext();
-        p = new PrettyTime();
-
         return new BeatsaverMapAdapter.ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_map_beatsaver, parent, false));
     }
 
@@ -62,7 +62,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
         int rating = Integer.parseInt(df2.format(map.getStats().getRating() * 100));
 
-        Logs(position, map);
         setItem(holder, map, rating);
 
     }
@@ -74,20 +73,19 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         parseTimeUploaded(holder, map, dt);
 
-        holder.mapTitle.setText(map.getName());
-        holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
+        holder.mapTitle.setText(getSpecificStringLength.getShorterString(map.getName(), 50));
 
+        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetaData().getSongAuthorName(),35));
 
         setDifficultyImages(holder, map);
 
         setRating(holder, map, rating);
-
+    // TODO: Update placeholder
         Glide.with(context)
                 .load("https://beatsaver.com" + map.getCoverURL())
                 .placeholder(R.drawable.about)
                 .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
-
     }
 
 
@@ -117,14 +115,13 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
             itemView.setOnClickListener(this);
 
             mapImage = itemView.findViewById(R.id.item_Map_image);
+
             mapDiffColor = itemView.findViewById(R.id.item_mapDiffColor);
             colorDiffEasy = itemView.findViewById(R.id.colorDiffEasy);
             colorDiffNormal = itemView.findViewById(R.id.colorDiffNormal);
             colorDiffHard = itemView.findViewById(R.id.colorDiffHard);
-            ;
             colorDiffExpert = itemView.findViewById(R.id.colorDiffExpert);
             colorDiffExpertPlus = itemView.findViewById(R.id.colorDiffExpertPlus);
-
             mapTitle = itemView.findViewById(R.id.item_songName);
             mapAuthorName = itemView.findViewById(R.id.item_songAuthorName);
             levelAuthorName = itemView.findViewById(R.id.item_levelAuthorName);
@@ -155,12 +152,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
         }
     }
 
-    private void Logs(int position, BeatsaverMap map) {
-        Log.d(TAG, "onBindViewHolder: position: " + position);
-        Log.d(TAG, "onBindViewHolder: Name: " + map.getName());
-        Log.d(TAG, "onBindViewHolder: diff: " + map.getMetaData().getDifficulties().isEasy() + " | " + map.getMetaData().getDifficulties().isNormal() + " | " + map.getMetaData().getDifficulties().isHard() + " | " + map.getMetaData().getDifficulties().isExpert() + " | " + map.getMetaData().getDifficulties().isExpertPlus());
-        Log.d(TAG, "onBindViewHolder: ");
-    }
 
     private void setRating(@NonNull ViewHolder holder, BeatsaverMap map, int rating) {
         if (map.getStats().getUpVotes() + map.getStats().getDownVotes() == 0) {

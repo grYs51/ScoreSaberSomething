@@ -7,6 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +24,6 @@ import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
-
 import java.io.Serializable;
 
 import retrofit2.Call;
@@ -38,7 +40,9 @@ public class Beatsaver_RV extends Fragment implements Serializable {
     private BeatsaverMapAdapter.RVClickListener listener;
     Call<MapsBeatsaver> mapList;
     Context context;
-
+    ImageView imageView;
+    SearchView searchView;
+    ProgressBar progressBar;
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
@@ -47,12 +51,13 @@ public class Beatsaver_RV extends Fragment implements Serializable {
 
     private String sorting = "hot";
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         beatsaverMapAdapter = new BeatsaverMapAdapter();
         context = getContext();
+
+//        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -62,11 +67,54 @@ public class Beatsaver_RV extends Fragment implements Serializable {
 
         recyclerView(view);
 
+        getProgressBar(view);
+
         getMaps(sorting, page_number);
+
+        showAddButton();
+
+        Log.d(TAG, "onCreateView: added search");
+        searchView =  getActivity().findViewById(R.id.searchView);
+        searchView.setVisibility(View.VISIBLE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "onQueryTextSubmit: Submit: " + query);
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                Log.d(TAG, "onQueryTextSubmit: Change: " + newText);
+
+                return false;
+            }
+        });
 
         addScrollListener();
 
+        setHasOptionsMenu(true);
+
         return view;
+    }
+
+    private void getProgressBar(View view) {
+        progressBar = view.findViewById(R.id.progress_loader);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+
+    private void showAddButton() {
+        imageView = getActivity().findViewById(R.id.addPerson);
+        imageView.setImageResource(R.drawable.ic_filter_list_24);
+        imageView.setVisibility(View.VISIBLE);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void addScrollListener() {
@@ -109,6 +157,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
                 }
+                progressBar.setVisibility(View.GONE);
                 MapsBeatsaver mapsExtra = response.body();
                 if (beatsaverMapAdapter.getItemCount() == 0) {
                     Log.d(TAG, "onResponse: setData" + mapsExtra.getBeatsaverMaps().toString());
@@ -123,6 +172,8 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             @Override
             public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
+                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
+                getMaps(sorting, page);
             }
         });
     }
@@ -143,7 +194,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             public void onClick(BeatsaverMap beatsaverMap) {
                 Log.d(TAG, "onClick: setonclicklistenet: " + beatsaverMap.toString());
 
-                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
                 intent.putExtra("ree", beatsaverMap);

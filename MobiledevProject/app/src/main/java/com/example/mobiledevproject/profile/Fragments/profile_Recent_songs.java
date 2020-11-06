@@ -13,7 +13,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.example.mobiledevproject.Adapters.RV.ScoresaberMapAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
@@ -42,9 +41,7 @@ public class profile_Recent_songs extends Fragment {
     private int view_threshold = 8;
 
     public profile_Recent_songs(String input) {
-
         this.playerId = input;
-
     }
 
     @Override
@@ -60,6 +57,8 @@ public class profile_Recent_songs extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile_recent_songs, container, false);
 
         recyclerView(view);
+
+        //TODO: get pull to refresh working in rv
 
         getRecentSongs(playerId, page_number);
 
@@ -116,14 +115,15 @@ public class profile_Recent_songs extends Fragment {
                 // progressbar gone
 
                 Scores scoresabermaps = response.body();
+
                 if (scoresaberMapAdapter.getItemCount() == 0) {
                     scoresaberMapAdapter.setData(scoresabermaps);
-//                    Toast.makeText(getActivity(), "First page is loaded", Toast.LENGTH_LONG);
                     Log.d(TAG, "onResponse: First page is loaded");
+
                 } else {
                     scoresaberMapAdapter.addData(scoresabermaps);
-//                    Toast.makeText(getContext(), "page "+ page + " loaded", Toast.LENGTH_LONG);
                     Log.d(TAG, "onResponse: page: " + page + " loaded");
+
                 }
 
                 scoresaberMapAdapter.notifyDataSetChanged();
