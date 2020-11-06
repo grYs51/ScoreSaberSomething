@@ -40,10 +40,12 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.github.siyamed.shapeimageview.RoundedImageView
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:layout_marginTop="-70dp"
         android:id="@+id/infoImage"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:src="@color/darkPurple" />
 
     <androidx.cardview.widget.CardView

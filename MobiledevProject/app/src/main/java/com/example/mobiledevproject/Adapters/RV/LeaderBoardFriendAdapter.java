@@ -55,7 +55,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     public int getPosition() {
         return position;
     }
-
     public void setPosition(int position) {
         this.position = position;
     }
@@ -74,8 +73,8 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
         }
 
-
     }
+
     public void addData(FriendsSharedPref friendsSharedPref, Player lPlayer) {
         Testing fullPlayer = new Testing();
         fullPlayer.setFriendsSharedPref(friendsSharedPref);
