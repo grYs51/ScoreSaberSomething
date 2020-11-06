@@ -26,6 +26,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.mobiledevproject.Adapters.InfoPagerAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.Shared.GetSpecificStringLength;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
@@ -37,7 +38,7 @@ public class BeatsaverMapInfo extends AppCompatActivity {
     BeatsaverMap beatsaverMap;
     ImageButton returnButton;
     ImageView songImage;
-
+    GetSpecificStringLength getSpecificStringLength = new GetSpecificStringLength();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +50,7 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetaData().getSongName());
 
         songName = findViewById(R.id.InfoTitle);
-        songName.setText(beatsaverMap.getMetaData().getSongName());
+        songName.setText(getSpecificStringLength.getShorterString( beatsaverMap.getMetaData().getSongName(), 50));
 
 
         //return

@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.Shared.GetSpecificStringLength;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
@@ -33,6 +34,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     PrettyTime p = new PrettyTime();
     Instant i;
     private RVClickListener rvClickListener;
+    private GetSpecificStringLength getSpecificStringLength = new GetSpecificStringLength();
 
     public void setData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver = mapsBeatsaver;
@@ -71,26 +73,9 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         parseTimeUploaded(holder, map, dt);
 
-        if(map.getName().length() >= 50){
-            String s;
-            s = map.getName().substring(0, Math.min(map.getName().length(), 55));
+        holder.mapTitle.setText(getSpecificStringLength.getShorterString(map.getName(), 50));
 
-            holder.mapTitle.setText(s+ "...");
-
-        } else {
-            holder.mapTitle.setText(map.getName());
-        }
-
-        Log.d(TAG, "setItem: length: " + map.getMetaData().getSongAuthorName());
-        Log.d(TAG, "setItem: length: " + map.getMetaData().getSongAuthorName().length());
-
-        if(map.getMetaData().getSongAuthorName().length() >= 35){
-            String s;
-            s = map.getMetaData().getSongAuthorName().substring(0, Math.min(+ map.getMetaData().getSongAuthorName().length(), 35));
-            holder.mapAuthorName.setText(s+ "...");
-        } else{
-            holder.mapAuthorName.setText(map.getMetaData().getSongAuthorName());
-        }
+        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetaData().getSongAuthorName(),35));
 
         setDifficultyImages(holder, map);
 

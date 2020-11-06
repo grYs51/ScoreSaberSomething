@@ -2,12 +2,10 @@ package com.example.mobiledevproject;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
+
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.profile.ProfileFragment;
 import com.google.gson.Gson;
