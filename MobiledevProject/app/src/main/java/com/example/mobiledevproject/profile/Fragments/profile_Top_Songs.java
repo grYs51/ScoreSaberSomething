@@ -38,7 +38,7 @@ public class profile_Top_Songs extends Fragment {
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
-    private SwipeRefreshLayout pullToRefresh;
+//    private SwipeRefreshLayout pullToRefresh;
 
     public profile_Top_Songs(String input) {
 

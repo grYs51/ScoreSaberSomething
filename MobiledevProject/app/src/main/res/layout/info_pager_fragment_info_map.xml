@@ -125,7 +125,7 @@
                                 android:layout_gravity="center"
                                 android:layout_height="35dp"
                                 android:tint="@color/black"
-                                android:src="@drawable/ic_download"/>
+                                android:src="@drawable/downloadicon"/>
                             <TextView
                                 android:maxLines="1"
                                 android:id="@+id/infoSongDownloads"

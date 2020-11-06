@@ -20,16 +20,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
@@ -98,9 +88,10 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginHorizontal="30dp"
-                            android:layout_marginVertical="20dp"
+                            android:layout_weight="1"
+                            android:gravity="bottom"
                             android:orientation="horizontal"
                             tools:layout_editor_absoluteX="30dp">
 
@@ -109,7 +100,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="30dp"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
 
                                 <TextView
@@ -128,6 +118,7 @@
                                     android:text="Rank"
                                     android:textAlignment="center"
                                     android:textAllCaps="true" />
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -156,15 +147,17 @@
 
                                     android:textAlignment="center"
                                     android:textAllCaps="true" />
+
                             </LinearLayout>
 
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginHorizontal="30dp"
-                            android:layout_marginVertical="20dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
                             android:orientation="horizontal"
                             tools:layout_editor_absoluteX="30dp">
 
@@ -173,7 +166,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="30dp"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
 
                                 <TextView
@@ -183,7 +175,6 @@
                                     android:textAlignment="center"
                                     android:textStyle="bold"
                                     android:textSize="16sp"
-
                                     android:textColor="@color/black" />
 
                                 <TextView
@@ -191,9 +182,9 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="-4dp"
                                     android:text="PP"
-
                                     android:textAlignment="center"
                                     android:textAllCaps="true" />
+
                             </LinearLayout>
 
                             <LinearLayout
@@ -201,7 +192,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="30dp"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
 
                                 <TextView
@@ -218,27 +208,25 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="-4dp"
-
                                     android:text="Weekly change"
                                     android:textAlignment="center"
                                     android:textAllCaps="true" />
                             </LinearLayout>
 
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="0dp"
                             android:layout_marginHorizontal="30dp"
-                            android:layout_marginVertical="20dp"
-                            android:orientation="horizontal"
-                            tools:layout_editor_absoluteX="30dp">
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
 
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="30dp"
                                 android:layout_weight="1"
-
                                 android:orientation="vertical">
 
                                 <TextView
@@ -248,7 +236,6 @@
                                     android:textAlignment="center"
                                     android:textStyle="bold"
                                     android:textSize="16sp"
-
                                     android:textColor="@color/black" />
 
                                 <TextView
@@ -267,7 +254,6 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/shareButton"
                         android:clickable="true"
-
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:cardCornerRadius="5dp"
@@ -286,13 +272,11 @@
                             android:text="Share"
                             android:textSize="16.5sp"
                             android:textColor="@color/white"
-                            android:textStyle="bold"
-                            />
+                            android:textStyle="bold"/>
+
                     </androidx.cardview.widget.CardView>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

@@ -6,10 +6,10 @@
     tools:context=".profile.Fragments.profile_Top_Songs"
     android:background="#ffffff">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshTop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeRefreshTop"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_profile_topscore"
@@ -18,9 +18,6 @@
             android:scrollbars="vertical"
             tools:listitem="@layout/item_map_scoresaber"/>
 
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
-
-
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 </FrameLayout>

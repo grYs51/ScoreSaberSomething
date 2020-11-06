@@ -41,9 +41,7 @@ public class profile_Recent_songs extends Fragment {
     private int view_threshold = 8;
 
     public profile_Recent_songs(String input) {
-
         this.playerId = input;
-
     }
 
     @Override
