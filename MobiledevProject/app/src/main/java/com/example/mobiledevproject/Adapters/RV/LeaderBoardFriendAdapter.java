@@ -88,15 +88,22 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     }
 
     public void sortList(){
-        for ( Testing test : testings){
-            Log.d(TAG, "sortList: noSorted: "+ test.getlPlayer().getPlayer_info().getPlayer_Name());
-        }
+
         Collections.sort(testings, new Comparator<Testing>() {
             @Override
             public int compare(Testing o1, Testing o2) {
                 return o1.getlPlayer().getPlayer_info().getRank().compareTo(o2.getlPlayer().getPlayer_info().getRank());
             }
         });
+
+
+        SaveFriendList();
+
+        notifyDataSetChanged();
+
+    }
+
+    private void SaveFriendList() {
         FriendList friendList = new FriendList();
         for( Testing pl: testings)
         {
@@ -109,10 +116,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
             }
         }
         Log.d(TAG, "sortList:");
-        for ( Testing test : testings){
-            Log.d(TAG, "sortList: Sorted: "+ test.getlPlayer().getPlayer_info().getPlayer_Name());
-        }
-            //TODO: save list in the right order
         Gson gson = new Gson();
         String json = gson.toJson(friendList);
         Log.d(TAG, "onResponse: json: " + json);
@@ -120,9 +123,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("playerFriends", json);
         editor.apply();
-
-        notifyDataSetChanged();
-
     }
 
 
@@ -144,6 +144,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
                 return false;
             }
         });
+        //TODO: change placeholder
         Glide.with(context)
                 .load("https://new.scoresaber.com" + testings.get(position).getFriendsSharedPref().getAvatar())
                 .placeholder(R.drawable.about)
@@ -156,7 +157,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
             Call<Player> playerCall = ApiClient.getPlayerService().getUserInfo(testings.get(position).getFriendsSharedPref().getId());
             playerCall.enqueue(new Callback<Player>() {
-                LPlayer playerObject = new LPlayer();
+
 
                 @Override
                 public void onResponse(Call<Player> call, Response<Player> response) {

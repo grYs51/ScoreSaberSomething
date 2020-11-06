@@ -75,7 +75,6 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
                 return new DifficultyInfoPar(null, duration, key);
         }
 
-
     }
 
 
