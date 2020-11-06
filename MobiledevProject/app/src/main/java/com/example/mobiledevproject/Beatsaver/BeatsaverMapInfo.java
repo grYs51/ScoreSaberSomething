@@ -36,11 +36,14 @@ public class BeatsaverMapInfo extends AppCompatActivity {
     private static final String TAG = "MapInfoActivity";
     BeatsaverMap beatsaverMap;
     ImageButton returnButton;
+    ImageView songImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_beatsaver_map_info);
+
+        transparentStatusAndNavigation();
 
         beatsaverMap = (BeatsaverMap) getIntent().getSerializableExtra("ree");
         Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetaData().getSongName());
@@ -58,6 +61,12 @@ public class BeatsaverMapInfo extends AppCompatActivity {
             }
         });
 
+        songImage = findViewById(R.id.infoImage);
+                Glide.with(getApplicationContext())
+                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
+                .placeholder(R.drawable.about)
+                .error(R.drawable.leaderbord)
+                .into(songImage);
 
         //setviewpager
         ViewPager viewPager = findViewById(R.id.infoPager);
@@ -76,5 +85,34 @@ public class BeatsaverMapInfo extends AppCompatActivity {
     public View onCreateView(@Nullable View parent, @NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
 
         return super.onCreateView(parent, name, context, attrs);
+    }
+
+
+    private void transparentStatusAndNavigation() {
+        //make full transparent statusBar
+        if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT < 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, true);
+        }
+        if (Build.VERSION.SDK_INT >= 19) {
+            getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            );
+        }
+        if (Build.VERSION.SDK_INT >= 21) {
+            setWindowFlag(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    private void setWindowFlag(final int bits, boolean on) {
+        Window win = getWindow();
+        WindowManager.LayoutParams winParams = win.getAttributes();
+        if (on) {
+            winParams.flags |= bits;
+        } else {
+            winParams.flags &= ~bits;
+        }
+        win.setAttributes(winParams);
     }
 }

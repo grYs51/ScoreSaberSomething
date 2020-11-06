@@ -35,9 +35,9 @@ import static android.content.ContentValues.TAG;
 
 public class InfoMapFragment extends Fragment {
 
-    ImageView songImage;
+//    ImageView songImage;
     TextView title, mapper, songAuthor;
-    TextView songDuration, songBpm, songDownloads, songRating;
+    TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
 
@@ -79,13 +79,13 @@ public class InfoMapFragment extends Fragment {
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
         songAuthor = view.findViewById(R.id.infosongAuthorName);
-        songImage = view.findViewById(R.id.infoImage);
 
         //stats
         songDuration = view.findViewById(R.id.infoSongDuration);
         songBpm = view.findViewById(R.id.infoSongBpm);
         songDownloads = view.findViewById(R.id.infoSongDownloads);
-        songRating = view.findViewById(R.id.infoSongRating);
+        songRatingUp = view.findViewById(R.id.infoSongRatingUp);
+        songRatingDown = view.findViewById(R.id.infoSongRatingDown);
     }
 
     private void setTekst(String dt) {
@@ -103,15 +103,16 @@ public class InfoMapFragment extends Fragment {
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
         songBpm.setText(beatsaverMap.getMetaData().getBpm() + "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
-        songRating.setText(beatsaverMap.getStats().getUpVotes() + " up ( " + beatsaverMap.getStats().getDownVotes() + " down )");
+        songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
+        songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");
 
 
 //TODO: change placeholder
-        Glide.with(getContext())
-                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
-                .into(songImage);
+//        Glide.with(getContext())
+//                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
+//                .placeholder(R.drawable.about)
+//                .error(R.drawable.leaderbord)
+//                .into(songImage);
     }
 
     private String getDurationString(int seconds) {
