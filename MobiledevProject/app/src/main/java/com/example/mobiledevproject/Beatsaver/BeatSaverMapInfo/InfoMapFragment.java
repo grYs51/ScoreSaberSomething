@@ -5,19 +5,15 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.example.mobiledevproject.Adapters.InfoModesAdapter;
-import com.example.mobiledevproject.Adapters.RV.InfoMapAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
 import com.example.mobiledevproject.R;
@@ -25,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -35,14 +32,14 @@ import static android.content.ContentValues.TAG;
 
 public class InfoMapFragment extends Fragment {
 
-//    ImageView songImage;
+    private static DecimalFormat df2 = new DecimalFormat("#.##");
     TextView title, mapper, songAuthor;
     TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
 
     private BeatsaverMap beatsaverMap;
-    
+
     public InfoMapFragment(BeatsaverMap beatsaverMap) {
         this.beatsaverMap = beatsaverMap;
         p = new PrettyTime();
@@ -75,6 +72,7 @@ public class InfoMapFragment extends Fragment {
 
 
     private void findViews(View view) {
+
         //info
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
@@ -93,15 +91,18 @@ public class InfoMapFragment extends Fragment {
             i = Instant.parse(dt);
             Log.d(TAG, "onCreateView: " + p.format(Date.from(i)));
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
+
         } catch (DateTimeParseException dtpe) {
+
             Log.d(TAG, "catch: " + dtpe);
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName());
+
         }
         //settekst
         songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());
         title.setText(beatsaverMap.getName());
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
-        songBpm.setText(beatsaverMap.getMetaData().getBpm() + "");
+        songBpm.setText( df2.format(beatsaverMap.getMetaData().getBpm() ) + "" );
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
         songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");

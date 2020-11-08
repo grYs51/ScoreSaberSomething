@@ -60,35 +60,42 @@ public class DifficultyInfoPar extends Fragment {
         playbutton = view.findViewById(R.id.mapButton);
 
         if (specificDiffSpec != null) {
-            if(specificDiffSpec.getNotes() != 0){
+
+            if (specificDiffSpec.getNotes() != 0) {
+
                 if (duration != 0) {
+
                     notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
-                } else {
 
                 }
+
                 bombs.setText(specificDiffSpec.getBombs() + "");
-                njs.setText(specificDiffSpec.getNjs() + "");
+                njs.setText(df2.format(specificDiffSpec.getNjs()) + "");
+
             } else {
+
                 hasNotes.setVisibility(View.GONE);
                 noNotes.setVisibility(View.VISIBLE);
                 playbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://skystudioapps.com/bs-viewer/?id="+key)));
-                        String url = "https://skystudioapps.com/bs-viewer/?id="+key;
+
+                        String url = "https://skystudioapps.com/bs-viewer/?id=" + key;
                         Log.d(TAG, "onClick: " + url);
                         Intent intent = new Intent(getContext(), WebViewMap.class);
                         intent.putExtra("page", url);
                         startActivity(intent);
+
                     }
                 });
+
             }
 
-
         } else {
-            hasNotes.setVisibility(View.GONE);
-        }
 
+            hasNotes.setVisibility(View.GONE);
+
+        }
 
         return view;
     }
