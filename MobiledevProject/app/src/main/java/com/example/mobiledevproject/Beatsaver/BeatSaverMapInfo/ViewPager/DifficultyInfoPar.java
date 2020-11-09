@@ -67,7 +67,7 @@ public class DifficultyInfoPar extends Fragment {
 
                 }
                 bombs.setText(specificDiffSpec.getBombs() + "");
-                njs.setText(specificDiffSpec.getNjs() + "");
+                njs.setText(df2.format(specificDiffSpec.getNjs())  + "");
             } else {
                 hasNotes.setVisibility(View.GONE);
                 noNotes.setVisibility(View.VISIBLE);
