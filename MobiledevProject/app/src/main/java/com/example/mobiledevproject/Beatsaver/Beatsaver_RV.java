@@ -1,9 +1,11 @@
 package com.example.mobiledevproject.Beatsaver;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +35,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
-public class Beatsaver_RV extends Fragment implements Serializable {
+public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog.ReturnSorting {
 
     private RecyclerView mapsbeatsaverRV;
     private BeatsaverMapAdapter beatsaverMapAdapter;
@@ -41,7 +43,6 @@ public class Beatsaver_RV extends Fragment implements Serializable {
     Call<MapsBeatsaver> mapList;
     Context context;
     ImageView imageView;
-    SearchView searchView;
     ProgressBar progressBar;
     private int page_number = 0;
     //vars
@@ -57,7 +58,6 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         beatsaverMapAdapter = new BeatsaverMapAdapter();
         context = getContext();
 
-//        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -71,26 +71,8 @@ public class Beatsaver_RV extends Fragment implements Serializable {
 
         getMaps(sorting, page_number);
 
-        showAddButton();
+        showFilter();
 
-        Log.d(TAG, "onCreateView: added search");
-        searchView =  getActivity().findViewById(R.id.searchView);
-        searchView.setVisibility(View.VISIBLE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d(TAG, "onQueryTextSubmit: Submit: " + query);
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d(TAG, "onQueryTextSubmit: Change: " + newText);
-
-                return false;
-            }
-        });
 
         addScrollListener();
 
@@ -104,15 +86,20 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-
-    private void showAddButton() {
+    private void showFilter() {
         imageView = getActivity().findViewById(R.id.addPerson);
         imageView.setImageResource(R.drawable.ic_filter_list_24);
         imageView.setVisibility(View.VISIBLE);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
+
+//                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
+                FilterDialog dialog = new FilterDialog(sorting);
+                dialog.setTargetFragment(Beatsaver_RV.this, 1);
+                dialog.show(getParentFragmentManager(), "FilterDialog");
+
+
             }
         });
     }
@@ -122,6 +109,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
 
                 visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
                 totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
@@ -192,15 +180,25 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         listener = new BeatsaverMapAdapter.RVClickListener() {
             @Override
             public void onClick(BeatsaverMap beatsaverMap) {
+
                 Log.d(TAG, "onClick: setonclicklistenet: " + beatsaverMap.toString());
-
-//                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
                 intent.putExtra("ree", beatsaverMap);
                 startActivity(intent);
 
             }
         };
+    }
+
+    @Override
+    public void sorting(String input) {
+        Log.d(TAG, "sorting: "+input);
+        if(sorting != input){
+            sorting = input;
+            page_number = 0;
+
+
+
+        }
     }
 }
