@@ -57,6 +57,20 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
     }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_friends_leaderboard, container, false);
+
+        showAddButton();
+
+        init_RV(view);
+
+        return view;
+    }
+
+
+
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
         int position = -1;
@@ -67,27 +81,26 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
             return super.onContextItemSelected(item);
         }
         switch (item.getItemId()) {
+
             case R.id.showProfile:
                 Log.d(TAG, "onContextItemSelected: onclick: show profile");
-                Player Pl = leaderBoardPlayerAdapter.getData(position);
-
-                String json = gson.toJson(Pl);
-
+                String id = leaderBoardPlayerAdapter.getData(position);
                 Intent intent = new Intent(getContext(), ProfileNotOwner.class);
-                intent.putExtra("playerNotOwner", json);
+                intent.putExtra("playerNotOwner", id);
                 startActivity(intent);
 
                 break;
+
             case R.id.removePlayer:
+
                 Log.d(TAG, "onContextItemSelected: onclick: Delete");
-                Log.d(TAG, "onContextItemSelected: "+ friendList.getFriends().get(position));
                 String player = friendList.getFriends().get(position).getName();
                 friendList.getFriends().remove(position);
                 SaveFriendList();
                 leaderBoardPlayerAdapter.RemovePlayer(position);
                 leaderBoardPlayerAdapter.notifyDataSetChanged();
-
                 Toast.makeText(getContext(), "Player: "+ player+ " removed!", Toast.LENGTH_SHORT).show();
+
                 break;
         }
         return super.onContextItemSelected(item);
@@ -100,18 +113,6 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("playerFriends", json);
         editor.apply();
-    }
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_friends_leaderboard, container, false);
-
-        showAddButton();
-
-        init_RV(view);
-
-        return view;
     }
 
     private Boolean checkIfExist(String id) {

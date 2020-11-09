@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mobiledevproject.Adapters.ProfilePagerAdapter;
-import com.example.mobiledevproject.Models.PlayerProfile.Player;
 import com.example.mobiledevproject.R;
 import com.google.android.material.tabs.TabLayout;
 
@@ -25,18 +24,16 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     private static final String TAG = "ProfileFragment";
 
     ViewPager viewPager;
-    PagerAdapter pagerAdapter;
     TabLayout tabLayout;
     String input;
-    Player playerimported;
+    String playerImported;
     Boolean isOwner = true;
 
     public ProfileFragment(){
-
     }
 
-    public ProfileFragment(Player player){
-        this.playerimported = player;
+    public ProfileFragment(String id){
+        this.playerImported = id;
         this.isOwner = false;
 
     }
@@ -49,7 +46,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         input = sharedPref.getString("playerId", null);
 
-        if (playerimported == null){
+        if (playerImported == null){
             if (input == null) {
                 Log.d(TAG, "onClick: Opening Dialog");
                 DialogScoresaberFragment dialog = new DialogScoresaberFragment();
@@ -59,9 +56,8 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
                 createPager(input);
             }
         } else {
-            createPager(playerimported.getPlayer_info().getPlayer_Id());
+            createPager(playerImported);
         }
-
 
     }
 

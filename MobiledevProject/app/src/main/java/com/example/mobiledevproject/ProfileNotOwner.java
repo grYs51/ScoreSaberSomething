@@ -19,14 +19,14 @@ public class ProfileNotOwner extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_not_owner);
         Gson gson = new Gson();
-        String json =  getIntent().getStringExtra("playerNotOwner");
-        Player player = gson.fromJson(json, Player.class);
+        String Id =  getIntent().getStringExtra("playerNotOwner");
 
-        Log.d(TAG, "onCreate: "+ json);
+
+        Log.d(TAG, "onCreate: "+ Id);
 
 
         getSupportFragmentManager().beginTransaction()
-                .add(android.R.id.content, new ProfileFragment(player)).commit();
+                .add(android.R.id.content, new ProfileFragment(Id)).commit();
 
 
     }
