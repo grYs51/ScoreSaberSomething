@@ -9,4 +9,8 @@
         android:id="@+id/removePlayer"
         android:title="Remove Player" />
 
+    <item
+        android:id="@+id/addToFriends"
+        android:title="add to Friends" />
+
 </menu>

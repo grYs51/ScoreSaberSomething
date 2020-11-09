@@ -1,9 +1,11 @@
 package com.example.mobiledevproject.Leaderboard;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -17,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobiledevproject.Adapters.RV.LeaderBoardPlayerAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
+import com.example.mobiledevproject.ProfileNotOwner;
 import com.example.mobiledevproject.R;
 
 import retrofit2.Call;
@@ -26,7 +29,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
-public class LeaderboardFragment extends Fragment {
+public class LeaderboardFragment extends Fragment  {
 
     private RecyclerView leaderboardRV;
     LeaderBoardPlayerAdapter leaderBoardPlayerAdapter;
@@ -55,9 +58,32 @@ public class LeaderboardFragment extends Fragment {
 
         addScrollListener();
 
-
-
         return view;
+    }
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = -1;
+        try {
+            position = ((LeaderBoardPlayerAdapter) leaderboardRV.getAdapter()).getPosition();
+        } catch (Exception e){
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()){
+            case R.id.showProfile:
+                Log.d(TAG, "onContextItemSelected: ShowProfile");
+                String id =  leaderBoardPlayerAdapter.getPlayerId(position);
+                Intent intent = new Intent(getContext(), ProfileNotOwner.class);
+                intent.putExtra("playerNotOwner", id);
+                startActivity(intent);
+                break;
+            case R.id.addToFriends:
+                Log.d(TAG, "onContextItemSelected: Add to Friends");
+                break;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     private void addScrollListener() {
@@ -89,8 +115,6 @@ public class LeaderboardFragment extends Fragment {
         page_Number++;
         getLeaderboardPlayers(page_Number);
     }
-
-
 
     private void getLeaderboardPlayers(int page_number) {
         Log.d(TAG, "getLeaderboardPlayers: getData: "+page_number);

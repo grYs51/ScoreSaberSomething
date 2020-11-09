@@ -1,7 +1,10 @@
 package com.example.mobiledevproject.Adapters.RV;
 
 import android.content.Context;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,14 +21,24 @@ import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.R;
 
+import org.apache.commons.text.StringEscapeUtils;
+
+import static android.content.ContentValues.TAG;
+
 public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPlayerAdapter.ViewHolder> {
     LeaderboardPlayers leaderboardPlayers;
     private Context context;
+    private int position;
 
+
+    public int getPosition() {
+        return position;
+    }
+    public void setPosition(int position) { this.position = position; }
+    public String getPlayerId(int position){ return leaderboardPlayers.getPlayers().get(position).getPlayerId(); }
     public void setData(LeaderboardPlayers leaderboardPlayers) {
         this.leaderboardPlayers = leaderboardPlayers;
     }
-
     public void addData(LeaderboardPlayers leaderboardPlayers) {
         this.leaderboardPlayers.getPlayers().addAll(leaderboardPlayers.getPlayers());
     }
@@ -39,8 +53,18 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         LPlayer player = leaderboardPlayers.getPlayers().get(position);
+
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Log.d(TAG, "onLongClick: position LongPres: " + position);
+                setPosition(position);
+                return false;
+            }
+        });
+
 
         holder.playerName.setText(player.getPlayerName());
         holder.playerRank.setText("#"+player.getRank());
@@ -82,15 +106,14 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         }
     }
 
-
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnCreateContextMenuListener {
         ImageView avatar, flag;
         TextView playerName, playerpp, playerRank;
         LinearLayout linearLayout;
+        CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            itemView.setOnCreateContextMenuListener(this);
             avatar = itemView.findViewById(R.id.leaderboard_ImagePlayer);
             flag = itemView.findViewById(R.id.leaderboard_Local_Flag);
 
@@ -99,6 +122,14 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
             playerRank = itemView.findViewById(R.id.leaderboard_Position);
 
             linearLayout = itemView.findViewById(R.id.leaderboard_Linear);
+            cardView = itemView.findViewById(R.id.item_leaderboardPlayerCard);
+
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+            menu.add(Menu.NONE, R.id.showProfile, Menu.NONE, "Show Profile");
+            menu.add(Menu.NONE, R.id.addToFriends, Menu.NONE, "Add to Friends");
 
         }
     }
