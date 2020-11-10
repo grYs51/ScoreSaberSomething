@@ -25,6 +25,7 @@ import com.google.android.material.tabs.TabLayout;
 
 import org.ocpsoft.prettytime.PrettyTime;
 
+import java.text.DecimalFormat;
 import java.time.Instant;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class InfoMapFragment extends Fragment {
     TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
-
+    private static DecimalFormat df2 = new DecimalFormat("#");
     private BeatsaverMap beatsaverMap;
     
     public InfoMapFragment(BeatsaverMap beatsaverMap) {
@@ -101,7 +102,7 @@ public class InfoMapFragment extends Fragment {
         songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());
         title.setText(beatsaverMap.getName());
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
-        songBpm.setText(beatsaverMap.getMetaData().getBpm() + "");
+        songBpm.setText(df2.format(beatsaverMap.getMetaData().getBpm())  + "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
         songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");
