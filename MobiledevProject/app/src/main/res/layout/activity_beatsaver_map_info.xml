@@ -7,11 +7,11 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:elevation="2dp"
-        android:layout_marginTop="20dp"
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:elevation="2dp"
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,20 +32,20 @@
             android:id="@+id/InfoTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:autoSizeMaxTextSize="1dp"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:autoSizeMaxTextSize="1dp"
             tools:text="SongName" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.github.siyamed.shapeimageview.RoundedImageView
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        android:layout_marginTop="-70dp"
         android:id="@+id/infoImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="-70dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
         android:src="@color/darkPurple" />
 
     <androidx.cardview.widget.CardView
@@ -80,17 +80,17 @@
 
     </androidx.cardview.widget.CardView>
 
-<!--    <com.google.android.material.tabs.TabLayout-->
-<!--        android:id="@+id/tablayout"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="@color/colorPrimary"-->
-<!--        android:minHeight="?attr/actionBarSize"-->
-<!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
+    <!--    <com.google.android.material.tabs.TabLayout-->
+    <!--        android:id="@+id/tablayout"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:background="@color/colorPrimary"-->
+    <!--        android:minHeight="?attr/actionBarSize"-->
+    <!--        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>-->
 
-<!--    <androidx.viewpager.widget.ViewPager-->
-<!--        android:id="@+id/infoPager"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="fill_parent"/>-->
+    <!--    <androidx.viewpager.widget.ViewPager-->
+    <!--        android:id="@+id/infoPager"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="fill_parent"/>-->
 
 </LinearLayout>

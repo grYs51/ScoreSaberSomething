@@ -3,6 +3,7 @@ package com.example.mobiledevproject.ApiCall;
 import com.example.mobiledevproject.ApiCall.Interfaces.AllmapsBeatsaverApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.LeaderboardPlayersApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.PlayerFullApi;
+import com.example.mobiledevproject.ApiCall.Interfaces.RankedMapsApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.RecentSongApi;
 import com.example.mobiledevproject.ApiCall.Interfaces.TopSongApi;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
@@ -13,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-
+    static String scoresaberold = "https://scoresaber.com/";
     static String scoresaber = "https://new.scoresaber.com/";
     static String beatsaver = "https://beatsaver.com/";
 
@@ -52,5 +53,9 @@ public class ApiClient {
 
     public static LeaderboardPlayersApi getLeaderboardPlayers() {
         return getRetrofit(scoresaber).create(LeaderboardPlayersApi.class);
+    }
+
+    public static RankedMapsApi getRankedMapsApi(){
+        return getRetrofit(scoresaberold).create(RankedMapsApi.class);
     }
 }

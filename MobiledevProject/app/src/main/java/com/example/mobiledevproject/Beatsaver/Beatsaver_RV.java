@@ -26,6 +26,7 @@ import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+
 import java.io.Serializable;
 
 import retrofit2.Call;
@@ -170,8 +171,8 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         SetOnClickListener();
         mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
         beatsaverMapAdapter.setlistener(listener);
-        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(context));
+        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
     }
 
@@ -196,8 +197,10 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         if(sorting != input){
             sorting = input;
             page_number = 0;
-
-
+            beatsaverMapAdapter.deleteData();
+            progressBar.setVisibility(View.VISIBLE);
+            pastVisibleItems = 0; visibleItemCount = 0; totalItemCount = 0; previous_total = 0;
+            getMaps(sorting, page_number);
 
         }
     }

@@ -38,11 +38,15 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
     public void setData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver = mapsBeatsaver;
-        notifyDataSetChanged();
+//        notifyDataSetChanged();
     }
 
     public void addData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver.getBeatsaverMaps().addAll(mapsBeatsaver.getBeatsaverMaps());
+    }
+    public void deleteData(){
+        this.mapsBeatsaver.getBeatsaverMaps().clear();
+//        notifyDataSetChanged();
     }
 
     public void setlistener(RVClickListener listener) {

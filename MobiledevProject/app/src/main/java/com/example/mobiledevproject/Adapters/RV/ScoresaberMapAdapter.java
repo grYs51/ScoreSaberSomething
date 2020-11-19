@@ -111,10 +111,9 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             return scores.getScores().size();
         }
 
-
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mapImage, songdiff;
         TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc, acctext, position;
