@@ -37,6 +37,12 @@ public class RankedMapsFragment extends Fragment {
 
     Call<RankedMapsList> rankedMapsListCall;
 
+    //vars
+    private boolean isLoading = true;
+    private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
+    private int view_threshold = 4;
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,8 +60,41 @@ public class RankedMapsFragment extends Fragment {
 
         getRankedMaps(cat, page, limit);
 
+        addScrollListener();
+
 
         return view;
+    }
+
+    private void addScrollListener() {
+        rankedMapsRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+
+                visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
+                totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
+                pastVisibleItems = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+
+                if (dy > 0) {
+                    if (isLoading) {
+                        if (totalItemCount > previous_total) {
+                            isLoading = false;
+                            previous_total = totalItemCount;
+                        }
+                    } else if (!isLoading && (totalItemCount - visibleItemCount) <= (pastVisibleItems + view_threshold)) {
+                        performPagination();
+                        isLoading = true;
+                    }
+                }
+            }
+        });
+    }
+
+    private void performPagination() {
+        page++;
+        getRankedMaps(cat, page, limit);
     }
 
     private void getRankedMaps(int cat, int page, int limit) {
