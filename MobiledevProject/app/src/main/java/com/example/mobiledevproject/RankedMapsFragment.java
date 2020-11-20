@@ -31,7 +31,6 @@ public class RankedMapsFragment extends Fragment {
 
     private RecyclerView rankedMapsRV;
     private RankedMapsAdapter rankedMapsAdapter;
-    private RankedMapsAdapter.RVClickListener listener;
 
     private Context context;
     private int limit = 10, page = 1, cat = 1;
@@ -62,7 +61,7 @@ public class RankedMapsFragment extends Fragment {
     private void getRankedMaps(int cat, int page, int limit) {
         Log.d(TAG, "getRankedMaps: page: " + page);
 
-        rankedMapsListCall = ApiClient.getRankedMapsApi().getRankedMaps(Integer.toString(cat), Integer.toString(page), Integer.toString(limit));
+        rankedMapsListCall = ApiClient.getRankedMapsApi().getRankedMaps( "get-leaderboards", Integer.toString(cat), Integer.toString(page), Integer.toString(limit));
         rankedMapsListCall.enqueue(new Callback<RankedMapsList>() {
             @Override
             public void onResponse(Call<RankedMapsList> call, Response<RankedMapsList> response) {
