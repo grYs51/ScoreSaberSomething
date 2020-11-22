@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -45,6 +46,7 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
     Context context;
     ImageView imageView;
     ProgressBar progressBar;
+    TextView error;
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
@@ -69,6 +71,8 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         recyclerView(view);
 
         getProgressBar(view);
+
+        error = view.findViewById(R.id.noConnection);
 
         getMaps(sorting, page_number);
 
@@ -144,6 +148,9 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             public void onResponse(Call<MapsBeatsaver> call, Response<MapsBeatsaver> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
+                    progressBar.setVisibility(View.GONE);
+                    error.setVisibility(View.VISIBLE);
+
                     return;
                 }
                 progressBar.setVisibility(View.GONE);
