@@ -76,7 +76,6 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
 
         getMaps(sorting, page_number);
 
-        showFilter();
 
 
         addScrollListener();
@@ -153,6 +152,9 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
 
                     return;
                 }
+
+                showFilter();
+
                 progressBar.setVisibility(View.GONE);
                 MapsBeatsaver mapsExtra = response.body();
                 if (beatsaverMapAdapter.getItemCount() == 0) {
