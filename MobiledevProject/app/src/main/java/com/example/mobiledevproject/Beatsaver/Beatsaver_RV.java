@@ -76,7 +76,7 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
 
         getMaps(sorting, page_number);
 
-
+        showFilter();
 
         addScrollListener();
 
@@ -98,10 +98,13 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             @Override
             public void onClick(View v) {
 
+                if(beatsaverMapAdapter.getItemCount() != 0){
+                    FilterDialog dialog = new FilterDialog(sorting);
+                    dialog.setTargetFragment(Beatsaver_RV.this, 1);
+                    dialog.show(getParentFragmentManager(), "FilterDialog");
+                }
 //                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
-                FilterDialog dialog = new FilterDialog(sorting);
-                dialog.setTargetFragment(Beatsaver_RV.this, 1);
-                dialog.show(getParentFragmentManager(), "FilterDialog");
+
 
 
             }
@@ -153,7 +156,6 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
                     return;
                 }
 
-                showFilter();
 
                 progressBar.setVisibility(View.GONE);
                 MapsBeatsaver mapsExtra = response.body();

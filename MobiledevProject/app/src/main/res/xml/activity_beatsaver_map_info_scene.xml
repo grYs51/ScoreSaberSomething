@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+
 
     <ConstraintSet android:id="@+id/start">
         <Constraint android:id="@+id/widget" />
@@ -12,5 +14,11 @@
 
     <Transition
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" />
+        app:constraintSetStart="@+id/start"
+        >
+
+        <OnSwipe
+            />
+
+    </Transition>
 </MotionScene>
