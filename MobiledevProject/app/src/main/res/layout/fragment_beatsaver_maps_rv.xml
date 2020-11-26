@@ -6,13 +6,6 @@
     tools:context=".Beatsaver.Beatsaver_RV"
     android:background="@color/white">
 
-<!--    <TextView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_gravity="center"-->
-<!--        android:textSize="20sp"-->
-<!--        android:text="@string/maps" />-->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_profile_maps_beatsaver"
         android:layout_width="match_parent"
@@ -28,4 +21,19 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/noConnection"
+        android:layout_marginHorizontal="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:text="It seems there is a problem.\n\n Try again later!"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="20sp"
+
+        android:gravity="center"/>
+
+
 </FrameLayout>

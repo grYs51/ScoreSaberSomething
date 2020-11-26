@@ -1,66 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
 
-<!--    <Transition-->
-<!--        app:constraintSetEnd="@id/collapsed"-->
-<!--        app:constraintSetStart="@id/expanded">-->
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start">
 
-<!--        <OnSwipe-->
-<!--            app:dragDirection="dragUp"-->
-<!--            app:touchAnchorId="@id/nestedScrollView"-->
-<!--            app:touchAnchorSide="top" />-->
+        <OnSwipe
+            app:touchAnchorId="@+id/cardview1"
+            app:touchAnchorSide="top" />
+    </Transition>
 
-<!--    </Transition>-->
+    <ConstraintSet android:id="@+id/start">
 
-<!--    <ConstraintSet android:id="@+id/expanded">-->
-<!--        <Constraint-->
-<!--            android:id="@id/toolbar_image"-->
-<!--            android:layout_height="250dp"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-<!--            <CustomAttribute-->
-<!--                app:attributeName="imageAlpha"-->
-<!--                app:customIntegerValue="255" />-->
-<!--        </Constraint>-->
-<!--        <Constraint-->
-<!--            android:id="@id/title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="8dp"-->
-<!--            android:layout_marginBottom="24dp"-->
-<!--            android:scaleX="1.0"-->
-<!--            android:scaleY="1.0"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/toolbar_image"-->
-<!--            app:layout_constraintStart_toStartOf="parent">-->
-<!--        </Constraint>-->
-<!--    </ConstraintSet>-->
+        <Constraint
+            android:id="@+id/infoImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-<!--    <ConstraintSet android:id="@+id/collapsed">-->
-<!--        <Constraint-->
-<!--            android:id="@id/toolbar_image"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent">-->
-<!--            <CustomAttribute-->
-<!--                app:attributeName="imageAlpha"-->
-<!--                app:customIntegerValue="0" />-->
-<!--        </Constraint>-->
-<!--        <Constraint-->
-<!--            android:id="@id/title"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginStart="20dp"-->
-<!--            android:layout_marginBottom="0dp"-->
-<!--            android:scaleX="0.625"-->
-<!--            android:scaleY="0.625"-->
-<!--            app:layout_constraintBottom_toBottomOf="@id/toolbar_image"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="@id/toolbar_image">-->
-<!--        </Constraint>-->
+    </ConstraintSet>
 
-<!--    </ConstraintSet>-->
+    <ConstraintSet android:id="@+id/end">
+
+        <Constraint
+            android:id="@+id/infoImage"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:alpha="0.0"
+            app:cardCornerRadius="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
 
 </MotionScene>

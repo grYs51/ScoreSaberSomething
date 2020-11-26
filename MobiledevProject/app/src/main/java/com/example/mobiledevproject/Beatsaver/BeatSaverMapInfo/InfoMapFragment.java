@@ -37,7 +37,7 @@ import static android.content.ContentValues.TAG;
 public class InfoMapFragment extends Fragment {
 
 //    ImageView songImage;
-    TextView title, mapper, songAuthor;
+    TextView title, mapper, songAuthor, songKey;
     TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
@@ -80,14 +80,17 @@ public class InfoMapFragment extends Fragment {
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
         songAuthor = view.findViewById(R.id.infosongAuthorName);
-
+        songKey = view.findViewById(R.id.infoKey);
         //stats
         songDuration = view.findViewById(R.id.infoSongDuration);
         songBpm = view.findViewById(R.id.infoSongBpm);
+//        songPlays = view.findViewById(R.id.infoSongPlays);
         songDownloads = view.findViewById(R.id.infoSongDownloads);
         songRatingUp = view.findViewById(R.id.infoSongRatingUp);
         songRatingDown = view.findViewById(R.id.infoSongRatingDown);
     }
+
+    //TODO: key to the fragment
 
     private void setTekst(String dt) {
         try {
@@ -101,8 +104,10 @@ public class InfoMapFragment extends Fragment {
         //settekst
         songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());
         title.setText(beatsaverMap.getName());
+        songKey.setText(beatsaverMap.getKey());
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
         songBpm.setText(df2.format(beatsaverMap.getMetaData().getBpm())  + "");
+//        songPlays.setText(beatsaverMap.getStats().getPlays()+ "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
         songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");

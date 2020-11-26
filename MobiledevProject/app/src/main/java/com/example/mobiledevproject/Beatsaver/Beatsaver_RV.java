@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+
 import java.io.Serializable;
 
 import retrofit2.Call;
@@ -44,6 +46,7 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
     Context context;
     ImageView imageView;
     ProgressBar progressBar;
+    TextView error;
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
@@ -69,10 +72,11 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
 
         getProgressBar(view);
 
+        error = view.findViewById(R.id.noConnection);
+
         getMaps(sorting, page_number);
 
         showFilter();
-
 
         addScrollListener();
 
@@ -94,10 +98,13 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             @Override
             public void onClick(View v) {
 
+                if(beatsaverMapAdapter.getItemCount() != 0){
+                    FilterDialog dialog = new FilterDialog(sorting);
+                    dialog.setTargetFragment(Beatsaver_RV.this, 1);
+                    dialog.show(getParentFragmentManager(), "FilterDialog");
+                }
 //                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
-                FilterDialog dialog = new FilterDialog(sorting);
-                dialog.setTargetFragment(Beatsaver_RV.this, 1);
-                dialog.show(getParentFragmentManager(), "FilterDialog");
+
 
 
             }
@@ -143,8 +150,13 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             public void onResponse(Call<MapsBeatsaver> call, Response<MapsBeatsaver> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
+                    progressBar.setVisibility(View.GONE);
+                    error.setVisibility(View.VISIBLE);
+
                     return;
                 }
+
+
                 progressBar.setVisibility(View.GONE);
                 MapsBeatsaver mapsExtra = response.body();
                 if (beatsaverMapAdapter.getItemCount() == 0) {
@@ -170,8 +182,8 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         SetOnClickListener();
         mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
         beatsaverMapAdapter.setlistener(listener);
-        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(context));
+        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
     }
 
@@ -196,8 +208,10 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         if(sorting != input){
             sorting = input;
             page_number = 0;
-
-
+            beatsaverMapAdapter.deleteData();
+            progressBar.setVisibility(View.VISIBLE);
+            pastVisibleItems = 0; visibleItemCount = 0; totalItemCount = 0; previous_total = 0;
+            getMaps(sorting, page_number);
 
         }
     }

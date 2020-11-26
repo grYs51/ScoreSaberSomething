@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +24,7 @@ import static android.content.ContentValues.TAG;
 public class FilterDialog extends DialogFragment {
 
     String sorting;
-
+    Handler handler = new Handler();
     TextView hot, rating, latest, downloads, plays;
 
     public interface ReturnSorting {
@@ -69,6 +70,7 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View v) {
                 sorting = "hot";
                 highlightselected();
+                dismissdelay();
             }
         });
         rating.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +78,8 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View v) {
                 sorting = "rating";
                 highlightselected();
+                dismissdelay();
+
             }
         });
         latest.setOnClickListener(new View.OnClickListener() {
@@ -83,6 +87,8 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View v) {
                 sorting = "latest";
                 highlightselected();
+                dismissdelay();
+
             }
         });
         downloads.setOnClickListener(new View.OnClickListener() {
@@ -90,6 +96,8 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View v) {
                 sorting = "downloads";
                 highlightselected();
+                dismissdelay();
+
             }
         });
         plays.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +105,20 @@ public class FilterDialog extends DialogFragment {
             public void onClick(View v) {
                 sorting = "plays";
                 highlightselected();
+                getDialog().dismiss();
+
             }
         });
+    }
+
+    private void dismissdelay(){
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getDialog().dismiss();
+
+            }
+        }, 100);
     }
 
     private void highlightselected() {
