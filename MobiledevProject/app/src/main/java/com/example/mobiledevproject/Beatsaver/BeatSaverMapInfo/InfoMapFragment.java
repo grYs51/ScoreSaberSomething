@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 import com.example.mobiledevproject.Adapters.InfoModesAdapter;
@@ -32,12 +33,11 @@ import static android.content.ContentValues.TAG;
 
 public class InfoMapFragment extends Fragment {
 
-    private static DecimalFormat df2 = new DecimalFormat("#.##");
-    TextView title, mapper, songAuthor;
+    TextView title, mapper, songAuthor, songKey;
     TextView songDuration, songBpm, songDownloads, songRatingUp, songRatingDown;
     PrettyTime p;
     Instant i;
-
+    private static DecimalFormat df2 = new DecimalFormat("#");
     private BeatsaverMap beatsaverMap;
 
     public InfoMapFragment(BeatsaverMap beatsaverMap) {
@@ -77,8 +77,7 @@ public class InfoMapFragment extends Fragment {
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
         songAuthor = view.findViewById(R.id.infosongAuthorName);
-
-        //stats
+        songKey = view.findViewById(R.id.infoKey);
         songDuration = view.findViewById(R.id.infoSongDuration);
         songBpm = view.findViewById(R.id.infoSongBpm);
         songDownloads = view.findViewById(R.id.infoSongDownloads);
@@ -86,8 +85,11 @@ public class InfoMapFragment extends Fragment {
         songRatingDown = view.findViewById(R.id.infoSongRatingDown);
     }
 
+    //TODO: key to the fragment
+
     private void setTekst(String dt) {
         try {
+
             i = Instant.parse(dt);
             Log.d(TAG, "onCreateView: " + p.format(Date.from(i)));
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
@@ -98,22 +100,16 @@ public class InfoMapFragment extends Fragment {
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName());
 
         }
-        //settekst
+
         songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());
         title.setText(beatsaverMap.getName());
+        songKey.setText(beatsaverMap.getKey());
         songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
-        songBpm.setText( df2.format(beatsaverMap.getMetaData().getBpm() ) + "" );
+        songBpm.setText(df2.format(beatsaverMap.getMetaData().getBpm()) + "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
         songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");
 
-
-//TODO: change placeholder
-//        Glide.with(getContext())
-//                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
-//                .placeholder(R.drawable.about)
-//                .error(R.drawable.leaderbord)
-//                .into(songImage);
     }
 
     private String getDurationString(int seconds) {

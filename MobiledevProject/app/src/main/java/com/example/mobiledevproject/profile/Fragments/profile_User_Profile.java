@@ -81,7 +81,6 @@ public class profile_User_Profile extends Fragment {
         cardShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), "Still working on!", Toast.LENGTH_SHORT).show();
                 Bitmap bitmap = getBitmapFromView(view);
                 Uri uri = saveImage(bitmap);
                 shareImageUri(uri);
@@ -207,10 +206,15 @@ public class profile_User_Profile extends Fragment {
         for (int i = 0; i < size; i++) {
             arr[i] = Integer.parseInt(stringTokens[i]);
         }
+        int historyDiff;
+        if (arr.length < 7) {
+            historyDiff = arr[size - (size - 1)] -  playerPlayerInfo.getRank();
+        } else {
+            historyDiff = arr[size - 7] - playerPlayerInfo.getRank();
+        }
 
-        int historyDiff = arr[size - 6] - playerPlayerInfo.getRank();
+
         profile_Diff.setText(historyDiff + "");
-
 
         if (historyDiff < 0) {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.leaderboardDown));
@@ -220,7 +224,7 @@ public class profile_User_Profile extends Fragment {
         } else {
             profile_Diff.setTextColor(ContextCompat.getColor(getContext(), R.color.greyText));
         }
-        Log.d(TAG, "onResponse: Done");
+        Log.d(TAG, "getHistory: Done");
     }
 
     public static Bitmap getBitmapFromView(View view) {

@@ -9,17 +9,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.ViewPager.DifficultyInfoPar;
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristics;
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Difficulties;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.DifficultiesSpecs;
-import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
-import com.example.mobiledevproject.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
-import kotlin.collections.ArrayDeque;
 
 public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
 
@@ -50,15 +44,12 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
         if (this.difficultiesSpecs.getExpertPlus() != null) {
             strings.add("Expert+");
         }
-
     }
 
 
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.d(TAG, "getItem: difficultie; position: " + position);
-        Log.d(TAG, "getItem: difficultie: " + strings.get(position));
 
         switch (strings.get(position)) {
             case "Easy":
@@ -74,9 +65,7 @@ public class InfoDifficultyPagerAdapter extends FragmentPagerAdapter {
             default:
                 return new DifficultyInfoPar(null, duration, key);
         }
-
     }
-
 
     @Override
     public int getCount() {

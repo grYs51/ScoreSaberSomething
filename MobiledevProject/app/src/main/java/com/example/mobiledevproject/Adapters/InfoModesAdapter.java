@@ -1,6 +1,5 @@
 package com.example.mobiledevproject.Adapters;
 
-import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,11 +12,12 @@ import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.Characteristic
 
 import java.util.List;
 
-public class InfoModesAdapter extends FragmentPagerAdapter{
-List<Characteristics> characteristics;
-List<String> modelist;
-int duration;
-String key;
+public class InfoModesAdapter extends FragmentPagerAdapter {
+    List<Characteristics> characteristics;
+    List<String> modelist;
+    int duration;
+    String key;
+
     public InfoModesAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> modeList, int duration, String key) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
@@ -32,12 +32,7 @@ String key;
     @Override
     public Fragment getItem(int position) {
 
-//        for (Characteristics item: characteristics) {
-//            return new ModesInfo(item.getDifficulties(), duration, item.getName() );
-//        }
-
         return new ModesInfo(characteristics.get(position).getDifficulties(), duration, key);
-//        return null;
     }
 
     @Override

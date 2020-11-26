@@ -31,15 +31,12 @@ public class BeatsaverFragment_adapter extends Fragment {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_beatsaver_adapter, container, false);
     }
-
-
 
 
 }

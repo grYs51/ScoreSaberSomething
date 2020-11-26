@@ -27,7 +27,6 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
-        Log.d(TAG, "getItem: position: " + position);
         switch (position) {
             case 0:
                 return new InfoMapFragment(beatsaverMap);
@@ -36,7 +35,6 @@ public class InfoPagerAdapter extends FragmentPagerAdapter {
             default:
                 return null;
         }
-
     }
 
     @Override

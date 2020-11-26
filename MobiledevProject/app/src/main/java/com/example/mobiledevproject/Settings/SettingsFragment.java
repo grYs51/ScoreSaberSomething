@@ -33,7 +33,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
         getCache = new GetCache(getActivity());
 
-        storage.setSummary( getCache.initializeCache());
+        storage.setSummary(getCache.initializeCache());
 
         RemoveListener();
 
@@ -43,7 +43,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         playerRemove.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                Log.d(TAG, "onPreferenceClick: buttonCLick" );
+                Log.d(TAG, "onPreferenceClick: buttonCLick");
 
                 editor.remove("playerId");
                 editor.commit();
@@ -55,7 +55,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void SetText() {
-        if(input != null){
+        if (input != null) {
             player.setSummary(input);
         } else {
             player.setSummary("None");
@@ -67,7 +67,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         input = sharedPref.getString("playerId", null);
 
-         editor = sharedPref.edit();
+        editor = sharedPref.edit();
     }
 
     private void setPreferencesView() {

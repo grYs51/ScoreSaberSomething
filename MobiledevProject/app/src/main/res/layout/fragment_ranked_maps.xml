@@ -5,11 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".RankedMapsFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:text="@string/rankedmaps" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        android:id="@+id/rankedMapsRV"
+        tools:listitem="@layout/item_rankedmaps"/>
 
 </FrameLayout>

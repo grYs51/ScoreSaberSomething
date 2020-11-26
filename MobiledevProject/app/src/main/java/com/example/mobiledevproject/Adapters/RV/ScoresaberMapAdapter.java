@@ -88,7 +88,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         holder.songName.setText(scoresaberMap.getSongName());
         holder.songAuthor.setText(scoresaberMap.getSongAuthorName());
         holder.rank.setText("#" + scoresaberMap.getRank());
-        holder.pp.setText("" + df2.format(scoresaberMap.getPp()));
+        holder.pp.setText(  df2.format(scoresaberMap.getPp()) + " ");
         holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + ")");
         holder.position.setText(position + 1 + "");
 
@@ -110,10 +110,9 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
             return scores.getScores().size();
         }
 
-
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView mapImage, songdiff;
         TextView songName, songAuthor, levelAuthor, rank, pp, ppWeight, acc, acctext, position;

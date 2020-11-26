@@ -17,184 +17,231 @@
             android:orientation="vertical"
             android:padding="5dp">
 
-                    <TextView
-                        android:id="@+id/infoSongName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:textAlignment="center"
-                        android:padding="1dp"
-                        tools:text="Title"
-                        android:textColor="@color/black"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/infoSongName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:padding="1dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Title" />
 
-                    <TextView
-                        android:id="@+id/infosongAuthorName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAlignment="center"
-                        android:padding="1dp"
-                        tools:text="SongAuthor"
-                        android:textSize="16sp" />
+            <TextView
+                android:id="@+id/infosongAuthorName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="1dp"
+                android:textAlignment="center"
+                android:textSize="16sp"
+                tools:text="SongAuthor" />
 
-                    <TextView
-                        android:id="@+id/infoMapper"
-                        android:textAlignment="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="3dp"
-                        android:layout_marginHorizontal="30dp"
-                        tools:text="Mapper + date releases" />
+            <TextView
+                android:id="@+id/infoMapper"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="3dp"
+                android:textAlignment="center"
+                tools:text="Mapper + date releases" />
+
+            <TextView
+                android:id="@+id/infoKey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="3dp"
+                android:textAlignment="center"
+                tools:text="Key" />
 
             <ImageView
-                android:layout_marginVertical="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="0.8dp"/>
+                android:layout_height="0.8dp"
+                android:layout_marginVertical="20dp" />
 
-                    <LinearLayout
-                        android:padding="10dp"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_time"
+                        android:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/infoSongDuration"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="time" />
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Duration"
+                        android:textAlignment="center" />
+                </LinearLayout>
 
-                            <com.google.android.material.imageview.ShapeableImageView
-                                android:layout_width="35dp"
-                                android:layout_gravity="center"
-                                android:layout_height="35dp"
-                                android:tint="@color/black"
-                                android:src="@drawable/ic_time"/>
-                            <TextView
-                                android:id="@+id/infoSongDuration"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/black"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                tools:text="time"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:text="Duration"/>
-                        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/bpmicon" />
 
-                            <com.google.android.material.imageview.ShapeableImageView
-                                android:layout_width="35dp"
-                                android:layout_gravity="center"
-                                android:layout_height="35dp"
-                                android:src="@drawable/bpmicon"/>
+                    <TextView
+                        android:id="@+id/infoSongBpm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="bpm" />
 
-                            <TextView
-                                android:id="@+id/infoSongBpm"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/black"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                tools:text="bpm"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Bpm"
+                        android:textAlignment="center" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:text="Bpm"/>
+                </LinearLayout>
 
-                        </LinearLayout>
+<!--                <LinearLayout-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:orientation="vertical">-->
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:layout_width="35dp"-->
 
-                            <com.google.android.material.imageview.ShapeableImageView
-                                android:layout_width="35dp"
-                                android:layout_gravity="center"
-                                android:layout_height="35dp"
-                                android:tint="@color/black"
-                                android:src="@drawable/downloadicon"/>
-                            <TextView
-                                android:maxLines="1"
-                                android:id="@+id/infoSongDownloads"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/black"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                tools:text="Downloads"/>
-                            <TextView
-                                android:maxLines="1"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:text="Downloads"/>
-                        </LinearLayout>
+<!--                        android:layout_height="35dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:src="@drawable/ic_play_arrow"-->
+<!--                        android:tint="@color/black" />-->
 
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
+<!--                    <TextView-->
+<!--                        android:id="@+id/infoSongPlays"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:textAlignment="center"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textStyle="bold"-->
+<!--                        tools:text="Plays" />-->
 
-                            <com.google.android.material.imageview.ShapeableImageView
-                                android:layout_width="35dp"
-                                android:layout_gravity="center"
-                                android:layout_height="35dp"
-                                android:tint="@color/black"
-                                android:src="@drawable/ic_thumbs"/>
-                            <TextView
-                                android:id="@+id/infoSongRatingUp"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/black"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                tools:text="up"/>
-                            <TextView
-                                android:id="@+id/infoSongRatingDown"
-                                android:textStyle="bold"
-                                android:layout_width="match_parent"
-                                android:textColor="@color/black"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                tools:text="down"/>
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textAlignment="center"
-                                android:text="Rating"/>
-                        </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Plays"-->
+<!--                        android:textAlignment="center" />-->
+<!--                </LinearLayout>-->
 
-                    </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/downloadicon"
+                        android:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/infoSongDownloads"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="Downloads" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Downloads"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_thumbs"
+                        android:tint="@color/black" />
+
+                    <TextView
+                        android:id="@+id/infoSongRatingUp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="up" />
+
+                    <TextView
+                        android:id="@+id/infoSongRatingDown"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        tools:text="down" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rating"
+                        android:textAlignment="center" />
+                </LinearLayout>
+
+
+            </LinearLayout>
 
             <com.google.android.material.tabs.TabLayout
-                android:layout_marginTop="13dp"
-                app:tabIndicator="@color/darkPurple"
-                app:tabBackground="@drawable/tablayout_selector"
-
                 android:id="@+id/tabLayoutModes"
                 android:layout_width="match_parent"
                 android:layout_height="33dp"
+
+                android:layout_marginTop="13dp"
                 android:minHeight="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                app:tabBackground="@drawable/tablayout_selector"
+                app:tabIndicator="@color/darkPurple" />
 
             <androidx.viewpager.widget.ViewPager
                 android:id="@+id/infoModePager"
                 android:layout_width="match_parent"
-                android:layout_height="250dp"/>
+                android:layout_height="250dp" />
 
         </LinearLayout>
 

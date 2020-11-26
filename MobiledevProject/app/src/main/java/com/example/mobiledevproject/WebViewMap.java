@@ -8,11 +8,11 @@ import android.webkit.WebView;
 public class WebViewMap extends AppCompatActivity {
     WebView myWebView;
     String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view_map);
-
 
 
         url = getIntent().getStringExtra("page");

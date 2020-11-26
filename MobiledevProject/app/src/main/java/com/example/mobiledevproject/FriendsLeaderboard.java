@@ -57,51 +57,6 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
 
     }
 
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        int position = -1;
-        try {
-            position = ((LeaderBoardFriendAdapter) recyclerView.getAdapter()).getPosition();
-        } catch (Exception e) {
-            Log.d(TAG, e.getLocalizedMessage(), e);
-            return super.onContextItemSelected(item);
-        }
-        switch (item.getItemId()) {
-            case R.id.showProfile:
-                Log.d(TAG, "onContextItemSelected: onclick: show profile");
-                Player Pl = leaderBoardPlayerAdapter.getData(position);
-
-                String json = gson.toJson(Pl);
-
-                Intent intent = new Intent(getContext(), ProfileNotOwner.class);
-                intent.putExtra("playerNotOwner", json);
-                startActivity(intent);
-
-                break;
-            case R.id.removePlayer:
-                Log.d(TAG, "onContextItemSelected: onclick: Delete");
-                Log.d(TAG, "onContextItemSelected: "+ friendList.getFriends().get(position));
-                String player = friendList.getFriends().get(position).getName();
-                friendList.getFriends().remove(position);
-                SaveFriendList();
-                leaderBoardPlayerAdapter.RemovePlayer(position);
-                leaderBoardPlayerAdapter.notifyDataSetChanged();
-
-                Toast.makeText(getContext(), "Player: "+ player+ " removed!", Toast.LENGTH_SHORT).show();
-                break;
-        }
-        return super.onContextItemSelected(item);
-    }
-
-    private void SaveFriendList() {
-        String json = gson.toJson(friendList);
-        Log.d(TAG, "onResponse: json: " + json);
-        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("playerFriends", json);
-        editor.apply();
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -114,6 +69,53 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
         return view;
     }
 
+
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        int position = -1;
+        try {
+            position = ((LeaderBoardFriendAdapter) recyclerView.getAdapter()).getPosition();
+        } catch (Exception e) {
+            Log.d(TAG, e.getLocalizedMessage(), e);
+            return super.onContextItemSelected(item);
+        }
+        switch (item.getItemId()) {
+
+            case R.id.showProfile:
+                Log.d(TAG, "onContextItemSelected: onclick: show profile");
+                String id = leaderBoardPlayerAdapter.getData(position);
+                Intent intent = new Intent(getContext(), ProfileNotOwner.class);
+                intent.putExtra("playerNotOwner", id);
+                startActivity(intent);
+
+                break;
+
+            case R.id.removePlayer:
+
+                Log.d(TAG, "onContextItemSelected: onclick: Delete");
+                String player = friendList.getFriends().get(position).getName();
+                friendList.getFriends().remove(position);
+                SaveFriendList();
+                leaderBoardPlayerAdapter.RemovePlayer(position);
+                leaderBoardPlayerAdapter.notifyDataSetChanged();
+                Toast.makeText(getContext(), "Player: " + player + " removed!", Toast.LENGTH_SHORT).show();
+
+                break;
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    //TODO: seperate class
+    private void SaveFriendList() {
+        String json = gson.toJson(friendList);
+        Log.d(TAG, "onResponse: json: " + json);
+        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("playerFriends", json);
+        editor.apply();
+    }
+
+    //TODO: seperate class
     private Boolean checkIfExist(String id) {
         if (friendList.getFriends() != null) {
             for (FriendsSharedPref fr : friendList.getFriends()) {
@@ -149,6 +151,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
                 fSP.setAvatar(player.getPlayer_info().getAvatar());
 
 
+                //TODO: seperate
                 //object fsp
                 if (friendList.getFriends() == null) {
                     List<FriendsSharedPref> friends = new ArrayList<>();
@@ -158,14 +161,10 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
                     friendList.getFriends().add(fSP);
                 }
 
-                //TODO: addtosharedpref
-
                 SaveFriendList();
                 Log.d(TAG, "onResponse: Player saved");
 
                 leaderBoardPlayerAdapter.addData(fSP, player);
-                leaderBoardPlayerAdapter.sortList();
-//                leaderBoardPlayerAdapter.notifyItemRangeInserted(leaderBoardPlayerAdapter.getItemCount(), 1);
 
             }
 
@@ -190,10 +189,11 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
         sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         playerId = sharedPref.getString("playerId", null);
         if (playerId != null) {
-    //TODO: player?
+            //TODO: player?
         }
     }
 
+    //TODO: seperate class
     private void getFriends() {
 
         Gson gson = new Gson();

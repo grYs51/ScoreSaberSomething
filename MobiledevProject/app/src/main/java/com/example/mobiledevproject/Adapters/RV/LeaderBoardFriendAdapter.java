@@ -58,8 +58,8 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     public void setPosition(int position) {
         this.position = position;
     }
-    public Player getData(int position){
-        return testings.get(position).getlPlayer();
+    public String getData(int position){
+        return testings.get(position).getFriendsSharedPref().getId();
     }
     public void setData(FriendList friendList) {
         if (friendList != null) {
@@ -74,7 +74,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         }
 
     }
-
     public void addData(FriendsSharedPref friendsSharedPref, Player lPlayer) {
         Testing fullPlayer = new Testing();
         fullPlayer.setFriendsSharedPref(friendsSharedPref);
@@ -86,7 +85,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         Log.d(TAG, "RemovePlayer: "+ testings.get(position).toString());
         testings.remove(position);
     }
-
     public void sortList(){
 
         Collections.sort(testings, new Comparator<Testing>() {
@@ -102,7 +100,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         notifyDataSetChanged();
 
     }
-
     private void SaveFriendList() {
         FriendList friendList = new FriendList();
         for( Testing pl: testings)
@@ -144,6 +141,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
                 return false;
             }
         });
+
         //TODO: change placeholder
         Glide.with(context)
                 .load("https://new.scoresaber.com" + testings.get(position).getFriendsSharedPref().getAvatar())
@@ -220,10 +218,10 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
             arr[i] = Integer.parseInt(stringTokens[i]);
         }
         int historyDiff;
-        if (arr.length < 6) {
+        if (arr.length < 7) {
             historyDiff = arr[size - (size - 1)] - lPlayer.getPlayer_info().getRank();
         } else {
-            historyDiff = arr[size - 6] - lPlayer.getPlayer_info().getRank();
+            historyDiff = arr[size - 7] - lPlayer.getPlayer_info().getRank();
         }
 
         Log.d(TAG, "setItem: Difference: " + historyDiff);
@@ -251,18 +249,15 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-
             avatar = itemView.findViewById(R.id.leaderboard_ImagePlayer);
             flag = itemView.findViewById(R.id.leaderboard_Local_Flag);
 
             cardView = itemView.findViewById(R.id.item_leaderboardPlayerCard);
             itemView.setOnCreateContextMenuListener(this);
 
-
             playerName = itemView.findViewById(R.id.leaderboard_PlayerName);
             playerpp = itemView.findViewById(R.id.leaderboard_Pp);
             playerRank = itemView.findViewById(R.id.leaderboard_Position);
-
             linearLayout = itemView.findViewById(R.id.leaderboard_Linear);
 
         }

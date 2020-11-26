@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +24,7 @@ import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Beatsaver.MapsBeatsaver;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
+
 import java.io.Serializable;
 
 import retrofit2.Call;
@@ -33,7 +34,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
-public class Beatsaver_RV extends Fragment implements Serializable {
+public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog.ReturnSorting {
 
     private RecyclerView mapsbeatsaverRV;
     private BeatsaverMapAdapter beatsaverMapAdapter;
@@ -41,8 +42,8 @@ public class Beatsaver_RV extends Fragment implements Serializable {
     Call<MapsBeatsaver> mapList;
     Context context;
     ImageView imageView;
-    SearchView searchView;
     ProgressBar progressBar;
+    TextView error;
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
@@ -57,7 +58,6 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         beatsaverMapAdapter = new BeatsaverMapAdapter();
         context = getContext();
 
-//        setHasOptionsMenu(true);
     }
 
     @Nullable
@@ -69,28 +69,11 @@ public class Beatsaver_RV extends Fragment implements Serializable {
 
         getProgressBar(view);
 
+        error = view.findViewById(R.id.noConnection);
+
         getMaps(sorting, page_number);
 
-        showAddButton();
-
-        Log.d(TAG, "onCreateView: added search");
-        searchView =  getActivity().findViewById(R.id.searchView);
-        searchView.setVisibility(View.VISIBLE);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                Log.d(TAG, "onQueryTextSubmit: Submit: " + query);
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                Log.d(TAG, "onQueryTextSubmit: Change: " + newText);
-
-                return false;
-            }
-        });
+        showFilter();
 
         addScrollListener();
 
@@ -104,15 +87,19 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         progressBar.setVisibility(View.VISIBLE);
     }
 
-
-    private void showAddButton() {
+    private void showFilter() {
         imageView = getActivity().findViewById(R.id.addPerson);
         imageView.setImageResource(R.drawable.ic_filter_list_24);
         imageView.setVisibility(View.VISIBLE);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
+
+                if (beatsaverMapAdapter.getItemCount() != 0) {
+                    FilterDialog dialog = new FilterDialog(sorting);
+                    dialog.setTargetFragment(Beatsaver_RV.this, 1);
+                    dialog.show(getParentFragmentManager(), "FilterDialog");
+                }
             }
         });
     }
@@ -122,6 +109,7 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
+
 
                 visibleItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getChildCount();
                 totalItemCount = ((LinearLayoutManager) recyclerView.getLayoutManager()).getItemCount();
@@ -155,8 +143,13 @@ public class Beatsaver_RV extends Fragment implements Serializable {
             public void onResponse(Call<MapsBeatsaver> call, Response<MapsBeatsaver> response) {
                 if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
+                    progressBar.setVisibility(View.GONE);
+                    error.setVisibility(View.VISIBLE);
+
                     return;
                 }
+
+
                 progressBar.setVisibility(View.GONE);
                 MapsBeatsaver mapsExtra = response.body();
                 if (beatsaverMapAdapter.getItemCount() == 0) {
@@ -182,8 +175,8 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         SetOnClickListener();
         mapsbeatsaverRV = view.findViewById(R.id.recycler_view_profile_maps_beatsaver);
         beatsaverMapAdapter.setlistener(listener);
-        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(getContext()));
-        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mapsbeatsaverRV.setLayoutManager(new LinearLayoutManager(context));
+        mapsbeatsaverRV.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         mapsbeatsaverRV.setAdapter(beatsaverMapAdapter);
     }
 
@@ -192,15 +185,30 @@ public class Beatsaver_RV extends Fragment implements Serializable {
         listener = new BeatsaverMapAdapter.RVClickListener() {
             @Override
             public void onClick(BeatsaverMap beatsaverMap) {
+
                 Log.d(TAG, "onClick: setonclicklistenet: " + beatsaverMap.toString());
-
-//                Toast.makeText(context, "Testing", Toast.LENGTH_LONG).show();
-
                 Intent intent = new Intent(getContext(), BeatsaverMapInfo.class);
                 intent.putExtra("ree", beatsaverMap);
                 startActivity(intent);
 
             }
         };
+    }
+
+    @Override
+    public void sorting(String input) {
+        Log.d(TAG, "sorting: " + input);
+        if (sorting != input) {
+            sorting = input;
+            page_number = 0;
+            beatsaverMapAdapter.deleteData();
+            progressBar.setVisibility(View.VISIBLE);
+            pastVisibleItems = 0;
+            visibleItemCount = 0;
+            totalItemCount = 0;
+            previous_total = 0;
+            getMaps(sorting, page_number);
+
+        }
     }
 }
