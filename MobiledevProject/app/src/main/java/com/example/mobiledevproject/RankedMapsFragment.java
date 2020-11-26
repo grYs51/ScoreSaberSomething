@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobiledevproject.Adapters.RV.RankedMapsAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
-import com.example.mobiledevproject.Models.RankedMaps.RankedMap;
 import com.example.mobiledevproject.Models.RankedMaps.RankedMapsList;
 
 import retrofit2.Call;
@@ -117,8 +116,6 @@ public class RankedMapsFragment extends Fragment {
                     rankedMapsAdapter.addData(rankedMapsListresponse);
                 }
                 rankedMapsAdapter.notifyItemRangeInserted(rankedMapsAdapter.getItemCount() - rankedMapsListresponse.getRankedMaps().size(), rankedMapsListresponse.getRankedMaps().size());
-
-
 
             }
 

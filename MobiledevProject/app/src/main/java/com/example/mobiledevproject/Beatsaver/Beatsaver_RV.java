@@ -1,17 +1,14 @@
 package com.example.mobiledevproject.Beatsaver;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -98,15 +95,11 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             @Override
             public void onClick(View v) {
 
-                if(beatsaverMapAdapter.getItemCount() != 0){
+                if (beatsaverMapAdapter.getItemCount() != 0) {
                     FilterDialog dialog = new FilterDialog(sorting);
                     dialog.setTargetFragment(Beatsaver_RV.this, 1);
                     dialog.show(getParentFragmentManager(), "FilterDialog");
                 }
-//                Toast.makeText(getContext(), "Show filter", Toast.LENGTH_SHORT).show();
-
-
-
             }
         });
     }
@@ -204,13 +197,16 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
 
     @Override
     public void sorting(String input) {
-        Log.d(TAG, "sorting: "+input);
-        if(sorting != input){
+        Log.d(TAG, "sorting: " + input);
+        if (sorting != input) {
             sorting = input;
             page_number = 0;
             beatsaverMapAdapter.deleteData();
             progressBar.setVisibility(View.VISIBLE);
-            pastVisibleItems = 0; visibleItemCount = 0; totalItemCount = 0; previous_total = 0;
+            pastVisibleItems = 0;
+            visibleItemCount = 0;
+            totalItemCount = 0;
+            previous_total = 0;
             getMaps(sorting, page_number);
 
         }

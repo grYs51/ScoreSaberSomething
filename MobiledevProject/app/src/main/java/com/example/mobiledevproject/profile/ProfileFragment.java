@@ -58,7 +58,6 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         } else {
             createPager(playerImported);
         }
-
     }
 
     public void sendInput(String input) {
@@ -71,7 +70,6 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         editor.apply();
 
         createPager(input);
-
 
     }
 

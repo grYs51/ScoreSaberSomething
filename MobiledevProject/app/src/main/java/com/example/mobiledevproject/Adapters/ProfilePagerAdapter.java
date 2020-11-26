@@ -10,7 +10,6 @@ import com.example.mobiledevproject.profile.Fragments.profile_Recent_songs;
 import com.example.mobiledevproject.profile.Fragments.profile_Top_Songs;
 import com.example.mobiledevproject.profile.Fragments.profile_User_Profile;
 
-
 public class ProfilePagerAdapter extends FragmentPagerAdapter {
 
     private String tabTitles[] = new String[]{"Profile", "Top Songs", "Recent Songs"};
@@ -33,8 +32,9 @@ public class ProfilePagerAdapter extends FragmentPagerAdapter {
                 return new profile_Top_Songs(input);
             case 2:
                 return new profile_Recent_songs(input);
+            default:
+                return null;
         }
-        return null;
     }
 
     @Override

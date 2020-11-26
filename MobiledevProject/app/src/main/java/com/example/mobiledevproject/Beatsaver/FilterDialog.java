@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
 
 import android.os.Handler;
 import android.util.Log;
@@ -30,16 +29,17 @@ public class FilterDialog extends DialogFragment {
     public interface ReturnSorting {
         void sorting(String input);
     }
+
     ReturnSorting returnSorting;
 
-    public FilterDialog(String sorting){
+    public FilterDialog(String sorting) {
         this.sorting = sorting;
     }
 
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
-        
+
         returnSorting.sorting(sorting);
         super.onDismiss(dialog);
 
@@ -111,7 +111,7 @@ public class FilterDialog extends DialogFragment {
         });
     }
 
-    private void dismissdelay(){
+    private void dismissdelay() {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -129,7 +129,7 @@ public class FilterDialog extends DialogFragment {
         downloads.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.tablayout_selected));
         plays.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.tablayout_selected));
 
-        switch (sorting.toLowerCase()){
+        switch (sorting.toLowerCase()) {
             case "hot":
                 hot.setBackground(ContextCompat.getDrawable(getContext(), R.drawable.tablayout_unselected));
                 break;
@@ -153,7 +153,7 @@ public class FilterDialog extends DialogFragment {
         super.onAttach(context);
         try {
             returnSorting = (ReturnSorting) getTargetFragment();
-        } catch (ClassCastException e){
+        } catch (ClassCastException e) {
             Log.d(TAG, "onAttach: ClassCastExeption" + e.getMessage());
         }
     }

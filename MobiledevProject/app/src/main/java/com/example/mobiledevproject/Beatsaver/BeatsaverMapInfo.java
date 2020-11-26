@@ -7,7 +7,6 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,13 +20,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.mobiledevproject.Adapters.InfoPagerAdapter;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Shared.GetSpecificStringLength;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class BeatsaverMapInfo extends AppCompatActivity {

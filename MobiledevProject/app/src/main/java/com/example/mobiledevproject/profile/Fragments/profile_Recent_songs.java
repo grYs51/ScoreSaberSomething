@@ -134,8 +134,6 @@ public class profile_Recent_songs extends Fragment {
 
             }
         });
-
-
     }
 
     private void recyclerView(View view) {

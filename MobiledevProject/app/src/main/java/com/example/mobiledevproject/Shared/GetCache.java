@@ -1,17 +1,10 @@
 package com.example.mobiledevproject.Shared;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.os.Build;
-import android.widget.TextView;
-
-import com.example.mobiledevproject.R;
 
 import java.io.File;
 import java.text.DecimalFormat;
 
-import static android.content.Context.ACTIVITY_SERVICE;
-import static androidx.core.content.ContextCompat.getSystemService;
 
 public class GetCache {
 

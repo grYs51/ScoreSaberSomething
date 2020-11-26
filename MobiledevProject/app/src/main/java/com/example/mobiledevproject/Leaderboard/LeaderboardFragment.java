@@ -117,7 +117,6 @@ public class LeaderboardFragment extends Fragment  {
     }
 
     private void getLeaderboardPlayers(int page_number) {
-        Log.d(TAG, "getLeaderboardPlayers: getData: "+page_number);
 
         playersCall = ApiClient.getLeaderboardPlayers().getLeaderBoardPlayers(Integer.toString(page_number));
 

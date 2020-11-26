@@ -1,7 +1,6 @@
 package com.example.mobiledevproject.Beatsaver.BeatSaverMapInfo.ViewPager;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.mobiledevproject.Beatsaver.BeatsaverMapInfo;
 import com.example.mobiledevproject.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.WebViewMap;
@@ -33,7 +31,7 @@ public class DifficultyInfoPar extends Fragment {
 
     SpecificDiffSpec specificDiffSpec;
     LinearLayout hasNotes, noNotes;
-    int color, duration;
+    int duration;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     Button playbutton;
 
@@ -42,7 +40,6 @@ public class DifficultyInfoPar extends Fragment {
 
     public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec, int duration, String key) {
         this.specificDiffSpec = specificDiffSpec;
-        this.color = color;
         this.duration = duration;
         this.key = key;
     }
@@ -60,22 +57,21 @@ public class DifficultyInfoPar extends Fragment {
         playbutton = view.findViewById(R.id.mapButton);
 
         if (specificDiffSpec != null) {
-            if(specificDiffSpec.getNotes() != 0){
+            if (specificDiffSpec.getNotes() != 0) {
                 if (duration != 0) {
                     notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
                 } else {
 
                 }
                 bombs.setText(specificDiffSpec.getBombs() + "");
-                njs.setText(df2.format(specificDiffSpec.getNjs())  + "");
+                njs.setText(df2.format(specificDiffSpec.getNjs()) + "");
             } else {
                 hasNotes.setVisibility(View.GONE);
                 noNotes.setVisibility(View.VISIBLE);
                 playbutton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://skystudioapps.com/bs-viewer/?id="+key)));
-                        String url = "https://skystudioapps.com/bs-viewer/?id="+key;
+                        String url = "https://skystudioapps.com/bs-viewer/?id=" + key;
                         Log.d(TAG, "onClick: " + url);
                         Intent intent = new Intent(getContext(), WebViewMap.class);
                         intent.putExtra("page", url);
@@ -84,11 +80,9 @@ public class DifficultyInfoPar extends Fragment {
                 });
             }
 
-
         } else {
             hasNotes.setVisibility(View.GONE);
         }
-
 
         return view;
     }

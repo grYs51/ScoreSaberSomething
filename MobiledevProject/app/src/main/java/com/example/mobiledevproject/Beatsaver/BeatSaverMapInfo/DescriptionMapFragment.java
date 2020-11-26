@@ -27,7 +27,8 @@ public class DescriptionMapFragment extends Fragment {
 
     Button button;
     TextView description;
-    public DescriptionMapFragment(BeatsaverMap beatsaverMap){
+
+    public DescriptionMapFragment(BeatsaverMap beatsaverMap) {
         this.beatsaverMap = beatsaverMap;
     }
 
@@ -44,26 +45,22 @@ public class DescriptionMapFragment extends Fragment {
         button = view.findViewById(R.id.mapButton);
         description = view.findViewById(R.id.description);
 
-        if( beatsaverMap.getDescription() == ""){
+        if (beatsaverMap.getDescription() == "") {
             description.setText("No Description given!");
-        } else{
+        } else {
             description.setText(StringEscapeUtils.escapeHtml4(beatsaverMap.getDescription()));
         }
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://skystudioapps.com/bs-viewer/?id="+key)));
-                String url = "https://skystudioapps.com/bs-viewer/?id="+beatsaverMap.getKey();
+                String url = "https://skystudioapps.com/bs-viewer/?id=" + beatsaverMap.getKey();
                 Log.d(TAG, "onClick: " + url);
                 Intent intent = new Intent(getContext(), WebViewMap.class);
                 intent.putExtra("page", url);
                 startActivity(intent);
             }
         });
-
-
 
         return view;
     }

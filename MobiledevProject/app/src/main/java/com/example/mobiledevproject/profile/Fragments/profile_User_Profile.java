@@ -81,7 +81,6 @@ public class profile_User_Profile extends Fragment {
         cardShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), "Still working on!", Toast.LENGTH_SHORT).show();
                 Bitmap bitmap = getBitmapFromView(view);
                 Uri uri = saveImage(bitmap);
                 shareImageUri(uri);
