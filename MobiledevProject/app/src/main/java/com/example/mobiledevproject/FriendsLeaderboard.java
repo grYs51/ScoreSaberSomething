@@ -23,11 +23,8 @@ import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Friends.FriendList;
 import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.PlayerProfile.Player;
+import com.example.mobiledevproject.Shared.Friends;
 import com.example.mobiledevproject.profile.DialogScoresaberFragment;
-import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -41,15 +38,16 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     RecyclerView recyclerView;
     LeaderBoardFriendAdapter leaderBoardPlayerAdapter;
     String playerId;
-    FriendList friendList;
     SharedPreferences sharedPref;
-    Gson gson = new Gson();
+    Friends friends;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         leaderBoardPlayerAdapter = new LeaderBoardFriendAdapter(getActivity());
+
+        friends = new Friends(getActivity().getPreferences(getActivity().MODE_PRIVATE));
 
         getUserId();
 
@@ -93,9 +91,11 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
             case R.id.removePlayer:
 
                 Log.d(TAG, "onContextItemSelected: onclick: Delete");
-                String player = friendList.getFriends().get(position).getName();
-                friendList.getFriends().remove(position);
-                SaveFriendList();
+                String player = friends.getFriendList().getFriends().get(position).getName();
+
+                friends.getFriendList().getFriends().remove(position);
+                friends.SaveFriendList();
+
                 leaderBoardPlayerAdapter.RemovePlayer(position);
                 leaderBoardPlayerAdapter.notifyDataSetChanged();
                 Toast.makeText(getContext(), "Player: " + player + " removed!", Toast.LENGTH_SHORT).show();
@@ -103,27 +103,6 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
                 break;
         }
         return super.onContextItemSelected(item);
-    }
-
-    //TODO: seperate class
-    private void SaveFriendList() {
-        String json = gson.toJson(friendList);
-        Log.d(TAG, "onResponse: json: " + json);
-        SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("playerFriends", json);
-        editor.apply();
-    }
-
-    //TODO: seperate class
-    private Boolean checkIfExist(String id) {
-        if (friendList.getFriends() != null) {
-            for (FriendsSharedPref fr : friendList.getFriends()) {
-                if (fr.getId().equals(id))
-                    return true;
-            }
-        }
-        return false;
     }
 
     private void getPlayer(String id) {
@@ -150,18 +129,8 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
                 fSP.setName(player.getPlayer_info().getPlayer_Name());
                 fSP.setAvatar(player.getPlayer_info().getAvatar());
 
+                friends.SaveFriend(fSP);
 
-                //TODO: seperate
-                //object fsp
-                if (friendList.getFriends() == null) {
-                    List<FriendsSharedPref> friends = new ArrayList<>();
-                    friends.add(fSP);
-                    friendList.setFriends(friends);
-                } else {
-                    friendList.getFriends().add(fSP);
-                }
-
-                SaveFriendList();
                 Log.d(TAG, "onResponse: Player saved");
 
                 leaderBoardPlayerAdapter.addData(fSP, player);
@@ -196,17 +165,14 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     //TODO: seperate class
     private void getFriends() {
 
-        Gson gson = new Gson();
-        String json = sharedPref.getString("playerFriends", null);
-        Log.d(TAG, "getFriends: " + json);
-        friendList = gson.fromJson(json, FriendList.class);
-        if (friendList != null) {
-            leaderBoardPlayerAdapter.setData(friendList);
+        if (friends.getFriendList() != null) {
+            leaderBoardPlayerAdapter.setData(friends.getFriendList());
         } else {
-            friendList = new FriendList();
-            friendList.setFriends(null);
+            FriendList tempfriend = new FriendList();
+            tempfriend.setFriends(null);
+            friends.setFriendList(tempfriend);
         }
-        Log.d(TAG, "getFriends: " + friendList.toString());
+
     }
 
     private void init_RV(View view) {
@@ -229,9 +195,9 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     }
 
     private void addPerson() {
-        Log.d(TAG, "addPerson: " + friendList.toString());
-        if (friendList.getFriends() != null) {
-            if (friendList.getFriends().size() >= 7) {
+        Log.d(TAG, "addPerson: " + friends.getFriendList().toString());
+        if (friends.getFriendList().getFriends() != null) {
+            if (friends.getFriendList().getFriends().size() >= 7) {
                 Toast.makeText(getActivity(), "Max 7 players!", Toast.LENGTH_SHORT).show();
             } else {
                 showDialog();
@@ -244,8 +210,8 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     public void sendInput(String id) {
         Log.d(TAG, "sendInput: found incoming input: " + id);
 
-
-        if (checkIfExist(id)) {
+        //todo friends
+        if (friends.checkIfExist(id)) {
             Log.d(TAG, "sendInput: Exist");
             Toast.makeText(getActivity(), "Player already exist", Toast.LENGTH_LONG).show();
         } else {

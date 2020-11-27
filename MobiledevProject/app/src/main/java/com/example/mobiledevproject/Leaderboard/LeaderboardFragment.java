@@ -18,9 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mobiledevproject.Adapters.RV.LeaderBoardPlayerAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
+import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.ProfileNotOwner;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.Shared.Friends;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +36,8 @@ public class LeaderboardFragment extends Fragment  {
     private RecyclerView leaderboardRV;
     LeaderBoardPlayerAdapter leaderBoardPlayerAdapter;
     Call<LeaderboardPlayers> playersCall;
+    Friends friends;
+
     private int page_Number = 1;
 
     //vars
@@ -45,6 +49,7 @@ public class LeaderboardFragment extends Fragment  {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         leaderBoardPlayerAdapter = new LeaderBoardPlayerAdapter();
+        friends = new Friends(getActivity().getPreferences(getActivity().MODE_PRIVATE));
     }
 
     @Nullable
@@ -80,6 +85,12 @@ public class LeaderboardFragment extends Fragment  {
                 break;
             case R.id.addToFriends:
                 Log.d(TAG, "onContextItemSelected: Add to Friends");
+
+                //TODO: finish
+                FriendsSharedPref friendsSharedPref = new FriendsSharedPref();
+
+
+
                 break;
         }
 
