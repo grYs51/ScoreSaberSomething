@@ -72,6 +72,7 @@ public class InfoMapFragment extends Fragment {
 
 
     private void findViews(View view) {
+
         //info
         title = view.findViewById(R.id.infoSongName);
         mapper = view.findViewById(R.id.infoMapper);
@@ -92,10 +93,12 @@ public class InfoMapFragment extends Fragment {
             i = Instant.parse(dt);
             Log.d(TAG, "onCreateView: " + p.format(Date.from(i)));
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
+
         } catch (DateTimeParseException dtpe) {
 
             Log.d(TAG, "catch: " + dtpe);
             mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName());
+
         }
 
         songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());

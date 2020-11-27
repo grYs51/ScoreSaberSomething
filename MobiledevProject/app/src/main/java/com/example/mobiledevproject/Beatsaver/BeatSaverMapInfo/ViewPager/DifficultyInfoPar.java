@@ -59,13 +59,15 @@ public class DifficultyInfoPar extends Fragment {
         if (specificDiffSpec != null) {
             if (specificDiffSpec.getNotes() != 0) {
                 if (duration != 0) {
+
                     notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
-                } else {
 
                 }
+
                 bombs.setText(specificDiffSpec.getBombs() + "");
                 njs.setText(df2.format(specificDiffSpec.getNjs()) + "");
             } else {
+
                 hasNotes.setVisibility(View.GONE);
                 noNotes.setVisibility(View.VISIBLE);
                 playbutton.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +78,15 @@ public class DifficultyInfoPar extends Fragment {
                         Intent intent = new Intent(getContext(), WebViewMap.class);
                         intent.putExtra("page", url);
                         startActivity(intent);
+
                     }
                 });
+
             }
 
         } else {
             hasNotes.setVisibility(View.GONE);
+
         }
 
         return view;
