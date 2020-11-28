@@ -17,6 +17,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.R;
@@ -36,6 +37,7 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
     }
     public void setPosition(int position) { this.position = position; }
     public String getPlayerId(int position){ return leaderboardPlayers.getPlayers().get(position).getPlayerId(); }
+    public LPlayer getplayerData (int position){ return leaderboardPlayers.getPlayers().get(position); }
     public void setData(LeaderboardPlayers leaderboardPlayers) {
         this.leaderboardPlayers = leaderboardPlayers;
     }

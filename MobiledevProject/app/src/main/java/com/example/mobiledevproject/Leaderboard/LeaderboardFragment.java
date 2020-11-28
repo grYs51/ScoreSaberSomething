@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mobiledevproject.Adapters.RV.LeaderBoardPlayerAdapter;
 import com.example.mobiledevproject.ApiCall.ApiClient;
 import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
+import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.ProfileNotOwner;
 import com.example.mobiledevproject.R;
@@ -86,9 +88,33 @@ public class LeaderboardFragment extends Fragment  {
             case R.id.addToFriends:
                 Log.d(TAG, "onContextItemSelected: Add to Friends");
 
-                //TODO: finish
-                FriendsSharedPref friendsSharedPref = new FriendsSharedPref();
+                
+                
+                FriendsSharedPref fSP = new FriendsSharedPref();
 
+                fSP.setName(leaderBoardPlayerAdapter.getplayerData(position).getPlayerName());
+                fSP.setId(leaderBoardPlayerAdapter.getplayerData(position).getPlayerId());
+                fSP.setAvatar(leaderBoardPlayerAdapter.getplayerData(position).getAvatar());
+                //TODO: finish
+//                Log.d(TAG, "onContextItemSelected: " + leaderBoardPlayerAdapter.getplayerData(position).toString());
+                if(friends.checkIfExist(leaderBoardPlayerAdapter.getplayerData(position).getPlayerId())){
+                    Log.d(TAG, "onContextItemSelected: Exist");
+                    Toast.makeText(getActivity(), "Player already in friendlist", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.d(TAG, "onContextItemSelected: Doesn't");
+                    if (friends.getFriendList().getFriends() != null) {
+                        if (friends.getFriendList().getFriends().size() >= 7) {
+                            Toast.makeText(getActivity(), "Max 7 players in friendlist!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            friends.SaveFriend(fSP);
+                            Toast.makeText(getActivity(), "Friend succesfully added to your friendlist", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        friends.SaveFriend(fSP);
+                        Toast.makeText(getActivity(), "Friend succesfully added to your friendlist", Toast.LENGTH_SHORT).show();
+
+                    }
+                }
 
 
                 break;
