@@ -75,8 +75,6 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
 
         Glide.with(context)
                 .load("https://new.scoresaber.com" + player.getAvatar())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
                 .into(holder.avatar);
 
         // TODO: Update placeholder
@@ -84,8 +82,6 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
 
         Glide.with(context)
                 .load("https://new.scoresaber.com/api/static/flags/" + player.getCountry().toLowerCase()+ ".png")
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
                 .into(holder.flag);
 
         if (player.getDifference() > 0){

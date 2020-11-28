@@ -97,7 +97,6 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         // TODO: Update placeholder
         Glide.with(context)
                 .load("https://scoresaber.com/imports/images/songs/" + scoresaberMap.getSongHash() + ".png")
-                .error(R.drawable.leaderbord)  // has to change
                 .into(holder.mapImage);
     }
 

@@ -172,14 +172,11 @@ public class profile_User_Profile extends Fragment {
         Glide.with(getContext())
                 .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
                 .centerCrop()
-                .placeholder(R.drawable.leaderbord)
                 .into(profile_User_Image);
         // TODO: Update placeholder
 
         Glide.with(getContext())
                 .load("https://new.scoresaber.com/api/static/flags/" + playerPlayerInfo.getCountry().toLowerCase() + ".png")
-                .placeholder(R.drawable.profile)
-                .error(R.drawable.leaderbord)
                 .into(profile_User_Country_Flag);
 
         //header?
@@ -192,7 +189,6 @@ public class profile_User_Profile extends Fragment {
             Glide.with(getContext())
                     .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
                     .centerCrop()
-                    .placeholder(R.drawable.leaderbord)
                     .into(headerImage);
         }
 

@@ -145,8 +145,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         //TODO: change placeholder
         Glide.with(context)
                 .load("https://new.scoresaber.com" + testings.get(position).getFriendsSharedPref().getAvatar())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
                 .into(holder.avatar);
 
 
@@ -206,8 +204,6 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
         Glide.with(context)
                 .load("https://new.scoresaber.com/api/static/flags/" + lPlayer.getPlayer_info().getCountry().toLowerCase() + ".png")
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
                 .into(holder.flag);
 
         String historyString = lPlayer.getPlayer_info().getHistory();

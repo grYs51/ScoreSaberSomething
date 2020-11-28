@@ -210,7 +210,7 @@ public class FriendsLeaderboard extends Fragment implements DialogScoresaberFrag
     public void sendInput(String id) {
         Log.d(TAG, "sendInput: found incoming input: " + id);
 
-        //todo friends
+        //TODO: friends
         if (friends.checkIfExist(id)) {
             Log.d(TAG, "sendInput: Exist");
             Toast.makeText(getActivity(), "Player already exist", Toast.LENGTH_LONG).show();

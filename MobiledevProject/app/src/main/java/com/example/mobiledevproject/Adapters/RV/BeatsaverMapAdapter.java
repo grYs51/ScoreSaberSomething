@@ -87,8 +87,6 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     // TODO: Update placeholder
         Glide.with(context)
                 .load("https://beatsaver.com" + map.getCoverURL())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
                 .into(holder.mapImage);
     }
 
