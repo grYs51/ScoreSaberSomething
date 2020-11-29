@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/beatsaver_RV"
-        android:name="com.example.mobiledevproject.Beatsaver.Beatsaver_RV"
+        android:name="be.grys.scoresabersomething.Beatsaver.Beatsaver_RV"
         android:label="fragment_beatsaver_maps_rv"
         tools:layout="@layout/fragment_beatsaver_maps_rv" />
 

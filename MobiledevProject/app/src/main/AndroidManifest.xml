@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mobiledevproject">
+    package="be.grys.scoresabersomething">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -14,7 +14,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.mobiledevproject.fileprovider"
+            android:authorities="be.grys.scoresabersomething.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
