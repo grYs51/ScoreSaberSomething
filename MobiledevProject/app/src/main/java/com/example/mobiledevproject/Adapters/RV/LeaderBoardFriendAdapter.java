@@ -62,8 +62,8 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         return testings.get(position).getFriendsSharedPref().getId();
     }
     public void setData(FriendList friendList) {
-        if (friendList != null) {
 
+        if (friendList.getFriends() != null) {
             for (FriendsSharedPref fr : friendList.getFriends()) {
                 Testing fullPlayer = new Testing();
                 fullPlayer.setFriendsSharedPref(fr);

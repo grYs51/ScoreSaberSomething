@@ -1,42 +1,43 @@
-<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory
-        app:title="Player">
+    <PreferenceCategory app:title="Player">
 
         <Preference
             android:key="user_Id"
-            android:title="Player Id"
             android:summary="None"
-            app:enableCopying="true"/>
+            android:title="Player Id"
+            app:enableCopying="true" />
 
         <Preference
             android:key="remove_Player"
-            android:title="Remove Player"
             android:selectable="true"
-            />
-
+            android:title="Remove Player" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        android:title="Storage">
+    <PreferenceCategory android:title="Storage">
 
         <Preference
             android:key="used_Storage"
-            android:title="Used Cache"
-            android:summary="50 mb"/>
+            android:summary="50 mb"
+            android:title="Used Cache" />
 
     </PreferenceCategory>
 
-    <PreferenceCategory
-        app:title="About the app">
+    <PreferenceCategory app:title="About the app">
 
+        <Preference android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^" />
         <Preference
-            android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^"/>
-        <Preference
-            android:title="Any Problems?"
-            android:summary="grYs#0011 (discord)"/>
+            android:summary="grYs#0011 (discord)"
+            android:title="Any Problems?" />
 
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="Thank you">
+
+        <Preference android:summary="Big thanks to Scoresaber and Beatsaver for their Api."/>
+
+    </PreferenceCategory>
+
 </PreferenceScreen>

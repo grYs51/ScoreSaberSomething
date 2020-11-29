@@ -1,24 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/leaderboard_Linear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/greyText"
-    >
-
-
+    android:background="@color/greyText">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/item_leaderboardPlayerCard"
-        android:contextClickable="true"
-        android:foreground="?android:attr/selectableItemBackground"
-        android:layout_marginStart="-40dp"
-        android:layout_marginEnd="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
+        android:layout_marginStart="-40dp"
+        android:layout_marginEnd="10dp"
+        android:contextClickable="true"
+        android:foreground="?android:attr/selectableItemBackground"
         android:longClickable="true"
+        android:padding="5dp"
         app:cardCornerRadius="100dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,12 +23,11 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp">
 
-
             <com.makeramen.roundedimageview.RoundedImageView
-                android:layout_marginStart="42dp"
                 android:id="@+id/leaderboard_ImagePlayer"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
+                android:layout_marginStart="42dp"
                 android:scaleType="centerCrop"
                 android:src="@color/subtitle_color"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -40,59 +36,53 @@
                 app:riv_oval="true" />
 
             <ImageView
-
                 android:id="@+id/leaderboard_Local_Flag"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginTop="7dp"
-                app:layout_constraintLeft_toRightOf="@id/leaderboard_ImagePlayer"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:layout_gravity="center"
-                />
+                android:layout_marginHorizontal="5dp"
+                android:layout_marginTop="7dp"
+                app:layout_constraintLeft_toRightOf="@id/leaderboard_ImagePlayer"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/leaderboard_PlayerName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="5dp"
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="30dp"
-                android:layout_marginVertical="5dp"
+                android:maxLines="1"
                 android:text="Player"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/leaderboard_Local_Flag"
-                app:layout_constraintTop_toTopOf="parent"
-                android:maxLines="1"
-                />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/leaderboard_Pp"
-                android:layout_marginHorizontal="4dp"
-                android:layout_marginTop="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/leaderboard_Local_Flag"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginTop="15dp"
+                android:text=""
                 app:layout_constraintLeft_toLeftOf="@id/leaderboard_Local_Flag"
-                android:text=""/>
+                app:layout_constraintTop_toBottomOf="@id/leaderboard_Local_Flag" />
 
             <TextView
                 android:id="@+id/leaderboard_Position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
-                android:textSize="18sp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_marginEnd="25dp"
+                android:text=""
+                android:textColor="@color/bottom_bar_color"
+                android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/bottom_bar_color"/>
-
-
-
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

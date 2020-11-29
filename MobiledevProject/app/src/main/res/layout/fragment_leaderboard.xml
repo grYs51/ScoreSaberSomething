@@ -5,13 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".Leaderboard.LeaderboardFragment">
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/RV_Leaderboard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scrollbars="vertical"
-        tools:listitem="@layout/item_leaderboard_player"/>
-    
+        tools:listitem="@layout/item_leaderboard_player" />
 
 </FrameLayout>

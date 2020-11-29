@@ -1,99 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Beatsaver.FilterDialog"
-    android:padding="5dp">
+    android:padding="5dp"
+    tools:context=".Beatsaver.FilterDialog">
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginStart="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="Sorting"
-            android:textSize="20dp"/>
+            android:textSize="20dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/greyText"
-            android:layout_marginBottom="15dp"/>
+            android:layout_marginBottom="15dp"
+            android:background="@color/greyText" />
 
         <com.google.android.flexbox.FlexboxLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
-            app:flexWrap="wrap"
-            app:alignItems="stretch"
-            app:alignContent="stretch"
             android:orientation="horizontal"
-            >
+            app:alignContent="stretch"
+            app:alignItems="stretch"
+            app:flexWrap="wrap">
 
             <TextView
                 android:id="@+id/filterHot"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Hot"
+                android:background="@drawable/tablayout_selected"
                 android:paddingHorizontal="25dp"
-                android:background="@drawable/tablayout_selected"/>
+                android:paddingVertical="5dp"
+                android:text="Hot"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/filterRating"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Rating"
+                android:background="@drawable/tablayout_selected"
                 android:paddingHorizontal="25dp"
-                android:background="@drawable/tablayout_selected"/>
+                android:paddingVertical="5dp"
+                android:text="Rating"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/filterLatest"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Latest"
+                android:background="@drawable/tablayout_selected"
                 android:paddingHorizontal="25dp"
-                android:background="@drawable/tablayout_selected"/>
+                android:paddingVertical="5dp"
+                android:text="Latest"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/filterDownloads"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Downloads"
+                android:background="@drawable/tablayout_selected"
                 android:paddingHorizontal="25dp"
-                android:background="@drawable/tablayout_selected"/>
+                android:paddingVertical="5dp"
+                android:text="Downloads"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/filterPlays"
-                android:textStyle="bold"
-                android:textColor="@color/white"
-                android:paddingVertical="5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="17sp"
-                android:text="Plays"
+                android:background="@drawable/tablayout_selected"
                 android:paddingHorizontal="25dp"
-                android:background="@drawable/tablayout_selected"/>
+                android:paddingVertical="5dp"
+                android:text="Plays"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
 
         </com.google.android.flexbox.FlexboxLayout>
 

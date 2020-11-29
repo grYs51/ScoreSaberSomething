@@ -57,7 +57,15 @@ public class Friends {
         String json = sharedPref.getString("playerFriends", null);
         Log.d(TAG, "getFriends: " + json);
         friendList = gson.fromJson(json, FriendList.class);
+        if( friendList == null){
+            friendList = new FriendList();
+            friendList.setFriends(null);
+            SaveFriendList();
+        }
+
         return friendList;
+
+
     }
 
     public void SaveFriend(FriendsSharedPref fSP){

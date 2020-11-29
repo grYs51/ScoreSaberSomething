@@ -59,13 +59,15 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="0.8dp"
-                android:layout_marginVertical="20dp" />
+                android:layout_marginVertical="20dp"
+                android:contentDescription="Divider" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -124,36 +126,6 @@
                         android:textAlignment="center" />
 
                 </LinearLayout>
-
-<!--                <LinearLayout-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_weight="1"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <com.google.android.material.imageview.ShapeableImageView-->
-<!--                        android:layout_width="35dp"-->
-
-<!--                        android:layout_height="35dp"-->
-<!--                        android:layout_gravity="center"-->
-<!--                        android:src="@drawable/ic_play_arrow"-->
-<!--                        android:tint="@color/black" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/infoSongPlays"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textStyle="bold"-->
-<!--                        tools:text="Plays" />-->
-
-<!--                    <TextView-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Plays"-->
-<!--                        android:textAlignment="center" />-->
-<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:layout_width="0dp"
