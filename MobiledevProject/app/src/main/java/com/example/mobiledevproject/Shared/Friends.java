@@ -17,7 +17,7 @@ public class Friends {
     FriendList friendList;
 
     public FriendList getFriendList() {
-        return friendList;
+        return getFriends();
     }
 
     public void setFriendList(FriendList friendList) {

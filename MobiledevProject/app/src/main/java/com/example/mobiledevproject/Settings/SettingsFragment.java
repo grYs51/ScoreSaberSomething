@@ -3,17 +3,25 @@ package com.example.mobiledevproject.Settings;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.mobiledevproject.R;
 import com.example.mobiledevproject.Shared.GetCache;
+import com.google.android.material.navigation.NavigationView;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "SettingFragment";
+
+    TextView headerRank,headerName;
+    ImageView headerImage;
     Preference player, playerRemove, storage, storageClear;
     String input;
     GetCache getCache;
@@ -26,6 +34,12 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         addPreferencesFromResource(R.xml.settings_preferences);
 
         setPreferencesView();
+
+        NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
+        View header = navigationView.getHeaderView(0);
+        headerRank = header.findViewById(R.id.header_rank);
+        headerName = header.findViewById(R.id.header_User);
+        headerImage = header.findViewById(R.id.imageProfile);
 
         getSharedPref();
 
@@ -44,7 +58,6 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 Log.d(TAG, "onPreferenceClick: buttonCLick");
-
                 editor.remove("playerId");
                 editor.commit();
                 getSharedPref();
@@ -59,6 +72,10 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             player.setSummary(input);
         } else {
             player.setSummary("None");
+            headerName.setText("User");
+            headerRank.setText("rank");
+            headerImage.setImageResource(android.R.color.transparent);
+
         }
 
     }

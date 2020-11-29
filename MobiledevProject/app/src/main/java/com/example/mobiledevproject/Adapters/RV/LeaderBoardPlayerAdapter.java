@@ -21,6 +21,7 @@ import com.example.mobiledevproject.Models.Friends.FriendsSharedPref;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LPlayer;
 import com.example.mobiledevproject.Models.LeaderboardPlayer.LeaderboardPlayers;
 import com.example.mobiledevproject.R;
+import com.example.mobiledevproject.Shared.GetSpecificStringLength;
 
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -30,7 +31,7 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
     LeaderboardPlayers leaderboardPlayers;
     private Context context;
     private int position;
-
+    GetSpecificStringLength specifLength = new GetSpecificStringLength();
 
     public int getPosition() {
         return position;
@@ -68,19 +69,17 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         });
 
 
-        holder.playerName.setText(player.getPlayerName());
+        holder.playerName.setText(specifLength.getShorterString(player.getPlayerName(), 50) );
         holder.playerRank.setText("#"+player.getRank());
         holder.playerpp.setText(player.getPp()+"pp");
 
         // TODO: Update placeholder
-
 
         Glide.with(context)
                 .load("https://new.scoresaber.com" + player.getAvatar())
                 .into(holder.avatar);
 
         // TODO: Update placeholder
-
 
         Glide.with(context)
                 .load("https://new.scoresaber.com/api/static/flags/" + player.getCountry().toLowerCase()+ ".png")
