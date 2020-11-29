@@ -30,7 +30,10 @@
         <Preference android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^" />
         <Preference
             android:summary="grYs#0011 (discord)"
-            android:title="Any Problems?" />
+            android:title="Any Problems?" >
+            <intent android:action="android.intent.action.VIEW"
+                android:data="https://discordapp.com/users/148824637004840961"/>
+        </Preference>
 
     </PreferenceCategory>
 
