@@ -61,8 +61,8 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         songImage = findViewById(R.id.infoImage);
                 Glide.with(getApplicationContext())
                 .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
-                .placeholder(R.drawable.about)
-                .error(R.drawable.leaderbord)
+                        .placeholder(R.color.colorPrimary)
+                        .error(R.color.colorPrimary)
                 .into(songImage);
 
         //setviewpager

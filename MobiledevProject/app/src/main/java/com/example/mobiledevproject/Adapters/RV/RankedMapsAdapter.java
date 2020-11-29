@@ -59,8 +59,6 @@ public class RankedMapsAdapter extends RecyclerView.Adapter<RankedMapsAdapter.Vi
 
         Glide.with(context)
                 .load("https://scoresaber.com/" + rankedMap.getImage())
-                .placeholder(R.drawable.profile) //has to change
-                .error(R.drawable.leaderbord)  // has to change
                 .into(holder.item_Map_image);
 
     }
