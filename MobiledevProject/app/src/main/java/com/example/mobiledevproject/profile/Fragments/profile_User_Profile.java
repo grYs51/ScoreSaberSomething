@@ -50,7 +50,7 @@ public class profile_User_Profile extends Fragment {
     private static DecimalFormat df2 = new DecimalFormat("#.##");
     String playerId;
     private Player player_response;
-    private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff;
+    private TextView profile_Username, profile_Rank_Global, profile_Rank_Local, profile_pp, profile_Average_Rank_Acc, profile_Diff, title_Text;
     private ImageView profile_User_Image, profile_User_Country_Flag;
     private CardView cardShare;
     private SwipeRefreshLayout pullToRefresh;
@@ -114,7 +114,6 @@ public class profile_User_Profile extends Fragment {
         profile_User_Country_Flag = view.findViewById(R.id.profile_Local_Flag);
         cardShare = view.findViewById(R.id.shareButton);
 
-
         //header?
         if (isOwner) {
             NavigationView navigationView = (NavigationView) getActivity().findViewById(R.id.navigationView);
@@ -122,6 +121,8 @@ public class profile_User_Profile extends Fragment {
             headerRank = header.findViewById(R.id.header_rank);
             headerName = header.findViewById(R.id.header_User);
             headerImage = header.findViewById(R.id.imageProfile);
+        } else {
+            title_Text = getActivity().findViewById(R.id.titleprofile);
         }
 
     }
@@ -183,13 +184,13 @@ public class profile_User_Profile extends Fragment {
         if (isOwner) {
             headerRank.setText("Rank: " + playerPlayerInfo.getRank());
             headerName.setText(playerPlayerInfo.getPlayer_Name());
-
             // TODO: Update placeholder
-
             Glide.with(getContext())
                     .load("https://new.scoresaber.com" + playerPlayerInfo.getAvatar().toLowerCase())
                     .centerCrop()
                     .into(headerImage);
+        } else {
+            title_Text.setText(playerPlayerInfo.getPlayer_Name());
         }
 
     }
