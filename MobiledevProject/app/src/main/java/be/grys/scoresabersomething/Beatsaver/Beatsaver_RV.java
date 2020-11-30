@@ -47,7 +47,7 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
     private int page_number = 0;
     //vars
     private boolean isLoading = true;
-    private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
+    private int failcount, pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 10;
 
     private String sorting = "hot";
@@ -165,8 +165,15 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             @Override
             public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
-                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
-                getMaps(sorting, page);
+//                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
+                if(failcount <5){
+                    failcount++;
+                    getMaps(sorting, page);
+                } else {
+//                    Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT).show();
+                    progressBar.setVisibility(View.GONE);
+                    error.setVisibility(View.VISIBLE);
+                }
             }
         });
     }

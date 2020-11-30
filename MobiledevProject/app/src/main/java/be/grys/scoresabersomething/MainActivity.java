@@ -2,6 +2,7 @@ package be.grys.scoresabersomething;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -10,6 +11,11 @@ import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,6 +40,26 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.addPerson);
         drawerLayout = findViewById(R.id.drawerLayout);
         searchView = findViewById(R.id.searchView);
+
+//        if(!isNetworkAvailable()){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage("Please turn wifi on the make this app functionable?")
+//                    .setCancelable(false)
+//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//                            wifi.setWifiEnabled(true); // true or false to activate/deactivate wifi
+//                        }
+//                    })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // Do Nothing or Whatever you want.
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
+//        }
 
 
         findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
@@ -60,6 +86,13 @@ public class MainActivity extends AppCompatActivity {
                 textTitle.setText(destination.getLabel());
             }
         });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }
