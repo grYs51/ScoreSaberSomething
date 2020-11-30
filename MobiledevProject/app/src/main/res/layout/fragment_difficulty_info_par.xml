@@ -9,79 +9,76 @@
         android:id="@+id/infoparLinear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:gravity="center_horizontal"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notes"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/InfoNotes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bombs"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/InfoBombs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Njs"
             android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/InfoNjs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"/>
+            android:layout_marginBottom="5dp" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="vertical"
-        android:gravity="center"
         android:id="@+id/infoparLinearifnonotes"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:visibility="gone"
-        >
-        <TextView
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            android:textAlignment="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
 
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="This maptype doesn't have any notes"/>
+            android:text="This maptype doesn't have any notes"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
 
         <Button
-            android:layout_margin="3dp"
-            android:backgroundTint="@color/colorPrimary"
             android:id="@+id/mapButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Preview map"
-            />
-
+            android:layout_margin="3dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Preview map" />
 
     </LinearLayout>
-    
 
 </FrameLayout>

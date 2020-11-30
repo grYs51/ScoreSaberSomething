@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".FriendsLeaderboard">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/RV_Friend_Leaderboard"
-    tools:listitem="@layout/item_leaderboard_player"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/RV_Friend_Leaderboard"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_leaderboard_player" />
 
 </FrameLayout>

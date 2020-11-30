@@ -7,33 +7,33 @@
 
     <fragment
         android:id="@+id/menuProfile"
-        android:name="com.example.mobiledevproject.profile.ProfileFragment"
+        android:name="be.grys.scoresabersomething.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile_adapter" />
 
     <fragment
         android:id="@+id/menuSettings"
-        android:name="com.example.mobiledevproject.Settings.SettingsFragment"
+        android:name="be.grys.scoresabersomething.Settings.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/menuLeaderboard"
-        android:name="com.example.mobiledevproject.Leaderboard.LeaderboardFragment"
+        android:name="be.grys.scoresabersomething.Leaderboard.LeaderboardFragment"
         android:label="Leaderboard"
         tools:layout="@layout/fragment_leaderboard" />
     <fragment
         android:id="@+id/menuMaps"
-        android:name="com.example.mobiledevproject.Beatsaver.BeatsaverFragment_adapter"
+        android:name="be.grys.scoresabersomething.Beatsaver.BeatsaverFragment_adapter"
         android:label="Maps"
         tools:layout="@layout/fragment_beatsaver_adapter" />
     <fragment
         android:id="@+id/menuRankedMaps"
-        android:name="com.example.mobiledevproject.RankedMapsFragment"
+        android:name="be.grys.scoresabersomething.RankedMapsFragment"
         android:label="Ranked Maps"
         tools:layout="@layout/fragment_ranked_maps" />
     <fragment
         android:id="@+id/menuFriends"
-        android:name="com.example.mobiledevproject.FriendsLeaderboard"
+        android:name="be.grys.scoresabersomething.FriendsLeaderboard"
         android:label="Friends"
         tools:layout="@layout/fragment_friends_leaderboard" />
 

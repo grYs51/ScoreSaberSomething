@@ -1,0 +1,98 @@
+package be.grys.scoresabersomething;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.NavDestination;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
+
+import android.content.Context;
+import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.SearchView;
+import android.widget.TextView;
+
+import com.google.android.material.navigation.NavigationView;
+
+import be.grys.scoresabersomething.R;
+
+
+public class MainActivity extends AppCompatActivity {
+    DrawerLayout drawerLayout;
+    private static final String TAG = "main";
+    ImageView imageView;
+    SearchView searchView;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        imageView = findViewById(R.id.addPerson);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        searchView = findViewById(R.id.searchView);
+
+//        if(!isNetworkAvailable()){
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setMessage("Please turn wifi on the make this app functionable?")
+//                    .setCancelable(false)
+//                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            WifiManager wifi = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+//                            wifi.setWifiEnabled(true); // true or false to activate/deactivate wifi
+//                        }
+//                    })
+//                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            // Do Nothing or Whatever you want.
+//                            dialog.cancel();
+//                        }
+//                    });
+//            AlertDialog alert = builder.create();
+//            alert.show();
+//        }
+
+
+        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: drawer");
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setItemIconTintList(null);
+        NavController navController = Navigation.findNavController(this, R.id.navHostFragment);
+
+        NavigationUI.setupWithNavController(navigationView, navController);
+
+        final TextView textTitle = findViewById(R.id.textTitle);
+        navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+                Log.d(TAG, "onCreate: " + destination);
+                imageView.setVisibility(View.GONE);
+                searchView.setVisibility(View.GONE);
+                textTitle.setText(destination.getLabel());
+            }
+        });
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+}
