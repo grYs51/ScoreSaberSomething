@@ -5,6 +5,7 @@ import android.util.Log;
 
 import be.grys.scoresabersomething.Models.Friends.FriendList;
 import be.grys.scoresabersomething.Models.Friends.FriendsSharedPref;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -27,9 +28,9 @@ public class Friends {
     Gson gson = new Gson();
     SharedPreferences sharedPref;
 
-    public Friends( SharedPreferences sharedPref){
-    this.sharedPref = sharedPref;
-    getFriends();
+    public Friends(SharedPreferences sharedPref) {
+        this.sharedPref = sharedPref;
+        getFriends();
     }
 
     public Boolean checkIfExist(String id) {
@@ -57,7 +58,7 @@ public class Friends {
         String json = sharedPref.getString("playerFriends", null);
         Log.d(TAG, "getFriends: " + json);
         friendList = gson.fromJson(json, FriendList.class);
-        if( friendList == null){
+        if (friendList == null) {
             friendList = new FriendList();
             friendList.setFriends(null);
             SaveFriendList();
@@ -68,7 +69,7 @@ public class Friends {
 
     }
 
-    public void SaveFriend(FriendsSharedPref fSP){
+    public void SaveFriend(FriendsSharedPref fSP) {
         if (friendList.getFriends() == null) {
             List<FriendsSharedPref> friends = new ArrayList<>();
             friends.add(fSP);

@@ -34,16 +34,26 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
     public int getPosition() {
         return position;
     }
-    public void setPosition(int position) { this.position = position; }
-    public String getPlayerId(int position){ return leaderboardPlayers.getPlayers().get(position).getPlayerId(); }
-    public LPlayer getplayerData (int position){ return leaderboardPlayers.getPlayers().get(position); }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
+
+    public String getPlayerId(int position) {
+        return leaderboardPlayers.getPlayers().get(position).getPlayerId();
+    }
+
+    public LPlayer getplayerData(int position) {
+        return leaderboardPlayers.getPlayers().get(position);
+    }
+
     public void setData(LeaderboardPlayers leaderboardPlayers) {
         this.leaderboardPlayers = leaderboardPlayers;
     }
+
     public void addData(LeaderboardPlayers leaderboardPlayers) {
         this.leaderboardPlayers.getPlayers().addAll(leaderboardPlayers.getPlayers());
     }
-
 
 
     @NonNull
@@ -67,9 +77,9 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         });
 
 
-        holder.playerName.setText(specifLength.getShorterString(player.getPlayerName(), 50) );
-        holder.playerRank.setText("#"+player.getRank());
-        holder.playerpp.setText(player.getPp()+"pp");
+        holder.playerName.setText(specifLength.getShorterString(player.getPlayerName(), 50));
+        holder.playerRank.setText("#" + player.getRank());
+        holder.playerpp.setText(player.getPp() + "pp");
 
         // TODO: Update placeholder
 
@@ -80,12 +90,12 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         // TODO: Update placeholder
 
         Glide.with(context)
-                .load("https://new.scoresaber.com/api/static/flags/" + player.getCountry().toLowerCase()+ ".png")
+                .load("https://new.scoresaber.com/api/static/flags/" + player.getCountry().toLowerCase() + ".png")
                 .into(holder.flag);
 
-        if (player.getDifference() > 0){
+        if (player.getDifference() > 0) {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.leaderboardUp));
-        } else if (player.getDifference() == 0){
+        } else if (player.getDifference() == 0) {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.greyText));
         } else {
             holder.linearLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.leaderboardDown));
@@ -94,7 +104,7 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
 
     @Override
     public int getItemCount() {
-        if (leaderboardPlayers == null){
+        if (leaderboardPlayers == null) {
             return 0;
         } else {
             return leaderboardPlayers.getPlayers().size();
@@ -106,6 +116,7 @@ public class LeaderBoardPlayerAdapter extends RecyclerView.Adapter<LeaderBoardPl
         TextView playerName, playerpp, playerRank;
         LinearLayout linearLayout;
         CardView cardView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemView.setOnCreateContextMenuListener(this);

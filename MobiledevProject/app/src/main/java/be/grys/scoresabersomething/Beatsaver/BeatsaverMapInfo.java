@@ -20,10 +20,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.Adapters.InfoPagerAdapter;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import be.grys.scoresabersomething.R;
 import be.grys.scoresabersomething.Shared.GetSpecificStringLength;
+
 import com.google.android.material.tabs.TabLayout;
 
 public class BeatsaverMapInfo extends AppCompatActivity {
@@ -35,6 +37,7 @@ public class BeatsaverMapInfo extends AppCompatActivity {
     ImageButton returnButton;
     ImageView songImage;
     GetSpecificStringLength getSpecificStringLength = new GetSpecificStringLength();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,7 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetaData().getSongName());
 
         songName = findViewById(R.id.InfoTitle);
-        songName.setText(getSpecificStringLength.getShorterString( beatsaverMap.getMetaData().getSongName(), 50));
+        songName.setText(getSpecificStringLength.getShorterString(beatsaverMap.getMetaData().getSongName(), 50));
 
 
         //return
@@ -59,10 +62,10 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         });
 
         songImage = findViewById(R.id.infoImage);
-                Glide.with(getApplicationContext())
+        Glide.with(getApplicationContext())
                 .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
-                        .placeholder(R.color.colorPrimary)
-                        .error(R.color.colorPrimary)
+                .placeholder(R.color.colorPrimary)
+                .error(R.color.colorPrimary)
                 .into(songImage);
 
         //setviewpager

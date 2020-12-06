@@ -38,5 +38,4 @@
         tools:layout="@layout/fragment_friends_leaderboard" />
 
 
-
 </navigation>

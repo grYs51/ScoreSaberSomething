@@ -54,7 +54,7 @@ public class ApiClient {
         return getRetrofit(scoresaber).create(LeaderboardPlayersApi.class);
     }
 
-    public static RankedMapsApi getRankedMapsApi(){
+    public static RankedMapsApi getRankedMapsApi() {
         return getRetrofit(scoresaberold).create(RankedMapsApi.class);
     }
 }

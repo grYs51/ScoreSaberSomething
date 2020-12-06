@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.Models.RankedMaps.RankedMap;
 import be.grys.scoresabersomething.Models.RankedMaps.RankedMapsList;
 import be.grys.scoresabersomething.R;
@@ -24,11 +25,11 @@ public class RankedMapsAdapter extends RecyclerView.Adapter<RankedMapsAdapter.Vi
 
 
     public void setData(RankedMapsList rankedMapsListresponse) {
-    this.rankedMapsList = rankedMapsListresponse;
+        this.rankedMapsList = rankedMapsListresponse;
     }
 
     public void addData(RankedMapsList rankedMapsListresponse) {
-    this.rankedMapsList.getRankedMaps().addAll(rankedMapsListresponse.getRankedMaps());
+        this.rankedMapsList.getRankedMaps().addAll(rankedMapsListresponse.getRankedMaps());
     }
 
     @NonNull
@@ -54,8 +55,8 @@ public class RankedMapsAdapter extends RecyclerView.Adapter<RankedMapsAdapter.Vi
         holder.item_levelAuthorName.setText(rankedMap.getLevelAuthorName());
 
         holder.item_plays.setText(rankedMap.getScores());
-        holder.item_plays24.setText(rankedMap.getScores_day()+"");
-        holder.item_stars.setText(rankedMap.getStars()+"");
+        holder.item_plays24.setText(rankedMap.getScores_day() + "");
+        holder.item_stars.setText(rankedMap.getStars() + "");
 
         Glide.with(context)
                 .load("https://scoresaber.com/" + rankedMap.getImage())
@@ -80,7 +81,7 @@ public class RankedMapsAdapter extends RecyclerView.Adapter<RankedMapsAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView item_Map_image, item_mapDiffColor;
-        TextView item_songName, item_songAuthorName, item_levelAuthorName, item_plays, item_plays24,item_stars;
+        TextView item_songName, item_songAuthorName, item_levelAuthorName, item_plays, item_plays24, item_stars;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

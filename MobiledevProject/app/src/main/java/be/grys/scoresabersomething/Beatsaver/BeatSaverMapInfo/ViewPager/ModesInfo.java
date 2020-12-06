@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import be.grys.scoresabersomething.Adapters.InfoDifficultyPagerAdapter;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.DifficultiesSpecs;
 import be.grys.scoresabersomething.R;
+
 import com.google.android.material.tabs.TabLayout;
 
 import static android.content.ContentValues.TAG;

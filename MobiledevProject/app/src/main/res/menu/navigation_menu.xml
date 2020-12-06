@@ -4,36 +4,41 @@
 
     <item android:title="@string/scoresaber">
         <menu>
-            <item android:id="@+id/menuLeaderboard"
+            <item
+                android:id="@+id/menuLeaderboard"
                 android:icon="@drawable/outline_leaderboard_black_24"
                 android:title="@string/leaderboard" />
 
-            <item android:id="@+id/menuMaps"
+            <item
+                android:id="@+id/menuMaps"
                 android:icon="@drawable/baseline_music_note_black_24"
                 android:iconTint="@color/black"
                 android:title="@string/maps" />
 
-            <item android:id="@+id/menuRankedMaps"
+            <item
+                android:id="@+id/menuRankedMaps"
                 android:icon="@drawable/scoresaber_logo"
                 android:title="@string/rankedmaps" />
 
-            <item android:id="@+id/menuProfile"
+            <item
+                android:id="@+id/menuProfile"
                 android:icon="@drawable/baseline_person_black_24"
                 android:title="@string/profile" />
 
-            <item android:id="@+id/menuFriends"
+            <item
+                android:id="@+id/menuFriends"
                 android:icon="@drawable/baseline_people_black_24"
                 android:title="Friends" />
         </menu>
     </item>
 
 
-
     <item android:title="@string/others">
 
         <menu>
 
-            <item android:id="@+id/menuSettings"
+            <item
+                android:id="@+id/menuSettings"
                 android:title="@string/settings"
                 android:icon="@drawable/baseline_settings_black_24" />
 

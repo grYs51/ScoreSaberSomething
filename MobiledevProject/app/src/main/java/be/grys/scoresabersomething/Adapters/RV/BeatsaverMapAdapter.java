@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.Models.Beatsaver.MapsBeatsaver;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import be.grys.scoresabersomething.R;
@@ -44,7 +45,8 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     public void addData(MapsBeatsaver mapsBeatsaver) {
         this.mapsBeatsaver.getBeatsaverMaps().addAll(mapsBeatsaver.getBeatsaverMaps());
     }
-    public void deleteData(){
+
+    public void deleteData() {
         this.mapsBeatsaver.getBeatsaverMaps().clear();
         notifyDataSetChanged();
     }
@@ -79,12 +81,12 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         holder.mapTitle.setText(getSpecificStringLength.getShorterString(map.getName(), 50));
 
-        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetaData().getSongAuthorName(),35));
+        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetaData().getSongAuthorName(), 35));
 
         setDifficultyImages(holder, map);
 
         setRating(holder, map, rating);
-    // TODO: Update placeholder
+        // TODO: Update placeholder
         Glide.with(context)
                 .load("https://beatsaver.com" + map.getCoverURL())
                 .into(holder.mapImage);

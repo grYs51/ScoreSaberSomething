@@ -3,7 +3,6 @@ package be.grys.scoresabersomething.Models.LeaderboardPlayer;
 public class LPlayer {
 
 
-
     public String getPlayerId() {
         return playerId;
     }

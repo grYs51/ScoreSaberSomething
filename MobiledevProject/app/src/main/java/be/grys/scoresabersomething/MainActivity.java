@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "main";
     ImageView imageView;
     SearchView searchView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

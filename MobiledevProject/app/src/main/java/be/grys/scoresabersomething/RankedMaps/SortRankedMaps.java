@@ -6,11 +6,11 @@ public class SortRankedMaps {
 
     RankedMapsList rankedMapsList;
 
-    public  SortRankedMaps (RankedMapsList rankedMapsList){
+    public SortRankedMaps(RankedMapsList rankedMapsList) {
         this.rankedMapsList = rankedMapsList;
     }
 
-    private void FilterMap(){
+    private void FilterMap() {
 
     }
 }

@@ -6,25 +6,25 @@ public class PlayerPlayerInfo {
 
 
     @SerializedName("playerId")
-  private String player_Id;
+    private String player_Id;
 
-  @SerializedName("playerName")
-  private String player_Name;
+    @SerializedName("playerName")
+    private String player_Name;
 
-  private String avatar;
+    private String avatar;
 
-  private Integer rank;
+    private Integer rank;
 
-  @SerializedName("countryRank")
+    @SerializedName("countryRank")
     private Integer country_Rank;
 
-  private double pp;
+    private double pp;
 
-  private  String country;
+    private String country;
 
-  private String history;
+    private String history;
 
-  private Integer inactive;
+    private Integer inactive;
 
     public String getPlayer_Id() {
         return player_Id;

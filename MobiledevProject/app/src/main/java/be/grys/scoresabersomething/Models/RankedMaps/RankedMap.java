@@ -12,7 +12,7 @@ public class RankedMap {
     private String levelAuthorName;
     private int bpm;
     private String diff;
-    private  String scores;
+    private String scores;
     private int scores_day;
     private int ranked;
     private double stars;

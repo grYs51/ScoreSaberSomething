@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import be.grys.scoresabersomething.Adapters.ProfilePagerAdapter;
 import be.grys.scoresabersomething.R;
+
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -29,10 +30,10 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     String playerImported;
     Boolean isOwner = true;
 
-    public ProfileFragment(){
+    public ProfileFragment() {
     }
 
-    public ProfileFragment(String id){
+    public ProfileFragment(String id) {
         this.playerImported = id;
         this.isOwner = false;
 
@@ -46,7 +47,7 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         input = sharedPref.getString("playerId", null);
 
-        if (playerImported == null){
+        if (playerImported == null) {
             if (input == null) {
                 Log.d(TAG, "onClick: Opening Dialog");
                 DialogScoresaberFragment dialog = new DialogScoresaberFragment();

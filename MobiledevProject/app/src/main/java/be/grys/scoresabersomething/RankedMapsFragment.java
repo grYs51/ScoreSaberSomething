@@ -42,7 +42,6 @@ public class RankedMapsFragment extends Fragment {
     private int view_threshold = 4;
 
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -99,7 +98,7 @@ public class RankedMapsFragment extends Fragment {
     private void getRankedMaps(int cat, int page, int limit) {
         Log.d(TAG, "getRankedMaps: page: " + page);
 
-        rankedMapsListCall = ApiClient.getRankedMapsApi().getRankedMaps( "get-leaderboards", Integer.toString(cat), Integer.toString(page), Integer.toString(limit));
+        rankedMapsListCall = ApiClient.getRankedMapsApi().getRankedMaps("get-leaderboards", Integer.toString(cat), Integer.toString(page), Integer.toString(limit));
         rankedMapsListCall.enqueue(new Callback<RankedMapsList>() {
             @Override
             public void onResponse(Call<RankedMapsList> call, Response<RankedMapsList> response) {

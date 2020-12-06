@@ -13,13 +13,14 @@ import androidx.preference.PreferenceFragmentCompat;
 
 import be.grys.scoresabersomething.R;
 import be.grys.scoresabersomething.Shared.GetCache;
+
 import com.google.android.material.navigation.NavigationView;
 
 public class SettingsFragment extends PreferenceFragmentCompat {
 
     private static final String TAG = "SettingFragment";
 
-    TextView headerRank,headerName;
+    TextView headerRank, headerName;
     ImageView headerImage;
     Preference player, playerRemove, storage, storageClear;
     String input;

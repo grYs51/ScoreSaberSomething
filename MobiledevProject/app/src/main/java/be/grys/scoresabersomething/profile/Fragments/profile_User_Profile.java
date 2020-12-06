@@ -25,11 +25,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.ApiCall.ApiClient;
 import be.grys.scoresabersomething.R;
 import be.grys.scoresabersomething.Models.PlayerProfile.Player;
 import be.grys.scoresabersomething.Models.PlayerProfile.PlayerPlayerInfo;
 import be.grys.scoresabersomething.Models.PlayerProfile.PlayerScoreStats;
+
 import com.google.android.material.navigation.NavigationView;
 
 import java.io.File;
@@ -205,7 +207,7 @@ public class profile_User_Profile extends Fragment {
         }
         int historyDiff;
         if (arr.length < 7) {
-            historyDiff = arr[size - (size - 1)] -  playerPlayerInfo.getRank();
+            historyDiff = arr[size - (size - 1)] - playerPlayerInfo.getRank();
         } else {
             historyDiff = arr[size - 7] - playerPlayerInfo.getRank();
         }

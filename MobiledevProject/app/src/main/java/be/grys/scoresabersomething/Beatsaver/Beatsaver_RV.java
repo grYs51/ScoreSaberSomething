@@ -166,7 +166,7 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
             public void onFailure(Call<MapsBeatsaver> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.toString());
 //                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
-                if(failcount <5){
+                if (failcount < 5) {
                     failcount++;
                     getMaps(sorting, page);
                 } else {

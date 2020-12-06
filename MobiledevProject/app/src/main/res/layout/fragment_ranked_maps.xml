@@ -10,6 +10,6 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         android:id="@+id/rankedMapsRV"
-        tools:listitem="@layout/item_rankedmaps"/>
+        tools:listitem="@layout/item_rankedmaps" />
 
 </FrameLayout>

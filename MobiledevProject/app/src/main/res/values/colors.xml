@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <color name="colorPrimary">#50289a</color>-->
-<!--    <color name="colorPrimaryDark">#50289a</color>-->
-<!--    <color name="colorAccent">#FF4081</color>-->
+    <!--    <color name="colorPrimary">#50289a</color>-->
+    <!--    <color name="colorPrimaryDark">#50289a</color>-->
+    <!--    <color name="colorAccent">#FF4081</color>-->
     <color name="toolbarColor">#673bb8</color>
     <color name="white">#ffffff</color>
     <color name="darkPurple">#50289a</color>
@@ -23,16 +23,16 @@
     <color name="red">#FF0000</color>
     <color name="green">#00FF00</color>
 
-<!--    difficulty colors-->
+    <!--    difficulty colors-->
     <color name="easy">#4caf50</color>
     <color name="mediums">#00bcd4</color>
     <color name="hard">#ff8f00</color>
     <color name="expert">#c62828</color>
     <color name="expertPlus">#ab47bc</color>
 
-<!--    leaderboard colors-->
-<color name="leaderboardUp">#42B129</color>
-<color name="leaderboardDown">#F94022</color>
+    <!--    leaderboard colors-->
+    <color name="leaderboardUp">#42B129</color>
+    <color name="leaderboardDown">#F94022</color>
     <!--    Drawer-->
     <color name="colorPrimary">#18BDD6</color>
     <color name="colorPrimaryDark">#0F6088</color>

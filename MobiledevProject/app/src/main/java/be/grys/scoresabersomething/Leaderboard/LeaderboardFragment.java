@@ -32,7 +32,7 @@ import retrofit2.Response;
 import static android.content.ContentValues.TAG;
 
 
-public class LeaderboardFragment extends Fragment  {
+public class LeaderboardFragment extends Fragment {
 
     private RecyclerView leaderboardRV;
     LeaderBoardPlayerAdapter leaderBoardPlayerAdapter;
@@ -72,14 +72,14 @@ public class LeaderboardFragment extends Fragment  {
         int position = -1;
         try {
             position = ((LeaderBoardPlayerAdapter) leaderboardRV.getAdapter()).getPosition();
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG, e.getLocalizedMessage(), e);
             return super.onContextItemSelected(item);
         }
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.showProfile:
                 Log.d(TAG, "onContextItemSelected: ShowProfile");
-                String id =  leaderBoardPlayerAdapter.getPlayerId(position);
+                String id = leaderBoardPlayerAdapter.getPlayerId(position);
                 Intent intent = new Intent(getContext(), ProfileNotOwner.class);
                 intent.putExtra("playerNotOwner", id);
                 startActivity(intent);
@@ -87,8 +87,7 @@ public class LeaderboardFragment extends Fragment  {
             case R.id.addToFriends:
                 Log.d(TAG, "onContextItemSelected: Add to Friends");
 
-                
-                
+
                 FriendsSharedPref fSP = new FriendsSharedPref();
 
                 fSP.setName(leaderBoardPlayerAdapter.getplayerData(position).getPlayerName());
@@ -96,7 +95,7 @@ public class LeaderboardFragment extends Fragment  {
                 fSP.setAvatar(leaderBoardPlayerAdapter.getplayerData(position).getAvatar());
                 //TODO: finish
 //                Log.d(TAG, "onContextItemSelected: " + leaderBoardPlayerAdapter.getplayerData(position).toString());
-                if(friends.checkIfExist(leaderBoardPlayerAdapter.getplayerData(position).getPlayerId())){
+                if (friends.checkIfExist(leaderBoardPlayerAdapter.getplayerData(position).getPlayerId())) {
                     Log.d(TAG, "onContextItemSelected: Exist");
                     Toast.makeText(getActivity(), "Player already in friendlist", Toast.LENGTH_SHORT).show();
                 } else {
@@ -165,7 +164,7 @@ public class LeaderboardFragment extends Fragment  {
                 }
 
                 LeaderboardPlayers leaderboardPlayers = response.body();
-                if(leaderBoardPlayerAdapter.getItemCount() == 0){
+                if (leaderBoardPlayerAdapter.getItemCount() == 0) {
                     leaderBoardPlayerAdapter.setData(leaderboardPlayers);
                 } else {
                     leaderBoardPlayerAdapter.addData(leaderboardPlayers);
@@ -175,7 +174,7 @@ public class LeaderboardFragment extends Fragment  {
 
             @Override
             public void onFailure(Call<LeaderboardPlayers> call, Throwable t) {
-                Log.d(TAG, "onFailure: "+ t.toString());
+                Log.d(TAG, "onFailure: " + t.toString());
             }
         });
     }

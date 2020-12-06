@@ -19,12 +19,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.ApiCall.ApiClient;
 import be.grys.scoresabersomething.Models.Friends.FriendList;
 import be.grys.scoresabersomething.Models.Friends.FriendsSharedPref;
 import be.grys.scoresabersomething.Models.Friends.Testing;
 import be.grys.scoresabersomething.Models.PlayerProfile.Player;
 import be.grys.scoresabersomething.R;
+
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -46,19 +48,23 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
     private int position;
     private int count;
 
-    public LeaderBoardFriendAdapter(FragmentActivity context){
-        this.activity = context; ;
+    public LeaderBoardFriendAdapter(FragmentActivity context) {
+        this.activity = context;
+        ;
     }
 
     public int getPosition() {
         return position;
     }
+
     public void setPosition(int position) {
         this.position = position;
     }
-    public String getData(int position){
+
+    public String getData(int position) {
         return testings.get(position).getFriendsSharedPref().getId();
     }
+
     public void setData(FriendList friendList) {
 
         if (friendList.getFriends() != null) {
@@ -72,6 +78,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         }
 
     }
+
     public void addData(FriendsSharedPref friendsSharedPref, Player lPlayer) {
         Testing fullPlayer = new Testing();
         fullPlayer.setFriendsSharedPref(friendsSharedPref);
@@ -79,11 +86,13 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         testings.add(fullPlayer);
         sortList();
     }
-    public void RemovePlayer(int position){
-        Log.d(TAG, "RemovePlayer: "+ testings.get(position).toString());
+
+    public void RemovePlayer(int position) {
+        Log.d(TAG, "RemovePlayer: " + testings.get(position).toString());
         testings.remove(position);
     }
-    public void sortList(){
+
+    public void sortList() {
 
         Collections.sort(testings, new Comparator<Testing>() {
             @Override
@@ -98,13 +107,13 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         notifyDataSetChanged();
 
     }
+
     private void SaveFriendList() {
         FriendList friendList = new FriendList();
-        for( Testing pl: testings)
-        {
+        for (Testing pl : testings) {
             if (friendList.getFriends() != null) {
                 friendList.getFriends().add(pl.getFriendsSharedPref());
-            } else{
+            } else {
                 List<FriendsSharedPref> friends = new ArrayList<>();
                 friends.add(pl.getFriendsSharedPref());
                 friendList.setFriends(friends);
@@ -114,7 +123,7 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
         Gson gson = new Gson();
         String json = gson.toJson(friendList);
         Log.d(TAG, "onResponse: json: " + json);
-        SharedPreferences sharedPref =  activity.getPreferences(activity.MODE_PRIVATE);
+        SharedPreferences sharedPref = activity.getPreferences(activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("playerFriends", json);
         editor.apply();
@@ -165,8 +174,8 @@ public class LeaderBoardFriendAdapter extends RecyclerView.Adapter<LeaderBoardFr
 
                     testings.get(position).setlPlayer(player);
                     setItem(holder, player);
-                    Log.d(TAG, "onResponse: position " + position + " / "+ testings.size());
-                    if(count == testings.size()-1){
+                    Log.d(TAG, "onResponse: position " + position + " / " + testings.size());
+                    if (count == testings.size() - 1) {
                         sortList();
                     } else {
                         count++;

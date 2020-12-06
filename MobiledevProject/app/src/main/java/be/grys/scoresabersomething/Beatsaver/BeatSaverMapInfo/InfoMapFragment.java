@@ -18,6 +18,7 @@ import be.grys.scoresabersomething.Adapters.InfoModesAdapter;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Characteristics;
 import be.grys.scoresabersomething.R;
+
 import com.google.android.material.tabs.TabLayout;
 
 import org.ocpsoft.prettytime.PrettyTime;

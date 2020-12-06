@@ -2,9 +2,9 @@ package be.grys.scoresabersomething.Shared;
 
 public class DiffStringtoInt {
 
-    public int difftoint(String diff){
+    public int difftoint(String diff) {
 
-        switch (diff){
+        switch (diff) {
             case "_Easy_SoloStandard":
                 return 1;
             case "_Normal_SoloStandard":

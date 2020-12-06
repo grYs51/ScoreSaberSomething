@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+
 import be.grys.scoresabersomething.Models.Scores;
 import be.grys.scoresabersomething.Models.ScoresaberMap;
 import be.grys.scoresabersomething.R;
@@ -88,7 +89,7 @@ public class ScoresaberMapAdapter extends RecyclerView.Adapter<ScoresaberMapAdap
         holder.songName.setText(scoresaberMap.getSongName());
         holder.songAuthor.setText(scoresaberMap.getSongAuthorName());
         holder.rank.setText("#" + scoresaberMap.getRank());
-        holder.pp.setText(  df2.format(scoresaberMap.getPp()) + " ");
+        holder.pp.setText(df2.format(scoresaberMap.getPp()) + " ");
         holder.ppWeight.setText("(" + df2.format(ppWeight.getPpWeight()) + ")");
         holder.position.setText(position + 1 + "");
 
