@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import be.grys.scoresabersomething.Adapters.RV.ScoresaberMapAdapter;
 import be.grys.scoresabersomething.ApiCall.ApiClient;
@@ -40,6 +42,8 @@ public class profile_Recent_songs extends Fragment {
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 8;
 
+    private SwipeRefreshLayout pullToRefresh;
+
     public profile_Recent_songs(String input) {
         this.playerId = input;
     }
@@ -59,7 +63,7 @@ public class profile_Recent_songs extends Fragment {
         recyclerView(view);
 
         //TODO: get pull to refresh working in rv
-
+        pullToRefresh(view);
         getRecentSongs(playerId, page_number);
 
         addScrollListener();
@@ -67,7 +71,22 @@ public class profile_Recent_songs extends Fragment {
         return view;
     }
 
+    private void pullToRefresh(View view){
+        pullToRefresh = view.findViewById(R.id.swipeRefreshRecent);
+        pullToRefresh.setRefreshing(true);
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.d(TAG, "onRefresh: Pulled Refresh");
+                page_number = 1;
+                pastVisibleItems=0; visibleItemCount=0; totalItemCount=0; previous_total = 0;
+                scoresaberMapAdapter.setData(null);
+                getRecentSongs(playerId, page_number);
 
+//                addScrollListener();
+            }
+        });
+    }
     private void addScrollListener() {
         recentsongRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -100,13 +119,15 @@ public class profile_Recent_songs extends Fragment {
 
     public void getRecentSongs(String userId, final int page) {
         Log.d(TAG, "getRecentSongs: " + userId + " - " + page);
-
         // progressbar visible
 
         mapList = ApiClient.getPlayerRecentSongs().getRecentSong(userId, Integer.toString(page));
         mapList.enqueue(new Callback<Scores>() {
             @Override
             public void onResponse(Call<Scores> call, Response<Scores> response) {
+
+                pullToRefresh.setRefreshing(false);
+
                 if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
@@ -131,7 +152,9 @@ public class profile_Recent_songs extends Fragment {
 
             @Override
             public void onFailure(Call<Scores> call, Throwable t) {
-
+                pullToRefresh.setRefreshing(false);
+                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
+                Log.d(TAG, "onFailure: "+t);
             }
         });
     }

@@ -20,14 +20,14 @@
 
         <Preference
             android:key="used_Storage"
-            android:summary="50 mb"
+            android:summary="0 mb"
             android:title="Used Cache" />
 
     </PreferenceCategory>
 
     <PreferenceCategory app:title="About the app">
 
-        <Preference android:summary="This app is meanly made for fun. Also as my school project, but i had a lot of fun making it. So i hope you also have fun using it. ^~^" />
+        <Preference android:summary="This app is meanly made for fun. Also as my school project. \n\nI had a lot of fun making it. So I hope you also have fun using it. ^~^" />
         <Preference
             android:summary="grYs#0011 (discord)"
             android:title="Any Problems?">
@@ -35,6 +35,7 @@
                 android:action="android.intent.action.VIEW"
                 android:data="https://discordapp.com/users/148824637004840961" />
         </Preference>
+        <Preference android:summary="If you experience issues any issues, you can click above to send me a message on discord."/>
 
     </PreferenceCategory>
 
@@ -42,6 +43,18 @@
 
         <Preference android:summary="Big thanks to Scoresaber and Beatsaver for their Api." />
 
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Future planning">
+        <Preference android:summary="There are a couple things I still want to add. \n\nStuff like:
+                \n
+                \n - DarkMode
+                \n
+                \n - Extra stuff with the friends page.\n \ \ \ \ Like comparing etc
+                \n
+                \n - Some optimization
+                "/>
+        <Preference android:summary="If you come up with an idea for this project feel free to send me a message through discord! "/>
     </PreferenceCategory>
 
 </PreferenceScreen>

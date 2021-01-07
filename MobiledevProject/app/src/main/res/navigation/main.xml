@@ -28,7 +28,7 @@
         tools:layout="@layout/fragment_beatsaver_adapter" />
     <fragment
         android:id="@+id/menuRankedMaps"
-        android:name="be.grys.scoresabersomething.RankedMapsFragment"
+        android:name="be.grys.scoresabersomething.RankedMaps.RankedMapsFragment"
         android:label="Ranked Maps"
         tools:layout="@layout/fragment_ranked_maps" />
     <fragment

@@ -3,7 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".RankedMapsFragment">
+    tools:context=".RankedMaps.RankedMapsFragment">
+
+<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
+<!--        android:id="@+id/swipeRefreshRankedmaps"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -11,5 +16,7 @@
         android:scrollbars="vertical"
         android:id="@+id/rankedMapsRV"
         tools:listitem="@layout/item_rankedmaps" />
+
+<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
 
 </FrameLayout>
