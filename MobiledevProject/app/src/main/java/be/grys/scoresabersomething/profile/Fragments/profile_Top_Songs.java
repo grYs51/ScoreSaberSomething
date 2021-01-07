@@ -145,7 +145,7 @@ public class profile_Top_Songs extends Fragment {
             @Override
             public void onFailure(Call<Scores> call, Throwable t) {
                 pullToRefresh.setRefreshing(false);
-                Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);
+                Toast.makeText(getContext(), "Request timed out, try again later!", Toast.LENGTH_SHORT);
                 Log.d(TAG, "onFailure: "+t);
             }
         });
