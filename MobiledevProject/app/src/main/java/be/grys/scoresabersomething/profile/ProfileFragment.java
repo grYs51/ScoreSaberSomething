@@ -18,12 +18,13 @@ import be.grys.scoresabersomething.Adapters.ProfilePagerAdapter;
 import be.grys.scoresabersomething.R;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 
 public class ProfileFragment extends Fragment implements DialogScoresaberFragment.OnInputSelected {
 
     private static final String TAG = "ProfileFragment";
-
+    private FirebaseAnalytics mFirebaseAnalytics;
     ViewPager viewPager;
     TabLayout tabLayout;
     String input;
@@ -65,9 +66,12 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
         Log.d(TAG, "sendInput: found incoming input: " + input);
         this.input = input;
 
+        mFirebaseAnalytics.setUserId(input);
+
         SharedPreferences sharedPref = getActivity().getPreferences(getActivity().MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putString("playerId", input);
+
         editor.apply();
 
         createPager(input);
@@ -84,6 +88,8 @@ public class ProfileFragment extends Fragment implements DialogScoresaberFragmen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(getContext());
 
         View view = inflater.inflate(R.layout.fragment_profile_adapter, container, false);
 

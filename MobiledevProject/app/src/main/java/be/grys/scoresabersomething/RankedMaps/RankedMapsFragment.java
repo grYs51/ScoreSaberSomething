@@ -42,7 +42,6 @@ public class RankedMapsFragment extends Fragment {
     private boolean isLoading = true;
     private int pastVisibleItems, visibleItemCount, totalItemCount, previous_total = 0;
     private int view_threshold = 4;
-    private SwipeRefreshLayout pulltoRefresh;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -58,7 +57,7 @@ public class RankedMapsFragment extends Fragment {
 
         InitRV(view);
 
-//        pullToRefresh(view);
+
 
         getRankedMaps(cat, page, limit);
 
@@ -68,20 +67,7 @@ public class RankedMapsFragment extends Fragment {
         return view;
     }
 
-//    private void pullToRefresh(View view){
-//        pulltoRefresh = view.findViewById(R.id.swipeRefreshRankedmaps);
-//        pulltoRefresh.setRefreshing(true);
-//        pulltoRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override
-//            public void onRefresh() {
-//                Log.d(TAG, "onRefresh: Pulled Refresh");
-//                page = 1;
-//                pastVisibleItems=0; visibleItemCount=0; totalItemCount=0; previous_total = 0;
-//                rankedMapsAdapter.setData(null);
-//                getRankedMaps(cat, page, limit);
-//            }
-//        });
-//    }
+
 
     private void addScrollListener() {
         rankedMapsRV.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -121,7 +107,7 @@ public class RankedMapsFragment extends Fragment {
         rankedMapsListCall.enqueue(new Callback<RankedMapsList>() {
             @Override
             public void onResponse(Call<RankedMapsList> call, Response<RankedMapsList> response) {
-                pulltoRefresh.setRefreshing(false);
+
                 if (!response.isSuccessful()) {
                     Log.d(TAG, "isSucces: " + response.code());
                     return;
@@ -140,7 +126,7 @@ public class RankedMapsFragment extends Fragment {
 
             @Override
             public void onFailure(Call<RankedMapsList> call, Throwable t) {
-                pulltoRefresh.setRefreshing(false);
+
 
                 Log.d(TAG, "onFailure: " + t.toString());
                 Toast.makeText(getContext(), "Request timed out, retrying!", Toast.LENGTH_SHORT);

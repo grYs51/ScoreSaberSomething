@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="false"
-        android:icon="@drawable/grys"
+        android:icon="@drawable/saber"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/gryscircle"
+        android:roundIcon="@drawable/saber"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
