@@ -16,7 +16,6 @@ import android.widget.TextView;
 
 import be.grys.scoresabersomething.Adapters.InfoModesAdapter;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
-import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Characteristics;
 import be.grys.scoresabersomething.R;
 
 import com.google.android.material.tabs.TabLayout;
@@ -62,7 +61,7 @@ public class InfoMapFragment extends Fragment {
         }
 
         ViewPager viewPager = view.findViewById(R.id.infoModePager);
-        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetaData().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration(), beatsaverMap.getKey());
+        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetadata().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration(), beatsaverMap.getKey());
         viewPager.setAdapter(infoModesAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayoutModes);

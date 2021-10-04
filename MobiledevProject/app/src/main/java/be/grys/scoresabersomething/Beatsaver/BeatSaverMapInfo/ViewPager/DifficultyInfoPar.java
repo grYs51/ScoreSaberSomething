@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.SpecificDiffSpec;
+import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Diff;
 import be.grys.scoresabersomething.R;
 import be.grys.scoresabersomething.WebViewMap;
 
@@ -29,7 +29,7 @@ public class DifficultyInfoPar extends Fragment {
         super.onCreate(savedInstanceState);
     }
 
-    SpecificDiffSpec specificDiffSpec;
+    Diff specificDiffSpec;
     LinearLayout hasNotes, noNotes;
     int duration;
     private static DecimalFormat df2 = new DecimalFormat("#.##");
@@ -38,9 +38,8 @@ public class DifficultyInfoPar extends Fragment {
     TextView notes, bombs, njs;
     String key;
 
-    public DifficultyInfoPar(SpecificDiffSpec specificDiffSpec, int duration, String key) {
+    public DifficultyInfoPar(Diff specificDiffSpec, String key) {
         this.specificDiffSpec = specificDiffSpec;
-        this.duration = duration;
         this.key = key;
     }
 
@@ -59,9 +58,7 @@ public class DifficultyInfoPar extends Fragment {
         if (specificDiffSpec != null) {
             if (specificDiffSpec.getNotes() != 0) {
                 if (duration != 0) {
-
                     notes.setText(specificDiffSpec.getNotes() + " ( " + df2.format(specificDiffSpec.getNotes() / (double) duration) + " n/s )");
-
                 }
 
                 bombs.setText(specificDiffSpec.getBombs() + "");
@@ -86,7 +83,6 @@ public class DifficultyInfoPar extends Fragment {
 
         } else {
             hasNotes.setVisibility(View.GONE);
-
         }
 
         return view;

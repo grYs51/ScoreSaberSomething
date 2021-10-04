@@ -1,10 +1,42 @@
 package be.grys.scoresabersomething.Models.Beatsaver.beatsavermap;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class BeatsaverMap implements Serializable {
 
-    public MetaData getMetaData() {
+    private String id;
+    private String name;
+    private String description;
+    private Uploader uploader;
+    private MetaData metadata;
+    private Stats stats;
+    private String uploaded;
+    private Boolean automapper;
+    private Boolean ranked;
+    private Boolean qualified;
+    private Version[] version;
+    private Date createdAt;
+    private Date updatedAt;
+    private Date lastPublishedAt;
+
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Uploader getUploader() {
+        return uploader;
+    }
+
+    public MetaData getMetadata() {
         return metadata;
     }
 
@@ -12,63 +44,39 @@ public class BeatsaverMap implements Serializable {
         return stats;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public String getDeletedAt() {
-        return deletedAt;
-    }
-
-    public String get_id() {
-        return _id;
-    }
-
-    public String getKey() {
-        return key;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Uploader getUploader() {
-        return uploader;
-    }
-
-    public String getHash() {
-        return hash;
-    }
-
     public String getUploaded() {
         return uploaded;
     }
 
-    public String getDirectDownload() {
-        return directDownload;
+    public Boolean getAutomapper() {
+        return automapper;
     }
 
-    public String getDownloadURL() {
-        return downloadURL;
+    public Boolean getRanked() {
+        return ranked;
     }
 
-    public String getCoverURL() {
-        return coverURL;
+    public Boolean getQualified() {
+        return qualified;
     }
 
-    private MetaData metadata;
-    private Stats stats;
-    private String description;
-    private String deletedAt;
-    private String _id;
-    private String key;
-    private String name;
-    private Uploader uploader;
-    private String hash;
-    private String uploaded;
-    private String directDownload;
-    private String downloadURL;
-    private String coverURL;
+    public Version[] getVersion() {
+        return version;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public Date getLastPublishedAt() {
+        return lastPublishedAt;
+    }
 
 
+    public BeatsaverMap() {
+    }
 }

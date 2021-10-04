@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import be.grys.scoresabersomething.Models.Beatsaver.MapsBeatsaver;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Diff;
 import be.grys.scoresabersomething.R;
 import be.grys.scoresabersomething.Shared.GetSpecificStringLength;
 
@@ -66,7 +67,7 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     @Override
     public void onBindViewHolder(@NonNull BeatsaverMapAdapter.ViewHolder holder, int position) {
         BeatsaverMap map = mapsBeatsaver.getBeatsaverMaps().get(position);
-        int rating = Integer.parseInt(df2.format(map.getStats().getRating() * 100));
+        int rating = Integer.parseInt(df2.format(map.getStats().getScore() * 100));
 
         setItem(holder, map, rating);
 
@@ -81,14 +82,14 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
 
         holder.mapTitle.setText(getSpecificStringLength.getShorterString(map.getName(), 50));
 
-        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetaData().getSongAuthorName(), 35));
+        holder.mapAuthorName.setText(getSpecificStringLength.getShorterString(map.getMetadata().getSongAuthorName(), 35));
 
         setDifficultyImages(holder, map);
 
         setRating(holder, map, rating);
         // TODO: Update placeholder
         Glide.with(context)
-                .load("https://beatsaver.com" + map.getCoverURL())
+                .load( map.getVersion()[0].getCoverURL())
                 .into(holder.mapImage);
     }
 
@@ -149,10 +150,10 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     private void parseTimeUploaded(@NonNull ViewHolder holder, BeatsaverMap map, String dt) {
         try {
             i = Instant.parse(dt);
-            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
+            holder.levelAuthorName.setText(map.getMetadata().getLevelAuthorName() + " - " + p.format(Date.from(i)));
         } catch (DateTimeParseException dtpe) {
             Log.d(TAG, "catch: " + dtpe);
-            holder.levelAuthorName.setText(map.getMetaData().getLevelAuthorName());
+            holder.levelAuthorName.setText(map.getMetadata().getLevelAuthorName());
         }
     }
 
@@ -175,31 +176,33 @@ public class BeatsaverMapAdapter extends RecyclerView.Adapter<BeatsaverMapAdapte
     }
 
     private void setDifficultyImages(@NonNull ViewHolder holder, BeatsaverMap map) {
-        if (map.getMetaData().getDifficulties().isEasy()) {
-            holder.colorDiffEasy.setImageResource(R.color.easy);
-        } else {
-            holder.colorDiffEasy.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isNormal()) {
-            holder.colorDiffNormal.setImageResource(R.color.mediums);
-        } else {
-            holder.colorDiffNormal.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isHard()) {
-            holder.colorDiffHard.setImageResource(R.color.hard);
-        } else {
-            holder.colorDiffHard.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isExpert()) {
-            holder.colorDiffExpert.setImageResource(R.color.expert);
-        } else {
-            holder.colorDiffExpert.setImageResource(R.color.greyText);
-        }
-        if (map.getMetaData().getDifficulties().isExpertPlus()) {
-            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
-        } else {
-            holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
-        }
+
+//
+//        if (map.getMetadata().getDifficulties().isEasy()) {
+//            holder.colorDiffEasy.setImageResource(R.color.easy);
+//        } else {
+//            holder.colorDiffEasy.setImageResource(R.color.greyText);
+//        }
+//        if (map.getMetadata().getDifficulties().isNormal()) {
+//            holder.colorDiffNormal.setImageResource(R.color.mediums);
+//        } else {
+//            holder.colorDiffNormal.setImageResource(R.color.greyText);
+//        }
+//        if (map.getMetadata().getDifficulties().isHard()) {
+//            holder.colorDiffHard.setImageResource(R.color.hard);
+//        } else {
+//            holder.colorDiffHard.setImageResource(R.color.greyText);
+//        }
+//        if (map.getMetadata().getDifficulties().isExpert()) {
+//            holder.colorDiffExpert.setImageResource(R.color.expert);
+//        } else {
+//            holder.colorDiffExpert.setImageResource(R.color.greyText);
+//        }
+//        if (map.getMetadata().getDifficulties().isExpertPlus()) {
+//            holder.colorDiffExpertPlus.setImageResource(R.color.expertPlus);
+//        } else {
+//            holder.colorDiffExpertPlus.setImageResource(R.color.greyText);
+//        }
     }
 
     public interface RVClickListener {

@@ -13,7 +13,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import be.grys.scoresabersomething.Adapters.InfoDifficultyPagerAdapter;
-import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.DifficultiesSpecs;
+import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Diff;
 import be.grys.scoresabersomething.R;
 
 import com.google.android.material.tabs.TabLayout;
@@ -22,11 +22,11 @@ import static android.content.ContentValues.TAG;
 
 public class ModesInfo extends Fragment {
 
-    DifficultiesSpecs difficultiesSpecs;
+    Diff difficultiesSpecs[];
     int duration;
     String key;
 
-    public ModesInfo(DifficultiesSpecs difficultiesSpecs, int duration, String key) {
+    public ModesInfo(Diff[] difficultiesSpecs, int duration, String key) {
         Log.d(TAG, "ModesInfo: Difficulties");
         this.difficultiesSpecs = difficultiesSpecs;
         this.duration = duration;

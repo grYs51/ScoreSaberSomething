@@ -3,10 +3,14 @@ package be.grys.scoresabersomething.Models.Beatsaver.beatsavermap;
 import java.io.Serializable;
 
 public class Stats implements Serializable {
-    private int downloads;
+
     private int plays;
-    private int downVotes;
+    private int downloads;
     private int upVotes;
+    private int downVotes;
+    private double score;
+
+
 
     public int getDownloads() {
         return downloads;
@@ -24,14 +28,5 @@ public class Stats implements Serializable {
         return upVotes;
     }
 
-    public double getHeat() {
-        return heat;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    private double heat;
-    private double rating;
+    public double getScore() { return score; }
 }

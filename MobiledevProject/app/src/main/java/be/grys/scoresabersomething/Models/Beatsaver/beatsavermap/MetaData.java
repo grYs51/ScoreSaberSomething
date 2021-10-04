@@ -5,31 +5,16 @@ import java.util.List;
 
 public class MetaData implements Serializable {
 
-    private Difficulties difficulties;
+    private Double bpm;
     private int duration;
-    private boolean automapper;
-    private String levelAuthorName;
-    private String songAuthorName;
     private String songName;
     private String songSubName;
-    private Double bpm;
+    private String songAuthorName;
+    private String levelAuthorName;
 
-    private List<Characteristics> characteristics;
-
-    public Difficulties getDifficulties() {
-        return difficulties;
-    }
 
     public int getDuration() {
         return duration;
-    }
-
-    public boolean isAutomapper() {
-        return automapper;
-    }
-
-    public List<Characteristics> getCharacteristics() {
-        return characteristics;
     }
 
     public String getLevelAuthorName() {
@@ -51,6 +36,5 @@ public class MetaData implements Serializable {
     public Double getBpm() {
         return bpm;
     }
-
 
 }

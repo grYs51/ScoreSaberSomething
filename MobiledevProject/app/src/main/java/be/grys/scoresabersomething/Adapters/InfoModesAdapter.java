@@ -8,22 +8,19 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import be.grys.scoresabersomething.Beatsaver.BeatSaverMapInfo.ViewPager.ModesInfo;
-import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Characteristics;
 
 import java.util.List;
 
 public class InfoModesAdapter extends FragmentPagerAdapter {
     List<Characteristics> characteristics;
     List<String> modelist;
-    int duration;
     String key;
 
-    public InfoModesAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> modeList, int duration, String key) {
+    public InfoModesAdapter(@NonNull FragmentManager fm, List<Characteristics> characteristics, List<String> modeList, String key) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
         this.characteristics = characteristics;
         this.modelist = modeList;
-        this.duration = duration;
         this.key = key;
 
     }
@@ -32,7 +29,7 @@ public class InfoModesAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        return new ModesInfo(characteristics.get(position).getDifficulties(), duration, key);
+        return new ModesInfo(characteristics.get(position).getDifficulties(), key);
     }
 
     @Override
