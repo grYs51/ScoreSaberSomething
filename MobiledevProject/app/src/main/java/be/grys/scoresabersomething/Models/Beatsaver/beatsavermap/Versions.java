@@ -2,7 +2,7 @@ package be.grys.scoresabersomething.Models.Beatsaver.beatsavermap;
 
 import java.util.Date;
 
-public class Version {
+public class Versions {
 
     private String hash;
     private String state;

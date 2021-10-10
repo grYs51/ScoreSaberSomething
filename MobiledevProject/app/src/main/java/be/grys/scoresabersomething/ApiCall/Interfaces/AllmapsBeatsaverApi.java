@@ -26,7 +26,7 @@ public interface AllmapsBeatsaverApi {
                                 @Query(value = "fullSpread") Boolean fullSpread,
                                 @Query(value = "q") String q,
                                 @Query(value = "maxNps") String maxNps,
-                                @Query(value = "minNps") String minNps,
-                                @Query(value = "from") String from,
-                                @Query(value = "to") String to);
+                                @Query(value = "minNps") String minNps);
+//                                @Query(value = "from") String from,
+//                                @Query(value = "to") String to);
 }

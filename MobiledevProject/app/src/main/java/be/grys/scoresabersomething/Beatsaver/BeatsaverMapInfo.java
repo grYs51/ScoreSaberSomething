@@ -46,10 +46,10 @@ public class BeatsaverMapInfo extends AppCompatActivity {
         transparentStatusAndNavigation();
 
         beatsaverMap = (BeatsaverMap) getIntent().getSerializableExtra("ree");
-        Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetaData().getSongName());
+        Log.d(TAG, "onCreate: dataget: Title: " + beatsaverMap.getMetadata().getSongName());
 
         songName = findViewById(R.id.InfoTitle);
-        songName.setText(getSpecificStringLength.getShorterString(beatsaverMap.getMetaData().getSongName(), 50));
+        songName.setText(getSpecificStringLength.getShorterString(beatsaverMap.getMetadata().getSongName(), 50));
 
 
         //return
@@ -63,7 +63,7 @@ public class BeatsaverMapInfo extends AppCompatActivity {
 
         songImage = findViewById(R.id.infoImage);
         Glide.with(getApplicationContext())
-                .load("https://beatsaver.com" + beatsaverMap.getCoverURL())
+                .load(beatsaverMap.getVersion()[0].getCoverURL())
                 .placeholder(R.color.colorPrimary)
                 .error(R.color.colorPrimary)
                 .into(songImage);

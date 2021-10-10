@@ -15,7 +15,7 @@ public class BeatsaverMap implements Serializable {
     private Boolean automapper;
     private Boolean ranked;
     private Boolean qualified;
-    private Version[] version;
+    private Versions[] versions;
     private Date createdAt;
     private Date updatedAt;
     private Date lastPublishedAt;
@@ -60,8 +60,8 @@ public class BeatsaverMap implements Serializable {
         return qualified;
     }
 
-    public Version[] getVersion() {
-        return version;
+    public Versions[] getVersion() {
+        return versions;
     }
 
     public Date getCreatedAt() {

@@ -140,7 +140,10 @@ public class Beatsaver_RV extends Fragment implements Serializable, FilterDialog
         mapList = ApiClient.getallmapsSongs().getMaps(Integer.toString(page),
                 "Latest",
                 false, false, false, false, false, false, false,
-                "", "0", "12", "", "");
+                "", "25", "12"
+//                "", ""
+
+        );
 
         mapList.enqueue(new Callback<MapsBeatsaver>() {
             @Override

@@ -54,7 +54,7 @@ public class DescriptionMapFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://skystudioapps.com/bs-viewer/?id=" + beatsaverMap.getKey();
+                String url = "https://skystudioapps.com/bs-viewer/?id=" + beatsaverMap.getId();
                 Log.d(TAG, "onClick: " + url);
                 Intent intent = new Intent(getContext(), WebViewMap.class);
                 intent.putExtra("page", url);

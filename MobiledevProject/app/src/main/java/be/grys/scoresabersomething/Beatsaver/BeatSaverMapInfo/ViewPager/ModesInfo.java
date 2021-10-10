@@ -22,14 +22,12 @@ import static android.content.ContentValues.TAG;
 
 public class ModesInfo extends Fragment {
 
-    Diff difficultiesSpecs[];
-    int duration;
+    Diff difficultiesSpecs;
     String key;
 
-    public ModesInfo(Diff[] difficultiesSpecs, int duration, String key) {
+    public ModesInfo(Diff difficultiesSpecs, String key) {
         Log.d(TAG, "ModesInfo: Difficulties");
         this.difficultiesSpecs = difficultiesSpecs;
-        this.duration = duration;
 
         this.key = key;
     }
@@ -46,7 +44,7 @@ public class ModesInfo extends Fragment {
 
         //fill adapter
         ViewPager viewPager = view.findViewById(R.id.infoDifficultyPager);
-        PagerAdapter pA = new InfoDifficultyPagerAdapter(getChildFragmentManager(), difficultiesSpecs, duration, key);
+        PagerAdapter pA = new InfoDifficultyPagerAdapter(getChildFragmentManager(), difficultiesSpecs, key);
         viewPager.setAdapter(pA);
 
         TabLayout tabLayout = view.findViewById(R.id.infoDifficultyTabLayout);

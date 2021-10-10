@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import be.grys.scoresabersomething.Adapters.InfoModesAdapter;
 import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.BeatsaverMap;
+import be.grys.scoresabersomething.Models.Beatsaver.beatsavermap.Diff;
 import be.grys.scoresabersomething.R;
 
 import com.google.android.material.tabs.TabLayout;
@@ -56,12 +57,12 @@ public class InfoMapFragment extends Fragment {
         setTekst(dt);
 
         List<String> myList = new ArrayList<String>();
-        for (Characteristics characteristics : beatsaverMap.getMetaData().getCharacteristics()) {
-            myList.add(characteristics.getName());
+        for (Diff characteristics : beatsaverMap.getVersion()[0].getDiffs()) {
+            myList.add(characteristics.getDifficulty());
         }
 
         ViewPager viewPager = view.findViewById(R.id.infoModePager);
-        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getMetadata().getCharacteristics(), myList, beatsaverMap.getMetaData().getDuration(), beatsaverMap.getKey());
+        InfoModesAdapter infoModesAdapter = new InfoModesAdapter(getParentFragmentManager(), beatsaverMap.getVersion()[0].getDiffs(), myList, beatsaverMap.getId());
         viewPager.setAdapter(infoModesAdapter);
 
         TabLayout tabLayout = view.findViewById(R.id.tabLayoutModes);
@@ -92,20 +93,20 @@ public class InfoMapFragment extends Fragment {
 
             i = Instant.parse(dt);
             Log.d(TAG, "onCreateView: " + p.format(Date.from(i)));
-            mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName() + " - " + p.format(Date.from(i)));
+            mapper.setText(beatsaverMap.getMetadata().getLevelAuthorName() + " - " + p.format(Date.from(i)));
 
         } catch (DateTimeParseException dtpe) {
 
             Log.d(TAG, "catch: " + dtpe);
-            mapper.setText(beatsaverMap.getMetaData().getLevelAuthorName());
+            mapper.setText(beatsaverMap.getMetadata().getLevelAuthorName());
 
         }
 
-        songAuthor.setText(beatsaverMap.getMetaData().getSongAuthorName());
+        songAuthor.setText(beatsaverMap.getMetadata().getSongAuthorName());
         title.setText(beatsaverMap.getName());
-        songKey.setText(beatsaverMap.getKey());
-        songDuration.setText(getDurationString(beatsaverMap.getMetaData().getDuration()));
-        songBpm.setText(df2.format(beatsaverMap.getMetaData().getBpm()) + "");
+        songKey.setText(beatsaverMap.getId());
+        songDuration.setText(getDurationString(beatsaverMap.getMetadata().getDuration()));
+        songBpm.setText(df2.format(beatsaverMap.getMetadata().getBpm()) + "");
         songDownloads.setText(beatsaverMap.getStats().getDownloads() + "");
         songRatingUp.setText(beatsaverMap.getStats().getUpVotes() + " up");
         songRatingDown.setText(beatsaverMap.getStats().getDownVotes() + " down");
